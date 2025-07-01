@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './Pages/Navbar'
 import Home from './Pages/Home'
 import Fotter from './Pages/Fotter'
+import ContactUs from './Pages/ContactUs'
 
 function MainLayout() {
   return (
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       {
         path: '/about', element: <h1>i'm from about</h1>
       },
+      {path:"/contact",element:<ContactUs/>}
     ]
   }
 ])
