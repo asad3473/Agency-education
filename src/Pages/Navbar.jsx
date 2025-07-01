@@ -62,7 +62,7 @@ export default function Navbar() {
       
 
           <div className="hidden lg:block">
-            <div className="flex hidden items-center">
+            <div className="flex  hidden items-center">
             <ul className="flex text-lg font-semibold gap-4 mr-5">
               <li className="cursor-pointer">Home</li>
               <li className="cursor-pointer">Universites</li>
