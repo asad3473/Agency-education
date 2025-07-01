@@ -5,17 +5,17 @@ export const HomeHeader = () => {
   
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      image: "public/Homeimages/homeheader/un2.jpg",
       title: "Modern Luxury Villa",
       description: "Spacious 5-bedroom villa with panoramic views and private pool"
     },
     {
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      image: "public/Homeimages/homeheader/uni.jpg",
       title: "Cozy Suburban Home",
       description: "Perfect family home with large backyard and modern amenities"
     },
     {
-      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      image: "",
       title: "Beachfront Property",
       description: "Stunning ocean views with direct beach access"
     }
