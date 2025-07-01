@@ -5,19 +5,16 @@ export const HomeHeader = () => {
   
   const slides = [
     {
-      image: "public/Homeimages/homeheader/un2.jpg",
-      title: "Modern Luxury Villa",
-      description: "Spacious 5-bedroom villa with panoramic views and private pool"
+      image: "/Homeimages/homeheader/un2.jpg",
+      title: "Nearby: Qatar University, a leading educational institution known for academic excellence and innovation."
     },
     {
-      image: "public/Homeimages/homeheader/uni.jpg",
-      title: "Cozy Suburban Home",
-      description: "Perfect family home with large backyard and modern amenities"
+      image: "/Homeimages/homeheader/uni.jpg",
+      title: "Close to Qatar University, offering a vibrant campus life and high-quality education in the heart of Doha."
     },
     {
-      image: "",
-      title: "Beachfront Property",
-      description: "Stunning ocean views with direct beach access"
+      image: "/Homeimages/homeheader/clas.png",
+      title: "Enjoy proximity to Qatar University – a hub for research, culture, and student diversity."
     }
   ];
 
@@ -46,7 +43,7 @@ export const HomeHeader = () => {
           style={{ backgroundImage: `url(${slide.image})` }}
         >
           <div className="absolute h-full bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white  flex flex-col items-center justify-center text-center p-8 pt-16">
-            <h2 className={`text-5xl font-semibold mb-4 transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '300ms' : '0ms' }}>
+            <h2 className={`text-4xl  w-8/12 font-semibold mb-4 transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '300ms' : '0ms' }}>
               {slide.title}
             </h2>
             <p className={`text-xl transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '500ms' : '0ms' }}>
