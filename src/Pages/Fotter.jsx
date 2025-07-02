@@ -9,19 +9,40 @@ import { FaTwitterSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const usefulLinks = [
+    { name: "Home", to: "/" },
+    { name: "Universities", to: "/universities" },
+    { name: "About North Cyprus", to: "/about" },
+    { name: "Gallery", to: "/gallery" },
+    { name: "FAQ", to: "/faq" },
+  ];
+
+  const otherLinks = [
+    { name: "Admission Process", to: "/admission" },
+    { name: "e-Subagent", to: "/subagent" },
+    { name: "Contact", to: "/contact" },
+  ];
+
+  const contactInfo = [
+    { icon: <FaSquarePhoneFlip className="text-lg" />, text: "+90 533 889 9948" },
+    { icon: <MdEmail className="text-lg" />, text: "info@studygists.com" },
+  ];
+
+  const socialLinks = [
+    { icon: <FaSquareFacebook />, to: "/facebook" },
+    { icon: <FaTwitterSquare />, to: "/twitter" },
+    { icon: <FaSquareInstagram />, to: "/instagram" },
+  ];
+
   return (
     <div className="bg-color1 text-white pt-10">
       <div className="w-[90vw] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-5">
         {/* Logo & Description */}
         <div>
           <Link to="/">
-            <h1 className="text-2xl font-bold mb-4 text-white">
-              AgencyEducation
-            </h1>
+            <h1 className="text-2xl font-bold mb-4 text-white">AgencyEducation</h1>
           </Link>
-          <p className="mb-4 text-md">
-            A Wonderful Education and Tech Skills Learning Platform.
-          </p>
+          <p className="mb-4 text-md">A Wonderful Education and Tech Skills Learning Platform.</p>
           <Link to="/contact">
             <button className="px-4 py-2 bg-[#F5891B] hover:bg-[#db8d3e] text-sm text-color1 rounded cursor-pointer font-medium transition">
               Apply Now
@@ -33,31 +54,11 @@ export default function Footer() {
         <div>
           <h2 className="text-xl font-bold mb-3">EducationUnlimited</h2>
           <ul className="space-y-2 text-md">
-            <li>
-              <Link to="/" className="hover:underline">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/universities" className="hover:underline">
-                Universities
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:underline">
-                About North Cyprus
-              </Link>
-            </li>
-            <li>
-              <Link to="/gallery" className="hover:underline">
-                Gallery
-              </Link>
-            </li>
-            <li>
-              <Link to="/faq" className="hover:underline">
-                FAQ
-              </Link>
-            </li>
+            {usefulLinks.map((link, idx) => (
+              <li key={idx}>
+                <Link to={link.to} className="hover:underline">{link.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -65,21 +66,11 @@ export default function Footer() {
         <div>
           <h2 className="text-xl font-bold mb-3">Other Links</h2>
           <ul className="space-y-2 text-md">
-            <li>
-              <Link to="/admission" className="hover:underline">
-                Admission Process
-              </Link>
-            </li>
-            <li>
-              <Link to="/subagent" className="hover:underline">
-                e-Subagent
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:underline">
-                Contact
-              </Link>
-            </li>
+            {otherLinks.map((link, idx) => (
+              <li key={idx}>
+                <Link to={link.to} className="hover:underline">{link.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -87,14 +78,12 @@ export default function Footer() {
         <div>
           <h2 className="text-xl font-bold mb-3">Contact Us</h2>
           <ul className="space-y-2 text-md">
-            <li className="flex items-center gap-2">
-              <FaSquarePhoneFlip className="text-lg" />
-              +90 533 889 9948
-            </li>
-            <li className="flex items-center gap-2">
-              <MdEmail className="text-lg" />
-              info@studygists.com
-            </li>
+            {contactInfo.map((info, idx) => (
+              <li key={idx} className="flex items-center gap-2">
+                {info.icon}
+                {info.text}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -103,21 +92,19 @@ export default function Footer() {
       <hr className="border-gray-700 mt-8" />
       <div className="flex flex-col sm:flex-row justify-between items-center w-[80vw] mx-auto py-5 gap-4 text-sm">
         <p className="text-center">
-          &copy; {new Date().getFullYear()} AgencyEducation Limited. All rights
-          reserved.
+          &copy; {new Date().getFullYear()} AgencyEducation Limited. All rights reserved.
         </p>
         <div className="flex gap-5 text-2xl">
-          <Link to="/facebook" className="hover:text-gray-300">
-            <FaSquareFacebook className="hover:scale-3d"/>
-          </Link>
-          <Link to="/twitter" className="hover:text-gray-300">
-            <FaTwitterSquare />
-          </Link>
-          <Link to="/instagram" className="hover:text-gray-300">
-            <FaSquareInstagram />
-          </Link>
+          {socialLinks.map((social, idx) => (
+            <Link
+              key={idx}
+              to={social.to}
+              className="hover:text-[#F5891B] transform transition-transform duration-300 hover:scale-110"
+            >
+              {social.icon}
+            </Link>
+          ))}
         </div>
-      </div>
-    </div>
+      </div>    </div>
   );
 }
