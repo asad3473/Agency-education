@@ -7,6 +7,7 @@ import Fotter from './Pages/Fotter'
 import ContactUs from './Pages/ContactUs'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
+import CyprusInternational from './Pages/CyprusInternational'
 
 function MainLayout() {
   return (
@@ -26,7 +27,8 @@ const router = createBrowserRouter([
       { path: '/about', element: <h1>i'm from about</h1>},
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
-      {path:"/Signup",element:<SignUp/>}
+      {path:"/Signup",element:<SignUp/>},
+      {path:"/cypruspage",element:<CyprusInternational/>}
     ]
   }
 ])

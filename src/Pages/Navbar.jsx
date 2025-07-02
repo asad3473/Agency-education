@@ -163,7 +163,7 @@ export default function Navbar() {
                 <Link to="/">
                   <li className="cursor-pointer">Home</li>
                 </Link>
-                <Link to="/universities">
+                <Link to="/cypruspage">
                   <li className="cursor-pointer">Universites</li>
                 </Link>
                 <Link to="/admission">
