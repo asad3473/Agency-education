@@ -76,12 +76,12 @@ export default function Navbar() {
         {/* <!-- =========First Section ========== --> */}
 
         {/* <!-- ========== second  Section ========== --> */}
-        <div className="flex whitespace-nowrap justify-between items-center py-10 ">
+        <div className="flex whitespace-nowrap justify-between items-center py-3 ">
           <Link to="/">
             {" "}
-            <div className=" w-15 mr-3 h-15 sm:w-25 sm:h-25 ">
+            <div className=" w-15 mr-3 h-15 sm:w-20 sm:h-15 ">
               <img
-                className="w-full rounded-full cursor-pointer h-full object-cover bg-center"
+                className="w-full rounded-xl cursor-pointer h-full object-cover bg-center"
                 src="https://plus.unsplash.com/premium_photo-1669652639337-c513cc42ead6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Ym9va3xlbnwwfHwwfHx8MA%3D%3D"
                 alt=""
               />
