@@ -1,102 +1,121 @@
 import React from "react";
-import { FaSquarePhoneFlip } from "react-icons/fa6";
+import {
+  FaSquarePhoneFlip,
+  FaSquareFacebook,
+  FaSquareInstagram,
+} from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { FaTwitterSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FaTwitterSquare } from "react-icons/fa";
-import { FaSquareInstagram } from "react-icons/fa6";
-export default function Fotter() {
+export default function Footer() {
   return (
-    <div className="bg-color1 pt-10 text-white">
-      <div className="w-[90vw] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 sm:gap-15 mx-auto p-5">
+    <div className="bg-color1 text-white pt-10">
+      <div className="w-[90vw] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-5">
+        {/* Logo & Description */}
         <div>
-          <Link to="/"><h1 className="text-2xl mb-3">AgencyEducation</h1></Link>
-          <p className="mb-5">
-            A Wonderful Education and Tec Skills learning Platform
+          <Link to="/">
+            <h1 className="text-2xl font-bold mb-4 text-white">
+              AgencyEducation
+            </h1>
+          </Link>
+          <p className="mb-4 text-md">
+            A Wonderful Education and Tech Skills Learning Platform.
           </p>
           <Link to="/contact">
-            {" "}
-            <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+            <button className="px-4 py-2 bg-[#F5891B] hover:bg-[#db8d3e] text-sm text-color1 rounded cursor-pointer font-medium transition">
               Apply Now
             </button>
           </Link>
         </div>
+
+        {/* Useful Links */}
         <div>
-          <h1 className="text-xl mb-3">EducationUnlimited</h1>
-          <ul className="flex flex-col gap-3">
-            <Link to="">
-              <li>Home </li>
-            </Link>
-            <Link to="">
-              <li>Universites </li>
-            </Link>
-            <Link to="">
-              <li>About North Cyprus </li>
-            </Link>
-            <Link to="">
-              <li>Gallery </li>
-            </Link>
-            <Link to="">
-              <li>FAQ </li>
-            </Link>
+          <h2 className="text-xl font-bold mb-3">EducationUnlimited</h2>
+          <ul className="space-y-2 text-md">
+            <li>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/universities" className="hover:underline">
+                Universities
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:underline">
+                About North Cyprus
+              </Link>
+            </li>
+            <li>
+              <Link to="/gallery" className="hover:underline">
+                Gallery
+              </Link>
+            </li>
+            <li>
+              <Link to="/faq" className="hover:underline">
+                FAQ
+              </Link>
+            </li>
           </ul>
         </div>
+
+        {/* Other Links */}
         <div>
-          <h1 className="text-xl mb-3">Others Links</h1>
-          <ul className="flex flex-col gap-3">
-            <Link to="">
-              Admission Process <li></li>
-            </Link>
-            <Link to="">
-              e-subagent <li></li>
-            </Link>
-            <Link to="">
-              Contact <li></li>
-            </Link>
+          <h2 className="text-xl font-bold mb-3">Other Links</h2>
+          <ul className="space-y-2 text-md">
+            <li>
+              <Link to="/admission" className="hover:underline">
+                Admission Process
+              </Link>
+            </li>
+            <li>
+              <Link to="/subagent" className="hover:underline">
+                e-Subagent
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:underline">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
+
+        {/* Contact Info */}
         <div>
-          <h1 className="text-xl mb-3">Contact Us</h1>
-          <ul className="flex flex-col gap-3">
-            <Link to="">
-              <li className="flex items-center gap-3">
-                <FaSquarePhoneFlip />
-                +905338899948
-              </li>
-            </Link>
-            <Link to="">
-              <li className="flex items-center gap-3">
-                <MdEmail />
-                info@studygists.com
-              </li>
-            </Link>
+          <h2 className="text-xl font-bold mb-3">Contact Us</h2>
+          <ul className="space-y-2 text-md">
+            <li className="flex items-center gap-2">
+              <FaSquarePhoneFlip className="text-lg" />
+              +90 533 889 9948
+            </li>
+            <li className="flex items-center gap-2">
+              <MdEmail className="text-lg" />
+              info@studygists.com
+            </li>
           </ul>
         </div>
       </div>
-      <hr />
-      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-10 py-5 items-center">
-        <div className=" flex justify-center  gap-5  text-center">
-          <Link to="/facebook">
-            <div>
-              <FaSquareFacebook className="text-3xl cursor-pointer" />
-            </div>
-          </Link>
 
-          <Link to="/twitter">
-            <div>
-              <FaTwitterSquare className="text-3xl cursor-pointer" />
-            </div>
+      {/* Footer Bottom */}
+      <hr className="border-gray-700 mt-8" />
+      <div className="flex flex-col sm:flex-row justify-between items-center w-[80vw] mx-auto py-5 gap-4 text-sm">
+        <p className="text-center">
+          &copy; {new Date().getFullYear()} AgencyEducation Limited. All rights
+          reserved.
+        </p>
+        <div className="flex gap-5 text-2xl">
+          <Link to="/facebook" className="hover:text-gray-300">
+            <FaSquareFacebook className="hover:scale-3d"/>
           </Link>
-
-          <Link to="/instagram">
-            <div>
-              <FaSquareInstagram className="text-3xl cursor-pointer" />
-            </div>
+          <Link to="/twitter" className="hover:text-gray-300">
+            <FaTwitterSquare />
           </Link>
-        </div>
-        <div>
-          <p>Copyright @AgencyEducation Limited.</p>
+          <Link to="/instagram" className="hover:text-gray-300">
+            <FaSquareInstagram />
+          </Link>
         </div>
       </div>
     </div>
