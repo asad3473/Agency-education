@@ -1,112 +1,70 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaWhatsapp, FaSquareFacebook, FaSquareInstagram } from "react-icons/fa6";
+import {
+  FaWhatsapp,
+  FaSquareFacebook,
+  FaSquareInstagram,
+  FaChevronDown,
+} from "react-icons/fa6";
 import { FaTwitterSquare } from "react-icons/fa";
 import { MdOutlineMenuBook, MdOutlineCancel } from "react-icons/md";
 
 export default function Navbar() {
-  const [first, setfirst] = useState(false);
-  const [cross, setcross] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
-  const showMobile = () => {
-    setfirst(true);
-    setcross(true);
-  };
-
-  const minusMobile = () => {
-    setfirst(false);
-    setcross(false);
-  };
+  const toggleLang = () => setIsLangOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <div className="bg-[#0A0851] text-white">
       <div className="w-[90vw] mx-auto">
-        {/* Top Contact Bar */}
-        <div className="p-5 border-b gap-3 border-gray-400 flex flex-col justify-center items-center sm:flex-row sm:justify-between ">
-          <div className="flex gap-4 items-center">
-            <Link to="/">
-              <FaWhatsapp className="text-2xl text-color2" />
-            </Link>
-            <span className="text-lg font-semibold">+9080808008088</span>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div className="relative z-20 text-sm block lg:hidden cursor-pointer font-semibold group">
-              <input
-                type="text"
-                readOnly
-                value="Select Language"
-                className="bg-transparent rounded-4xl border border-gray-500 text-white px-3 py-2 focus:outline-none"
-              />
-              <ul className="absolute bg-[#0A0851] text-white mt-2 w-full rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <li className="px-4 py-2 hover:bg-color1">English</li>
-                <li className="px-4 py-2 hover:bg-color1">French</li>
-                <li className="px-4 py-2 hover:bg-color1">Arabic</li>
-                <li className="px-4 py-2 hover:bg-color1">Spanish</li>
-              </ul>
-            </div>
-
-            <div className="hidden lg:flex gap-5">
-              <Link to="/facebook">
-                <FaSquareFacebook className="text-3xl cursor-pointer" />
-              </Link>
-              <Link to="/twitter">
-                <FaTwitterSquare className="text-3xl cursor-pointer" />
-              </Link>
-              <Link to="/instagram">
-                <FaSquareInstagram className="text-3xl cursor-pointer" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Navbar */}
-        <div className="flex justify-between items-center py-4 relative">
+        <div className="flex justify-between items-center py-4 relative z-30">
           {/* Logo */}
           <Link to="/">
-            <div className="w-10 h-10 sm:w-10 sm:h-10 mr-3">
+            <div className="w-10 h-10 mr-3">
               <img
-                className="w-full h-full object-cover rounded-xl cursor-pointer"
                 src="https://plus.unsplash.com/premium_photo-1669652639337-c513cc42ead6?w=500&auto=format&fit=crop&q=60"
                 alt="Logo"
+                className="w-full h-full object-cover rounded-xl cursor-pointer"
               />
             </div>
           </Link>
 
-          {/* Hamburger Menu */}
-          <div className="text-4xl lg:hidden" onClick={showMobile}>
-            <MdOutlineMenuBook />
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex justify-center w-full">
+            <ul className="flex text-sm xl:text-lg font-semibold gap-8">
+              <Link to="/"><li className="cursor-pointer hover:text-[#F5891B]">Home</li></Link>
+              <Link to="/about"><li className="cursor-pointer hover:text-[#F5891B]">About</li></Link>
+              <Link to="/cypruspage"><li className="cursor-pointer hover:text-[#F5891B]">Universities</li></Link>
+              <Link to="/apply"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
+              <Link to="/contact"><li className="cursor-pointer hover:text-[#F5891B]">Contact</li></Link>
+            </ul>
           </div>
 
-          {/* Mobile Sidebar */}
-          {cross && (
-            <div className="absolute z-50 top-5 right-5 text-white" onClick={minusMobile}>
-              <MdOutlineCancel className="text-4xl" />
-            </div>
-          )}
-
-          {first && (
-            <div className="z-40 absolute top-0 right-0 w-full sm:w-[300px] min-h-screen px-4 py-10 bg-color1 lg:hidden">
-              <div className="flex flex-col items-center">
-                <ul className="flex flex-col items-center text-lg font-semibold gap-4">
-                  <Link to="/"><li className="cursor-pointer">Home</li></Link>
-                  <Link to="/universities"><li className="cursor-pointer">Universities</li></Link>
-                  <Link to="/contact"><li className="cursor-pointer">Contact</li></Link>
-                  <Link to="/login"><li className="cursor-pointer">Login</li></Link>
+          {/* Language & Login (Desktop Only) */}
+          <div className="hidden lg:flex items-center gap-3 ml-6 font-semibold text-sm">
+            <div className="relative">
+              <div
+                className="flex items-center gap-2 cursor-pointer border border-gray-500 rounded-4xl px-3 py-2"
+                onClick={toggleLang}
+              >
+                <span className="text-nowrap">Select Language</span>
+                <FaChevronDown
+                  className={`transition-transform duration-300 ${
+                    isLangOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </div>
+              {isLangOpen && (
+                <ul className="absolute bg-[#0A0851] mt-2 w-full rounded shadow-lg border border-gray-600">
+                  <li className="px-4 py-2 hover:text-[#F5891B] cursor-pointer">English</li>
+                  <li className="px-4 py-2 hover:text-[#F5891B] cursor-pointer">Arabic</li>
                 </ul>
-                <Link to="/applynow">
-                  <button className="px-3 my-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                    Apply Now
-                  </button>
-                </Link>
-              </div>
-              <div className="flex justify-center mt-5 gap-5">
-                <Link to="/facebook"><FaSquareFacebook className="text-3xl cursor-pointer" /></Link>
-                <Link to="/twitter"><FaTwitterSquare className="text-3xl cursor-pointer" /></Link>
-                <Link to="/instagram"><FaSquareInstagram className="text-3xl cursor-pointer" /></Link>
-              </div>
+              )}
             </div>
-          )}
 
+<<<<<<< HEAD
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center mr-4">
             <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
@@ -118,30 +76,78 @@ export default function Navbar() {
               <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
                 Apply Now
               </button>
+=======
+            <Link to="/login">
+              <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
+                Login
+              </li>
+>>>>>>> 1d7d32c30ec7cc1908f86f45f97c0e2a0c14f1c5
             </Link>
           </div>
 
-          {/* Language & Login */}
-          <div className="relative z-20 text-sm hidden lg:block cursor-pointer font-semibold group">
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                readOnly
-                value="Select Language"
-                className="bg-transparent rounded-4xl border border-gray-500 text-white text-center py-2 focus:outline-none"
-              />
-              <Link to="/login">
-                <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white transition duration-300 hover:bg-[#f47f09] cursor-pointer">
-                  Login
-                </li>
-              </Link>
-            </div>
-            <ul className="absolute bg-[#0A0851] text-white mt-2 w-full rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-              <li className="px-4 py-2 hover:bg-color1">English</li>
-              <li className="px-4 py-2 hover:bg-color1">Arabic</li>
-            </ul>
+          {/* Hamburger Icon */}
+          <div className="text-3xl lg:hidden cursor-pointer" onClick={() => setIsMenuOpen(true)}>
+            <MdOutlineMenuBook />
           </div>
         </div>
+
+        {/* Mobile Sidebar */}
+        <div
+          className={`fixed top-0 right-0 w-4/5 max-w-[300px] h-full bg-[#0A0851] text-white transform ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300 ease-in-out z-50 shadow-lg`}
+        >
+          <div className="flex justify-between items-center px-4 py-4">
+            <h2 className="text-lg font-semibold">Menu</h2>
+            <MdOutlineCancel
+              className="text-3xl cursor-pointer"
+              onClick={closeMenu}
+            />
+          </div>
+
+          <ul className="flex flex-col items-start px-6 text-lg text-center font-medium space-y-4 mt-6">
+            <Link to="/" onClick={closeMenu}><li>Home</li></Link>
+            <Link to="/about" onClick={closeMenu}><li>About</li></Link>
+            <Link to="/cypruspage" onClick={closeMenu}><li>Universities</li></Link>
+            <Link to="/apply" onClick={closeMenu}><li>Apply</li></Link>
+            <Link to="/contact" onClick={closeMenu}><li>Contact</li></Link>
+
+            {/* Mobile Language Selector */}
+            <div className="relative w-full">
+              <div
+                className="flex items-center gap-2 cursor-pointer border border-gray-500 rounded-2xl px-3 py-2 w-full"
+                onClick={toggleLang}
+              >
+                <span className="text-nowrap">Select Language</span>
+                <FaChevronDown
+                  className={`ml-auto transition-transform duration-300 ${
+                    isLangOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </div>
+              {isLangOpen && (
+                <ul className="mt-2 w-full rounded bg-[#0A0851] shadow-md border border-gray-600">
+                  <li className="px-4 py-2 hover:text-[#F5891B] cursor-pointer">English</li>
+                  <li className="px-4 py-2 hover:text-[#F5891B] cursor-pointer">Arabic</li>
+                </ul>
+              )}
+            </div>
+
+            <Link to="/login" onClick={closeMenu}>
+              <button className="mt-4 px-4 py-2 w-full text-left bg-[#F5891B] rounded-sm">
+                Login
+              </button>
+            </Link>
+          </ul>
+        </div>
+
+        {/* Overlay */}
+        {isMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black opacity-50 z-40"
+            onClick={closeMenu}
+          />
+        )}
       </div>
     </div>
   );
