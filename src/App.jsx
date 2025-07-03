@@ -8,6 +8,7 @@ import ContactUs from './Pages/ContactUs'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
 import CyprusInternational from './Pages/CyprusInternational'
+import ApplyNow from './Pages/ApplyNow'
 
 function MainLayout() {
   return (
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
-      {path:"/cypruspage",element:<CyprusInternational/>}
+      {path:"/cypruspage",element:<CyprusInternational/>},
+      {path:"/applynow",element:<ApplyNow/>}
     ]
   }
 ])
