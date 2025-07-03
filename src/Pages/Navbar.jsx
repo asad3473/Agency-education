@@ -36,7 +36,7 @@ export default function Navbar() {
             <ul className="flex text-sm xl:text-lg font-semibold gap-8">
               <Link to="/"><li className="cursor-pointer hover:text-[#F5891B]">Home</li></Link>
               <Link to="/about"><li className="cursor-pointer hover:text-[#F5891B]">About</li></Link>
-              <Link to="/cypruspage"><li className="cursor-pointer hover:text-[#F5891B]">Universities</li></Link>
+              <Link to="/universities"><li className="cursor-pointer hover:text-[#F5891B]">Universities</li></Link>
               <Link to="/apply"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
               <Link to="/contact"><li className="cursor-pointer hover:text-[#F5891B]">Contact</li></Link>
             </ul>
@@ -64,24 +64,10 @@ export default function Navbar() {
               )}
             </div>
 
-<<<<<<< HEAD
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center mr-4">
-            <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
-              <Link to="/"><li className="cursor-pointer">Home</li></Link>
-              <Link to="/universities"><li className="cursor-pointer">Universities</li></Link>
-              <Link to="/contact"><li className="cursor-pointer">Contact</li></Link>
-            </ul>
-            <Link to="/applynow">
-              <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                Apply Now
-              </button>
-=======
             <Link to="/login">
               <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
                 Login
               </li>
->>>>>>> 1d7d32c30ec7cc1908f86f45f97c0e2a0c14f1c5
             </Link>
           </div>
 
@@ -108,7 +94,7 @@ export default function Navbar() {
           <ul className="flex flex-col items-start px-6 text-lg text-center font-medium space-y-4 mt-6">
             <Link to="/" onClick={closeMenu}><li>Home</li></Link>
             <Link to="/about" onClick={closeMenu}><li>About</li></Link>
-            <Link to="/cypruspage" onClick={closeMenu}><li>Universities</li></Link>
+            <Link to="/universities" onClick={closeMenu}><li>Universities</li></Link>
             <Link to="/apply" onClick={closeMenu}><li>Apply</li></Link>
             <Link to="/contact" onClick={closeMenu}><li>Contact</li></Link>
 
