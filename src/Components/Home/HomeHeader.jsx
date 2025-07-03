@@ -1,8 +1,8 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const HomeHeader = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const slides = [
     {
       image: "/Homeimages/homeheader/un2.jpg",
@@ -37,38 +37,39 @@ export const HomeHeader = () => {
   return (
     <div className="relative w-full h-[80vh] overflow-hidden shadow-xl">
       {slides.map((slide, index) => (
-        <div 
+        <div
           key={index}
           className={`absolute w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
           style={{ backgroundImage: `url(${slide.image})` }}
         >
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/80 to-blue-900/90"></div>
           <div className="absolute h-full bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white  flex flex-col items-center justify-center text-center p-8 pt-16">
-            <h2 className={`text-4xl  w-8/12 font-semibold mb-4 transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '300ms' : '0ms' }}>
+            <h2 className={`text-2xl sm:text-4xl w-full sm:w-8/12 font-semibold mb-4 transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '300ms' : '0ms' }}>
               {slide.title}
             </h2>
-            <p className={`text-xl transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '500ms' : '0ms' }}>
+            <p className={`text-sm sm:text-xl transition-all duration-500 ease-out ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`} style={{ transitionDelay: index === currentSlide ? '500ms' : '0ms' }}>
               {slide.description}
             </p>
           </div>
         </div>
       ))}
-      
-      <button 
-        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-white/30 text-white text-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/50 z-10"
+
+      <button
+        className="absolute top-1/2  sm:flex hidden left-5 transform -translate-y-1/2 bg-white/30 text-white text-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/50 z-10"
         onClick={prevSlide}
       >
         &#10094;
       </button>
-      <button 
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-white/30 text-white text-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/50 z-10"
+      <button
+        className="absolute sm:flex hidden top-1/2 right-5 transform -translate-y-1/2 bg-white/30 text-white text-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/50 z-10"
         onClick={nextSlide}
       >
         &#10095;
       </button>
-      
+
       <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex z-10">
         {slides.map((_, index) => (
-          <span 
+          <span
             key={index}
             className={`w-3 h-3 mx-1 rounded-full cursor-pointer transition-all duration-300 ${index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'}`}
             onClick={() => setCurrentSlide(index)}
