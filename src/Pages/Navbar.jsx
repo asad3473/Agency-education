@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="bg-[#0A0851] text-white">
       <div className="w-[90vw] mx-auto">
-     
+
         <div className="flex justify-between items-center py-4 relative">
           {/* Logo */}
           <Link to="/">
@@ -50,94 +50,56 @@ export default function Navbar() {
                     <Link to="/contact"><li>Contact</li></Link>
                     <Link to="/login"><li>Login</li></Link>
                   </ul>
-                  <Link to="/contact">
-                    <li className="cursor-pointer">Contact</li>
+                  <Link to="/applynow">
+                    <button className="px-3 my-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+                      Apply Now
+                    </button>
                   </Link>
-                  <Link to="/login">
-                    <li className="cursor-pointer">Login</li>
-                  </Link>
-                </ul>
-                <Link to="/applynow">
-                  {" "}
-                  <button className="px-3 my-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                    Apply Now
-                  </button>
-                </Link>
-              </div>
 
-              <div className=" flex justify-center mt-5  gap-5  text-center">
-                <Link to="/facebook">
-                  <div>
-                    <FaSquareFacebook className="text-3xl cursor-pointer" />
+                  <div className="flex justify-center gap-5 mt-5">
+                    <Link to="/facebook">
+                      <FaSquareFacebook className="text-3xl cursor-pointer" />
+                    </Link>
+                    <Link to="/twitter">
+                      <FaTwitterSquare className="text-3xl cursor-pointer" />
+                    </Link>
+                    <Link to="/instagram">
+                      <FaSquareInstagram className="text-3xl cursor-pointer" />
+                    </Link>
                   </div>
-                </Link>
-
-                <Link to="/twitter">
-                  <div>
-                    <FaTwitterSquare className="text-3xl cursor-pointer" />
-                  </div>
-                </Link>
-
-                <Link to="/instagram">
-                  <div>
-                    <FaSquareInstagram className="text-3xl cursor-pointer" />
-                  </div>
-                </Link>
+                </div>
               </div>
             </>
           )}
 
-          {/* <!-- =========Mobile Side Bar Section ========== --> */}
-
-          <div className="hidden lg:block">
-            <div className="flex  mr-4  items-center">
-              <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
-                <Link to="/">
-                  <li className="cursor-pointer">Home</li>
-                </Link>
-                <Link to="/cypruspage">
-                  <li className="cursor-pointer">Universites</li>
-                </Link>
-
-                <Link to="/contact">
-                  <li className="cursor-pointer">Contact</li>
-                </Link>
-
-              </ul>
-<<<<<<< HEAD
-              <Link to="/applynow">
-                {" "}
-                <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                  Apply Now
-                </button>
-              </Link>
-=======
-              <Link to="/contact"> <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                Apply Now
-              </button></Link>
->>>>>>> 864dc455b0e60230c69c13bc96a38cb5993db571
-            </div>
-          </div>
-
-          {/* Language + Login (Desktop) */}
-          <div className="relative z-20 hidden lg:block font-semibold group text-sm">
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                readOnly
-                value="Select Language"
-                className="bg-transparent border border-gray-500 rounded-4xl text-white text-center py-2 focus:outline-none"
-              />
-              <Link to="/login">
-                <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white transition duration-300 hover:bg-orange-600">
-                  Login
-                </li>
-              </Link>
-            </div>
-            <ul className="absolute bg-[#0A0851] text-white mt-2 w-full rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-              <li className="px-4 py-2 hover:bg-color1">English</li>
-              <li className="px-4 py-2 hover:bg-color1">Arabic</li>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
+            <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
+              <Link to="/"><li className="cursor-pointer">Home</li></Link>
+              <Link to="/cypruspage"><li className="cursor-pointer">Universities</li></Link>
+              <Link to="/contact"><li className="cursor-pointer">Contact</li></Link>
             </ul>
+
+            {/* Language + Login */}
+            <div className="relative z-20 font-semibold group text-sm">
+              <div className="flex items-center gap-3">
+                <input
+                  type="text"
+                  readOnly
+                  value="Select Language"
+                  className="bg-transparent border border-gray-500 rounded-4xl text-white text-center py-2 focus:outline-none"
+                />
+                <Link to="/login">
+                  <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white transition duration-300 hover:bg-orange-600">
+                    Login
+                  </li>
+                </Link>
+              </div>
+              <ul className="absolute bg-[#0A0851] text-white mt-2 w-full rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                <li className="px-4 py-2 hover:bg-color1">English</li>
+                <li className="px-4 py-2 hover:bg-color1">Arabic</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
