@@ -126,8 +126,9 @@ export default function Navbar() {
                     <li className="cursor-pointer">Login</li>
                   </Link>
                 </ul>
-                <Link to="/contact">
-                  <button className="px-3  py-2 text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+                <Link to="/applynow">
+                  {" "}
+                  <button className="px-3 my-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
                     Apply Now
                   </button>
                 </Link>
@@ -182,9 +183,12 @@ export default function Navbar() {
                   <li className="cursor-pointer">Login</li>
                 </Link>
               </ul>
-             <Link to="/contact"> <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
-                Apply Now
-              </button></Link>
+              <Link to="/applynow">
+                {" "}
+                <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+                  Apply Now
+                </button>
+              </Link>
             </div>
           </div>
           <div className="relative z-20 text-sm hidden lg:block cursor-pointer font-semibold group">

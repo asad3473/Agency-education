@@ -43,7 +43,7 @@ export default function Footer() {
             <h1 className="text-2xl font-bold mb-4 text-white">AgencyEducation</h1>
           </Link>
           <p className="mb-4 text-md">A Wonderful Education and Tech Skills Learning Platform.</p>
-          <Link to="/contact">
+          <Link to="/applynow">
             <button className="px-4 py-2 bg-[#F5891B] hover:bg-[#db8d3e] text-sm text-color1 rounded cursor-pointer font-medium transition">
               Apply Now
             </button>
