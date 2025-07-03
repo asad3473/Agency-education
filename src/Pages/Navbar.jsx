@@ -51,33 +51,72 @@ export default function Navbar() {
                     <Link to="/login"><li>Login</li></Link>
                   </ul>
                   <Link to="/contact">
-                    <button className="px-3 py-2 text-lg bg-color1 rounded-sm font-semibold">
-                      Apply Now
-                    </button>
+                    <li className="cursor-pointer">Contact</li>
                   </Link>
-                </div>
-                <div className="flex justify-center mt-5 gap-5">
-                  <Link to="/facebook"><FaSquareFacebook className="text-3xl" /></Link>
-                  <Link to="/twitter"><FaTwitterSquare className="text-3xl" /></Link>
-                  <Link to="/instagram"><FaSquareInstagram className="text-3xl" /></Link>
-                </div>
+                  <Link to="/login">
+                    <li className="cursor-pointer">Login</li>
+                  </Link>
+                </ul>
+                <Link to="/applynow">
+                  {" "}
+                  <button className="px-3 my-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+                    Apply Now
+                  </button>
+                </Link>
+              </div>
+
+              <div className=" flex justify-center mt-5  gap-5  text-center">
+                <Link to="/facebook">
+                  <div>
+                    <FaSquareFacebook className="text-3xl cursor-pointer" />
+                  </div>
+                </Link>
+
+                <Link to="/twitter">
+                  <div>
+                    <FaTwitterSquare className="text-3xl cursor-pointer" />
+                  </div>
+                </Link>
+
+                <Link to="/instagram">
+                  <div>
+                    <FaSquareInstagram className="text-3xl cursor-pointer" />
+                  </div>
+                </Link>
               </div>
             </>
           )}
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-4 mr-4">
-            <ul className="flex text-sm xl:text-lg font-semibold gap-4">
-              <Link to="/"><li>Home</li></Link>
-              <Link to="/universities"><li>Universities</li></Link>
-              <Link to="/about"><li>About</li></Link>
-              <Link to="/contact"><li>Contact</li></Link>
-            </ul>
-            <Link to="/contact">
-              <button className="px-3 py-2 text-lg bg-color1 rounded-sm font-semibold">
+          {/* <!-- =========Mobile Side Bar Section ========== --> */}
+
+          <div className="hidden lg:block">
+            <div className="flex  mr-4  items-center">
+              <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
+                <Link to="/">
+                  <li className="cursor-pointer">Home</li>
+                </Link>
+                <Link to="/cypruspage">
+                  <li className="cursor-pointer">Universites</li>
+                </Link>
+
+                <Link to="/contact">
+                  <li className="cursor-pointer">Contact</li>
+                </Link>
+
+              </ul>
+<<<<<<< HEAD
+              <Link to="/applynow">
+                {" "}
+                <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
+                  Apply Now
+                </button>
+              </Link>
+=======
+              <Link to="/contact"> <button className="px-3 py-2 btnbg text-lg bg-color1 cursor-pointer rounded-sm font-semibold">
                 Apply Now
-              </button>
-            </Link>
+              </button></Link>
+>>>>>>> 864dc455b0e60230c69c13bc96a38cb5993db571
+            </div>
           </div>
 
           {/* Language + Login (Desktop) */}

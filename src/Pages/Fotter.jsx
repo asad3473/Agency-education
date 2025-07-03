@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  FaSquarePhoneFlip,
   FaSquareFacebook,
   FaSquareInstagram,
 } from "react-icons/fa6";
+import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaTwitterSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { icon: <FaSquarePhoneFlip className="text-lg" />, text: "+90 533 889 9948" },
+    { icon: <FaPhone className="text-lg" />, text: "+90 533 889 9948" },
     { icon: <MdEmail className="text-lg" />, text: "info@studygists.com" },
   ];
 
@@ -43,7 +43,7 @@ export default function Footer() {
             <h1 className="text-2xl font-bold mb-4 text-white">AgencyEducation</h1>
           </Link>
           <p className="mb-4 text-md">A Wonderful Education and Tech Skills Learning Platform.</p>
-          <Link to="/contact">
+          <Link to="/applynow">
             <button className="px-4 py-2 bg-[#F5891B] hover:bg-[#db8d3e] text-sm text-color1 rounded cursor-pointer font-medium transition">
               Apply Now
             </button>

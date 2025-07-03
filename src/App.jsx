@@ -15,6 +15,7 @@ import KyreniaUni from './Pages/KyreniaUni'
 import FinalUni from './Pages/FinalUni'
 import BauUni from './Pages/BauUni'
 import OurUniversity from './Components/Home/OurUniversity'
+import ApplyNow from './Pages/ApplyNow'
 
 function MainLayout() {
   return (
@@ -52,6 +53,8 @@ const router = createBrowserRouter([
       {path:"/Kyrenia-University",element:<KyreniaUni/>},
       {path:"/Final-International-University",element:<FinalUni/>},
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
+      {path:"/cypruspage",element:<CyprusInternational/>},
+      {path:"/applynow",element:<ApplyNow/>}
     ]
   }
 ])
@@ -61,4 +64,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

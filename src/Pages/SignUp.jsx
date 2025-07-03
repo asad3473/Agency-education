@@ -74,7 +74,7 @@ const SignUp = () => {
             <div className="relative px-2  w-full">
               <RiIdCardFill className="absolute top-5 right-4 text-lg" />
               <input
-                type="cnic"
+                type="number"
                 placeholder="CNIC"
                 className=" focus:outline-gray-300 border-b border-gray-400 px-2 py-3 w-full "
               />
