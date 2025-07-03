@@ -111,7 +111,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center mr-4">
             <ul className="flex text-sm xl:text-lg font-semibold gap-4 mr-5">
               <Link to="/"><li className="cursor-pointer">Home</li></Link>
-              <Link to="/cypruspage"><li className="cursor-pointer">Universities</li></Link>
+              <Link to="/universities"><li className="cursor-pointer">Universities</li></Link>
               <Link to="/contact"><li className="cursor-pointer">Contact</li></Link>
             </ul>
             <Link to="/applynow">
