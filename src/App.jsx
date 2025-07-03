@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import './App.css'
 import Navbar from './Pages/Navbar'
 import Home from './Pages/Home'
-import About from './Pages/About'
+import Fotter from './Pages/Fotter'
 import ContactUs from './Pages/ContactUs'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
@@ -15,7 +15,6 @@ import KyreniaUni from './Pages/KyreniaUni'
 import FinalUni from './Pages/FinalUni'
 import BauUni from './Pages/BauUni'
 import OurUniversity from './Components/Home/OurUniversity'
-import Fotter from './Pages/Fotter'
 
 function MainLayout() {
   return (
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
     children: [
       {path: '/', element: <Home />},
       {path: '/service', element: <h1>i'am from service</h1>},
-      {path:"/about",element:<About/>},
+      { path: '/about', element: <h1>i'm from about</h1>},
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
@@ -53,6 +52,47 @@ const router = createBrowserRouter([
       {path:"/Kyrenia-University",element:<KyreniaUni/>},
       {path:"/Final-International-University",element:<FinalUni/>},
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
+    ]
+  }
+])
+function App() {
+  return (
+    <RouterProvider router={router} />
+  )
+}
+
+export default App
+
+
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import './App.css'
+import Navbar from './Pages/Navbar'
+import Home from './Pages/Home'
+import About from './Pages/About'
+import ContactUs from './Pages/ContactUs'
+import Login from './Pages/Login'
+import SignUp from './Pages/SignUp'
+import Fotter from './Pages/Fotter'
+
+function MainLayout() {
+  return (
+    <div className=' min-h-screen overflow-auto'>
+      <Navbar />
+      <Outlet />
+      <Fotter />
+    </div>
+  )
+}
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    children: [
+      {path: '/', element: <Home />},
+      {path: '/service', element: <h1>i'am from service</h1>},
+      {path:"/about",element:<About/>},
+      {path:"/contact",element:<ContactUs/>},
+      {path:"/login",element:<Login/>},
+      {path:"/Signup",element:<SignUp/>}
     ]
   }
 ])
