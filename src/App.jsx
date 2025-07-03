@@ -5,6 +5,9 @@ import Navbar from './Pages/Navbar'
 import Home from './Pages/Home'
 import Fotter from './Pages/Fotter'
 import ContactUs from './Pages/ContactUs'
+import Login from './Pages/Login'
+import SignUp from './Pages/SignUp'
+import CyprusInternational from './Pages/CyprusInternational'
 import CyprusUni from './Pages/CyprusUni'
 import NearEast from './Pages/NearEast'
 import MediteraninUni from './Pages/MediteraninUni'
@@ -26,6 +29,13 @@ const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
+      {path: '/', element: <Home />},
+      {path: '/service', element: <h1>i'am from service</h1>},
+      { path: '/about', element: <h1>i'm from about</h1>},
+      {path:"/contact",element:<ContactUs/>},
+      {path:"/login",element:<Login/>},
+      {path:"/Signup",element:<SignUp/>},
+      {path:"/cypruspage",element:<CyprusInternational/>}
       {
         path: '/', element: <Home />
       },
