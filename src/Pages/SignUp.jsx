@@ -29,7 +29,7 @@ const SignUp = () => {
     setTimeout(() => {
       setpopDiv(false);
       navigate("/login");
-    }, 5000);
+    }, 2000);
   };
 
   return (

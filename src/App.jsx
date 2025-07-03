@@ -7,6 +7,14 @@ import About from './Pages/About'
 import ContactUs from './Pages/ContactUs'
 import Login from './Pages/Login'
 import SignUp from './Pages/SignUp'
+import CyprusInternational from './Pages/CyprusInternational'
+import CyprusUni from './Pages/CyprusUni'
+import NearEast from './Pages/NearEast'
+import MediteraninUni from './Pages/MediteraninUni'
+import KyreniaUni from './Pages/KyreniaUni'
+import FinalUni from './Pages/FinalUni'
+import BauUni from './Pages/BauUni'
+import OurUniversity from './Components/Home/OurUniversity'
 import Fotter from './Pages/Fotter'
 
 function MainLayout() {
@@ -27,7 +35,24 @@ const router = createBrowserRouter([
       {path:"/about",element:<About/>},
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
-      {path:"/Signup",element:<SignUp/>}
+      {path:"/Signup",element:<SignUp/>},
+      {path:"/cypruspage",element:<CyprusInternational/>}
+      {
+        path: '/', element: <Home />
+      },
+      {
+        path: '/service', element: <h1>i'am from service</h1>
+      },
+      { path: '/about', element: <h1>i'm from about</h1>},
+      { path: '/universities', element: <OurUniversity/>},
+
+      {path:"/contact",element:<ContactUs/>},
+      {path:"/Cyprus-International-University",element:<CyprusUni/>},
+      {path:"/Near-East-University",element:<NearEast/>},
+      {path:"/Eastern-Mediterranean-University",element:<MediteraninUni/>},
+      {path:"/Kyrenia-University",element:<KyreniaUni/>},
+      {path:"/Final-International-University",element:<FinalUni/>},
+      {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
     ]
   }
 ])
