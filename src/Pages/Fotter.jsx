@@ -1,9 +1,9 @@
 import React from "react";
 import {
-  FaSquarePhoneFlip,
   FaSquareFacebook,
   FaSquareInstagram,
 } from "react-icons/fa6";
+import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaTwitterSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { icon: <FaSquarePhoneFlip className="text-lg" />, text: "+90 533 889 9948" },
+    { icon: <FaPhone className="text-lg" />, text: "+90 533 889 9948" },
     { icon: <MdEmail className="text-lg" />, text: "info@studygists.com" },
   ];
 
