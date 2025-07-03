@@ -37,7 +37,7 @@ export default function Navbar() {
               <Link to="/"><li className="cursor-pointer hover:text-[#F5891B]">Home</li></Link>
               <Link to="/about"><li className="cursor-pointer hover:text-[#F5891B]">About</li></Link>
               <Link to="/universities"><li className="cursor-pointer hover:text-[#F5891B]">Universities</li></Link>
-              <Link to="/apply"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
+              <Link to="/applynow"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
               <Link to="/contact"><li className="cursor-pointer hover:text-[#F5891B]">Contact</li></Link>
             </ul>
           </div>
