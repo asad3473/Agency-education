@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
-      {path:"/cypruspage",element:<CyprusInternational/>}
+      {path:"/cypruspage",element:<CyprusInternational/>},
       {
         path: '/', element: <Home />
       },
