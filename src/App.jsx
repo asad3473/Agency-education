@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
       {path:"/cypruspage",element:<CyprusInternational/>},
-       { path: '/universities', element: <OurUniversity/>},
+      { path: '/universities', element: <OurUniversity/>},
        {path:"/contact",element:<ContactUs/>},
       {path:"/Cyprus-International-University",element:<CyprusUni/>},
       {path:"/Near-East-University",element:<NearEast/>},
