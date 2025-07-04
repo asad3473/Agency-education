@@ -1,32 +1,32 @@
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import './App.css';
 
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
-import './App.css'
-import Navbar from './Pages/Navbar'
-import Home from './Pages/Home'
-import Fotter from './Pages/Fotter'
-import About from './Pages/About'
-import ContactUs from './Pages/ContactUs'
-import Login from './Pages/Login'
-import SignUp from './Pages/SignUp'
-import CyprusInternational from './Pages/CyprusInternational'
-import CyprusUni from './Pages/CyprusUni'
-import NearEast from './Pages/NearEast'
-import MediteraninUni from './Pages/MediteraninUni'
-import KyreniaUni from './Pages/KyreniaUni'
-import FinalUni from './Pages/FinalUni'
-import BauUni from './Pages/BauUni'
-import OurUniversity from './Components/Home/OurUniversity'
-import ApplyNow from './Pages/ApplyNow'
+import Navbar from './Pages/Navbar';
+import Home from './Pages/Home';
+import Fotter from './Pages/Fotter';
+import About from './Pages/About';
+import ContactUs from './Pages/ContactUs';
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import CyprusUni from './Pages/CyprusUni';
+import NearEast from './Pages/NearEast';
+import MediteraninUni from './Pages/MediteraninUni';
+import KyreniaUni from './Pages/KyreniaUni';
+import FinalUni from './Pages/FinalUni';
+import BauUni from './Pages/BauUni';
+import OurUniversity from './Components/Home/OurUniversity';
+import ApplyNow from './Pages/ApplyNow';
 
 function MainLayout() {
   return (
-    <div className=' min-h-screen overflow-auto'>
+    <div className="min-h-screen overflow-auto">
       <Navbar />
       <Outlet />
       <Fotter />
     </div>
-  )
+  );
 }
+
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -50,10 +50,9 @@ const router = createBrowserRouter([
     ]
   }
 ])
+
 function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
 
 export default App;
