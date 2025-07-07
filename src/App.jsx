@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
-      {path:"/cypruspage",element:<CyprusInternational/>},
+      // {path:"/cypruspage",element:<CyprusInternational/>},
       { path: '/universities', element: <OurUniversity/>},
        {path:"/contact",element:<ContactUs/>},
       {path:"/Cyprus-International-University",element:<CyprusUni/>},
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       {path:"/Kyrenia-University",element:<KyreniaUni/>},
       {path:"/Final-International-University",element:<FinalUni/>},
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
-      {path:"/cypruspage",element:<CyprusInternational/>},
+      // {path:"/cypruspage",element:<CyprusInternational/>},
       {path:"/applynow",element:<ApplyNow/>}
     ]
   }
