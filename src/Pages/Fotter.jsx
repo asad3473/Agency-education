@@ -19,7 +19,7 @@ export default function Footer() {
 
   const otherLinks = [
     { name: "Admission Process", to: "/admission" },
-    { name: "e-Subagent", to: "/subagent" },
+    { name: "E-Subagent", to: "/subagent" },
     { name: "Contact", to: "/contact" },
   ];
 

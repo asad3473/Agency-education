@@ -32,30 +32,49 @@ export default function MedeterianIntroduction() {
             <hr className="h-1 bg-[#F5891B] sm:w-[14%] border-none hidden md:flex" />
           </div>
           <ol className="mt-4 px-3 flex flex-col gap-3">
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Cyprus International University</li>
-            </Link>
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Near East University</li>
-            </Link>
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Eastern Mediterranean University</li>
-            </Link>
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Kyrenia University</li>
-            </Link>
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Bahcesehir Cyprus University</li>
-            </Link>
-            <Link to="" className="flex items-center gap-2">
-              <GiConvergenceTarget />
-              <li>Final International University</li>
-            </Link>
+            <Link
+                to="/Cyprus-International-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Cyprus International University</li>
+              </Link>
+              <Link
+                to="/Near-East-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Near East University</li>
+              </Link>
+
+              <Link
+                to="/Eastern-Mediterranean-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Eastern Mediterranean University</li>
+              </Link>
+              <Link
+                to="/Kyrenia-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Kyrenia University</li>
+              </Link>
+              <Link
+                to="/Bahcesehir-Cyprus-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Bahcesehir Cyprus University</li>
+              </Link>
+              <Link
+                to="/Final-International-University"
+                className="flex items-center gap-2"
+              >
+                <GiConvergenceTarget />
+                <li>Final International University</li>
+              </Link>
           </ol>
         </div>
       </div>
