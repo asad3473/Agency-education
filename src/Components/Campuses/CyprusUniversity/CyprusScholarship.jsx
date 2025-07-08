@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaAward, FaUsers, FaHeart, FaRunning, FaGraduationCap, FaArrowRight } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 import { GiMoneyStack } from 'react-icons/gi';
 
 const CyprusScholarship = () => {
@@ -129,9 +130,9 @@ const CyprusScholarship = () => {
               </li>
             </ul>
             <div className="mt-10 flex flex-wrap gap-4">
-              <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-[#F5891B] hover:text-white transition-colors duration-300 shadow-lg flex items-center">
+              <Link to="/applynow" className="px-6 py-3 sm:px-8 sm:py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-[#F5891B] hover:text-white transition-colors duration-300 shadow-lg flex items-center">
                 Apply Now <FaArrowRight className="ml-2" />
-              </button>
+              </Link>
             </div>
           </div>
           <div className="hidden md:block bg-blue-500 bg-opacity-10 relative">

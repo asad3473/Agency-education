@@ -392,8 +392,8 @@ const About = () => {
                 <FaHeadset className="text-3xl text-[#F5891B] mr-4" />
               </motion.div>
               <div>
-                <h4 className="font-bold text-[#0A0851]">Still have questions?</h4>
-                <p className="text-gray-600">We're here to help</p>
+                <h4 className="font-bold text-[#0A0851] text-2xl">Still have questions?</h4>
+                <p className="text-gray-600 text-xl">We're here to help</p>
               </div>
             </motion.div>
             <motion.button
@@ -402,7 +402,7 @@ const About = () => {
                 backgroundColor: "#F5891B"
               }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#0A0851] border-1 border-[#0A0851] text-white font-medium py-2 px-6 transition hover:scale-105 shadow-md"
+              className="bg-[#0A0851] border-1 border-[#0A0851] text-white text-sx font-medium py-2 px-4 sm:px-6 transition hover:scale-105 shadow-md"
             >
               CONTACT SUPPORT
             </motion.button>

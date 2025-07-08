@@ -37,8 +37,8 @@ export default function Navbar() {
               <Link to="/"><li className="cursor-pointer hover:text-[#F5891B]">Home</li></Link>
               <Link to="/about"><li className="cursor-pointer hover:text-[#F5891B]">About</li></Link>
               <Link to="/universities"><li className="cursor-pointer hover:text-[#F5891B]">Universities</li></Link>
-              <Link to="/applynow"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
               <Link to="/contact"><li className="cursor-pointer hover:text-[#F5891B]">Contact</li></Link>
+              <Link to="/applynow"><li className="cursor-pointer hover:text-[#F5891B]">Apply</li></Link>
             </ul>
           </div>
 
@@ -95,8 +95,8 @@ export default function Navbar() {
             <Link to="/" onClick={closeMenu}><li>Home</li></Link>
             <Link to="/about" onClick={closeMenu}><li>About</li></Link>
             <Link to="/universities" onClick={closeMenu}><li>Universities</li></Link>
-            <Link to="/apply" onClick={closeMenu}><li>Apply</li></Link>
             <Link to="/contact" onClick={closeMenu}><li>Contact</li></Link>
+            <Link to="/apply" onClick={closeMenu}><li>Apply</li></Link>
 
             {/* Mobile Language Selector */}
             <div className="relative w-full">
