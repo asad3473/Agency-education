@@ -46,7 +46,7 @@ const SignUp = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-700 to-indigo-900 py-8 px-6 text-center">
+        <div className="inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 py-8 px-6 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-white">Create Your Account</h1>
           <p className="mt-2 text-blue-100">Join us today and get started</p>
         </div>
@@ -248,7 +248,7 @@ const SignUp = () => {
           <div className="mt-8">
             <button
               type="submit"
-              className="w-full py-4 px-6 bg-gradient-to-r from-blue-700 to-indigo-900 hover:from-blue-800 hover:to-indigo-900 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              className="w-full py-4 px-6 inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 cursor-pointer to-blue-900/90 hover:from-blue-800 hover:to-indigo-900 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
               Create Account
             </button>

@@ -15,6 +15,7 @@ import FinalUni from './Pages/FinalUni';
 import BauUni from './Pages/BauUni';
 import OurUniversity from './Components/Home/OurUniversity';
 import ApplyNow from './Pages/ApplyNow';
+import ForgotPage from './Pages/ForgotPage';
 
 function MainLayout() {
   return (
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
       {path:"/Final-International-University",element:<FinalUni/>},
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
       // {path:"/cypruspage",element:<CyprusInternational/>},
-      {path:"/applynow",element:<ApplyNow/>}
+      {path:"/applynow",element:<ApplyNow/>},
+      {path:"/forgotpassword",element:<ForgotPage/>}
     ]
   }
 ])

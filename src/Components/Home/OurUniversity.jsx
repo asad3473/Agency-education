@@ -82,7 +82,7 @@ export default function OurUniversity() {
                                 <hr />
                                 <div className='flex flex-col items-center h-full text-center mt-3'>
                                     <p className='text-color mb-4'>{val.description}</p>
-                                    <button className='mt-auto w-fit px-4 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white hover:w-6/12 cursor-pointer hover:bg-[#F5891B]'>
+                                    <button className='mt-auto w-fit px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'>
                                         <Link to={val.link}>{val.btn}</Link>
                                     </button>
                                 </div>
@@ -96,7 +96,7 @@ export default function OurUniversity() {
                 !isUniversitiesPage && (
                     <div className='mt-4 flex justify-center items-center mb-3'>
                         <button
-                            className='w-fit px-4 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white hover:w-2/12 cursor-pointer hover:bg-[#F5891B]'
+                            className=' px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'
                             onClick={() => setShowAll(true)}
                         >
                             <Link to='/universities'>View all universities</Link>

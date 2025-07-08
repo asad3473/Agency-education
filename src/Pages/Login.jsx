@@ -99,7 +99,7 @@ const Login = () => {
               </div>
 
               <div className="text-sm">
-                <Link to="/forgot-password" className="font-medium text-indigo-700 hover:text-indigo-600">
+                <Link to="/forgotpassword" className="font-medium text-indigo-700 hover:text-indigo-600">
                   Forgot your password?
                 </Link>
               </div>
@@ -108,7 +108,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white bg-gradient-to-r from-blue-700 to-indigo-900 hover:from-blue-800 hover:to-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
               >
                 Login
               </button>
