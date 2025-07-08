@@ -157,7 +157,7 @@ const ApplyNow = () => {
                   key={i}
                   className="flex flex-col gap-5 sm:flex-row items-center justify-between border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 hover:shadow-sm transition"
                 >
-                  <p className="text-gray-700 text-sm">{label}</p>
+                  <p className="text-gray-700 text-sm font-semibold" >{label}</p>
                   <input
                     type="file"
                     className="file:px-3 file:py-1 file:rounded-md file:bg-white file:border file:border-gray-300 file:text-gray-700"

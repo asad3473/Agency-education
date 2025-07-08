@@ -68,7 +68,7 @@ export default function OurUniversity() {
                 {
                     displayedUniversities.map((val, ind) => (
                         <div
-                            className='group relative shadow-md hover:shadow-amber-50 transition-all ease-in-out delay-100 shadow-[#0A0851] flex flex-col h-full'
+                            className='group relative shadow-md hover:shadow-amber-50 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full'
                             key={ind}
                         >
                             <div

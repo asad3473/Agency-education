@@ -1,172 +1,302 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { RiIdCardFill } from "react-icons/ri";
-import { FaRegEye } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { GiCrossedBones } from "react-icons/gi";
 
-
 const SignUp = () => {
-  const [password, setpassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setshowPassword] = useState(false);
-  const [setConfirmPass, setsetConfirmPass] = useState(false);
-  const [popDiv, setpopDiv] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    maritalStatus: "",
+    cnic: "",
+    dob: "",
+    nationality: "",
+    contact: "",
+    address: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [popDiv, setPopDiv] = useState(false);
   const navigate = useNavigate();
 
-  const showPopDiv = () => {
-    setpopDiv(true);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-  const hidePopDiv = () => {
-    setpopDiv(false);
-  };
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setpopDiv(true);
+    setPopDiv(true);
+    console.log("Form submitted:", formData);
     setTimeout(() => {
-      setpopDiv(false);
+      setPopDiv(false);
       navigate("/login");
     }, 2000);
   };
 
   return (
-    <div className="flex bg-color1 justify-center items-center p-10">
-      <div className="border border-gray-400  bg-white shadow-xl rounded-sm  ">
-        <div className=" flex justify-center items-center lg:p-10 sm:h-32 bg-color3">
-          <h1 className="text-2xl lg:text-3xl whitespace-nowrap py-2 text-center text-white font-semibold">
-            SignUp Here
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-700 to-indigo-900 py-8 px-6 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-white">Create Your Account</h1>
+          <p className="mt-2 text-blue-100">Join us today and get started</p>
         </div>
 
-        <form className="p-5" onSubmit={handleSubmit}>
-          <div className="flex justify-between gap-2 py-2">
-            <input
-              type="text"
-              placeholder="First Name"
-              className=" focus:outline-gray-300 border-b border-gray-400 px-2 py-3 w-full"
-            />
+        {/* Form */}
+        <form className="p-6 md:p-8" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Personal Information */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Enter first name"
+                  required
+                />
+              </div>
 
-            <input
-              type="text "
-              placeholder="Last Name"
-              className=" focus:outline-gray-300 border-b border-gray-400 px-2 py-3 w-full "
-            />
-          </div>
-          <div className="flex flex-col sm:flex-row justify-between gap-2 py-2">
-            <select className=" focus:outline-gray-300 text-gray-400 border-b border-gray-400 px-2 py-2 w-full ">
-              <option value="">Gender</option>
-              <option>Male</option>
-              <option>Female </option>
-              <option>Others</option>
-            </select>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-            <select className=" focus:outline-gray-300 text-gray-400 border-b border-gray-400 px-2 py-2 w-full ">
-              <option value="">Martial Status </option>
-              <option>Single </option>
-              <option>Married </option>
-              <option>None</option>
-            </select>
-          </div>
-          <div className=" flex flex-col items-center sm:flex-row justify-between gap-2 py-2">
-            <div className="relative px-2  w-full">
-              <RiIdCardFill className="absolute top-5 right-4 text-lg" />
-              <input
-                type="number"
-                placeholder="CNIC"
-                className=" focus:outline-gray-300 border-b border-gray-400 px-2 py-3 w-full "
-              />
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-1">CNIC</label>
+                <RiIdCardFill className="absolute right-3 top-11 text-gray-400" />
+                <input
+                  type="text"
+                  name="cnic"
+                  value={formData.cnic}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Enter CNIC"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
+                <input
+                  type="text"
+                  name="nationality"
+                  value={formData.nationality}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Your nationality"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Permanent Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Your address"
+                  required
+                />
+              </div>
             </div>
 
-            <input
-              type="date"
-              placeholder="Date of Birth"
-              className=" focus:outline-gray-300 text-gray-500 border-b border-gray-400 px-2 py-3 w-full "
-            />
-          </div>
-          <div className="flex justify-between gap-2 py-2">
-            <input
-              type="Nationality"
-              placeholder="Type Nationality"
-              className=" focus:outline-gray-300 border border-gray-200 px-2 py-3 w-full "
-            />
+            {/* Additional Information */}
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Enter last name"
+                  required
+                />
+              </div>
 
-            <input
-              type="contact"
-              placeholder="Contact No."
-              className=" focus:outline-gray-300 border border-gray-200 px-2 py-3 w-full "
-            />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
+                <select
+                  name="maritalStatus"
+                  value={formData.maritalStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  required
+                >
+                  <option value="">Select Status</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                <input
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-700"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Contact No.</label>
+                <input
+                  type="tel"
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Your phone number"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+            </div>
           </div>
-          <div className="w-full gap-2 py-2">
-            <input
-              type="text"
-              placeholder="Permanent Address"
-              className=" w-full focus:outline-gray-300 border-b border-gray-400 px-2 py-3 "
-            />
-          </div>
-          <div className="w-full  gap-2 py-2">
-            <input
-              type="text"
-              placeholder="Email Address"
-              className=" w-full focus:outline-gray-300 border-b border-gray-400 px-2 py-3 "
-            />
-          </div>
-          <div className="flex justify-between gap-2 py-2">
-            <div className="relative w-full">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                className="focus:outline-gray-300 border-2 border-gray-200 px-2 py-3 w-full"
-                ref={passwordRef}
-                onChange={(e) => setpassword(e.target.value)}
-                value={password}
-              />
-              <FaRegEye
-                className="absolute top-5 right-2 text-lg cursor-pointer"
-                onClick={() => setshowPassword(!showPassword)}
-              />
+
+          {/* Password Section */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Create password"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-3.5 text-gray-500 hover:text-indigo-700"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
-            <div className="relative w-full">
-              <input
-                type={setConfirmPass ? "text" : "password"}
-                placeholder="Confirm Password"
-                className="focus:outline-gray-300 border-2 border-gray-200 px-2 py-3 w-full"
-                ref={confirmPasswordRef}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                value={ConfirmPassword}
-              />
-              <FaEye
-                className="absolute top-5 right-5 text-lg cursor-pointer"
-                onClick={() => setsetConfirmPass(!setConfirmPass)}
-              />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Confirm password"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-3.5 text-gray-500 hover:text-indigo-700"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
           </div>
 
-          <div>
+          {/* Submit Button */}
+          <div className="mt-8">
             <button
               type="submit"
-              className="px-3 w-full  py-2 text-lg bg-color3 text-white cursor-pointer rounded-sm font-semibold"
+              className="w-full py-4 px-6 bg-gradient-to-r from-blue-700 to-indigo-900 hover:from-blue-800 hover:to-indigo-900 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Submit Now
+              Create Account
             </button>
+          </div>
+
+          {/* Login Link */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-600">
+              Already have an account?{" "}
+              <Link to="/login" className="font-medium text-indigo-700 hover:text-indigo-600">
+                Login
+              </Link>
+            </p>
           </div>
         </form>
       </div>
 
-     {popDiv && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 flex flex-col justify-center items-center z-50">
-          <div className="bg-white p-10 rounded shadow-lg text-center relative">
-            <GiCrossedBones
-              className="absolute top-3 right-3 text-xl cursor-pointer"
-              onClick={() => setpopDiv(false)}
-            />
-            <h2 className="text-2xl font-bold text-green-600">
-              🎉 SignUp Successful!
-            </h2>
-            <p className="mt-2 text-gray-700">Redirecting to Login...</p>
+      {/* Success Popup */}
+      {popDiv && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full relative">
+            <button
+              onClick={() => setPopDiv(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              <GiCrossedBones className="text-xl" />
+            </button>
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
+                <svg
+                  className="h-10 w-10 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 13l4 4L19 7"
+                  ></path>
+                </svg>
+              </div>
+              <h3 className="mt-4 text-2xl font-bold text-gray-900">Registration Successful!</h3>
+              <div className="mt-4">
+                <p className="text-gray-600">You're being redirected to login page...</p>
+              </div>
+            </div>
           </div>
         </div>
       )}
