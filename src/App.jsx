@@ -16,7 +16,7 @@ import FinalUni from './Pages/FinalUni'
 import BauUni from './Pages/BauUni'
 import OurUniversity from './Components/Home/OurUniversity'
 import ApplyNow from './Pages/ApplyNow'
-
+import About from './Pages/About'
 function MainLayout() {
   return (
     <div className=' min-h-screen overflow-auto'>
@@ -31,19 +31,12 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {path: '/', element: <Home />},
-      {path: '/service', element: <h1>i'am from service</h1>},
-      { path: '/about', element: <h1>i'm from about</h1>},
+      { path: '/about', element: <About/>},
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
       {path:"/Signup",element:<SignUp/>},
       {path:"/cypruspage",element:<CyprusInternational/>},
-      {
-        path: '/', element: <Home />
-      },
-      {
-        path: '/service', element: <h1>i'am from service</h1>
-      },
-      { path: '/about', element: <h1>i'm from about</h1>},
+     
       { path: '/universities', element: <OurUniversity/>},
 
       {path:"/contact",element:<ContactUs/>},
