@@ -33,16 +33,7 @@ export default function BAUintroduction() {
           </p>
 
           <div className=" mt-4 w-full mb-4">
-            <iframe
-              className="w-full"
-              height="360"
-              src="https://www.youtube.com/embed/oKu4GAeGjp8?list=PLsTddL7XG_ksoWGtge2ne09eOYEsShQ1V"
-              title="Cyprus International University-Promotional Video 2018"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/KItGnLjdI9Q?si=1QEKb5CDPn7B2caS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
         <div className=" w-full p-2 h-auto lg:h-70 sm:w-[30%] shadow-md shadow-[#0A0851]">

@@ -99,9 +99,9 @@ export default function Footer() {
             <Link
               key={idx}
               to={social.to}
-              className="hover:text-[#F5891B] transform transition-transform duration-300 hover:scale-110"
+              className="hover:text-[#F5891B]  transform transition-transform duration-300 hover:scale-110"
             >
-              {social.icon}
+              {social.icon} 
             </Link>
           ))}
         </div>
