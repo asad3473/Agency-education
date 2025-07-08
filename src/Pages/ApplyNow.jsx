@@ -39,7 +39,7 @@ const documents = [
 ];
 
 const inputClass =
-  "w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2b2e4a] shadow-sm transition-all duration-200";
+  "w-full px-4 py-3  text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2b2e4a] shadow-sm transition-all duration-200";
 
 const ApplyNow = () => {
   const passwordRef = useRef(null);
@@ -50,10 +50,10 @@ const ApplyNow = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   return (
-    <div className="flex justify-center bg-gradient-to-br from-blue-400 to-orange-300 min-h-screen items-center p-6">
+    <div className="flex justify-center bg-gradient-to-r from-blue-900/90 via-orange-400/80 to-blue-900/90 min-h-screen items-center p-6">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="w-full flex justify-center items-center h-32 inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90">
+        <div className="w-full flex justify-center items-center h-32 bg-[#2b2e4a]">
           <h1 className="text-5xl text-white font-extrabold tracking-wide">Apply Now</h1>
         </div>
 
