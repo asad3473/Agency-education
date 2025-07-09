@@ -75,8 +75,8 @@ const ApplyNow = () => {
               <option>Single</option>
               <option>Married</option>
             </select>
+            <input  type="date"  className={inputClass} />
             <input type="text" placeholder="Place of Birth" className={inputClass} />
-            <input type="date" className={inputClass} />
             <input type="text" placeholder="Nationality" className={inputClass} />
             <input type="text" placeholder="Phone No." className={inputClass} />
           </div>

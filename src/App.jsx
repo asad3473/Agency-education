@@ -16,6 +16,7 @@ import BauUni from './Pages/BauUni';
 import OurUniversity from './Components/Home/OurUniversity';
 import ApplyNow from './Pages/ApplyNow';
 import ForgotPage from './Pages/ForgotPage';
+import OTPverify from './Pages/OTPverify';
 
 
 // import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
@@ -69,7 +70,8 @@ const router = createBrowserRouter([
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
       // {path:"/cypruspage",element:<CyprusInternational/>},
       {path:"/applynow",element:<ApplyNow/>},
-      {path:"/forgotpassword",element:<ForgotPage/>}
+      {path:"/forgotpassword",element:<ForgotPage/>},
+      {path:"/otpverify",element:<OTPverify/>}
     ]
   }
 ])
