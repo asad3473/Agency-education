@@ -96,7 +96,7 @@ export default function Navbar() {
             <Link to="/about" onClick={closeMenu}><li>About</li></Link>
             <Link to="/universities" onClick={closeMenu}><li>Universities</li></Link>
             <Link to="/contact" onClick={closeMenu}><li>Contact</li></Link>
-            <Link to="/apply" onClick={closeMenu}><li>Apply</li></Link>
+            <Link to="/applynow" onClick={closeMenu}><li>Apply</li></Link>
 
             {/* Mobile Language Selector */}
             <div className="relative w-full">
