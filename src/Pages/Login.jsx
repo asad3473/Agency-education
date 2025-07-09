@@ -17,10 +17,34 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
-    // Here you would typically send the data to your backend
+     if (
+      !formData.email ||
+      !formData.password
+    ) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      console.log(
+        "this form data ::",
+        formData,
+        " this is response from backend :: ",
+        response
+      );
+    } catch (error) {
+      console.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
