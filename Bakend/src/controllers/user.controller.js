@@ -129,7 +129,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { email, password } = req.body;
 
-  if (!email || password) {
+  if (!email || !password) {
     throw new ApiError(400, " email and password both are required");
   }
 
@@ -141,7 +141,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-
+  
   // compare password
   const correctPassword = await user.isPasswordCorrect(password);
 
@@ -152,7 +152,7 @@ const loginUser = asyncHandler(async (req, res) => {
  const {refreshToken, accessToken} = await generateAcessAndRefreshtoken(user._id)
 
 const loggedInUser = await User.findById(user._id).select(
-   "-password -refreshToken -varificationCode -varificationCodeExpiry -googleId -emailVerified"
+   "-password -refreshToken -varificationCode -varificationCodeExpiry -emailVerified"
 )
 
 const option = {

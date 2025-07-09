@@ -48,6 +48,7 @@ const ApplyNow = () => {
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+   const [program, setProgram] = useState("")
 
   return (
     <div className="flex justify-center bg-gradient-to-r from-blue-900/90 via-orange-400/80 to-blue-900/90 min-h-screen items-center p-6">
@@ -93,7 +94,7 @@ const ApplyNow = () => {
                 ))}
               </select>
 
-              <select className={inputClass}>
+              <select className={inputClass} value={program} onChange={(e)=> setProgram(e.target.value)}>
                 <option>Select Program</option>
                 <option>BS (14 Years)</option>
                 <option>Master</option>
