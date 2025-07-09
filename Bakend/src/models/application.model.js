@@ -90,7 +90,7 @@ const ApplicationSchema = new Schema(
       required: true,
       match: [/^\d{10,15}$/, "Invalid phone number"],
     },
-    academicStatus: {
+    maritalStatus: {
       type: String,
       trim: true,
       required: true,
