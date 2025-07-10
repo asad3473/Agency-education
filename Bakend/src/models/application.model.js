@@ -77,10 +77,13 @@ const ApplicationSchema = new Schema(
       requried: true,
       trim: true,
     },
+    cnic: {
+     type: String,
+     required: true
+    },
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
