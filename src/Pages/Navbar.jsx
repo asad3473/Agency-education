@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {useAuth} from "../contextApi/contextApi"
 import {
   FaWhatsapp,
   FaSquareFacebook,
@@ -15,6 +16,7 @@ export default function Navbar() {
 
   const toggleLang = () => setIsLangOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+  const {user} =useAuth()
 
   return (
     <div className="bg-[#0A0851] text-white">
@@ -63,12 +65,16 @@ export default function Navbar() {
                 </ul>
               )}
             </div>
-
-            <Link to="/login">
+             { user?
+            <Link to="/logout">
+              <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
+                Logout
+              </li>
+            </Link> : <Link to="/login">
               <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
                 Login
               </li>
-            </Link>
+            </Link> }
           </div>
 
           {/* Hamburger Icon */}
@@ -118,12 +124,16 @@ export default function Navbar() {
                 </ul>
               )}
             </div>
-
+            {user? <Link to="/logout">
+              <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
+                Logout
+              </li>
+            </Link>:
             <Link to="/login" onClick={closeMenu}>
               <button className="mt-4 px-4 py-2 w-full text-left bg-[#F5891B] rounded-sm">
                 Login
               </button>
-            </Link>
+            </Link>}
           </ul>
         </div>
 

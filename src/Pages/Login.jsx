@@ -1,14 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import img from "/login.jpg";
+import { useAuth } from "../contextApi/contextApi";
 
 const Login = () => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
     rememberMe: false,
   });
+
+  const {setUser} = useAuth()
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -21,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields");
+      console.error("Please fill in all fields");
       return;
     }
     console.log("this form data ::", formData);
@@ -32,8 +35,14 @@ const Login = () => {
         {
           email: formData.email,
           password: formData.password,
-        }
+        },
+        {
+  withCredentials: true,
+}
       );
+      console.log("this is user response ::", response.data.data.user)
+
+      setUser(response.data.data.user)
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
     }
