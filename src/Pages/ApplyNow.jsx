@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaRegEye, FaEye } from "react-icons/fa";
+import axios from "axios";
 
 const Universities = [
   "Cyprus International University",
@@ -27,17 +26,49 @@ const Courses = [
 ];
 
 const requiredDocument = [
-  "Photo (.jpeg, .png, .jpg): *",
-  "International Passport, Data page: *",
-  "Higher/Secondary Certificate or Equivalent: *",
+  {
+    name: "photo",
+    tittle: "Photo (.jpeg, .png, .jpg): *",
+  },
+  {
+    name: "passportCopy",
+    tittle: "International Passport, Data page: *",
+  },
+  {
+    name: "secondaryCertificate",
+    tittle: "Higher/Secondary Certificate or Equivalent: *",
+  },
 ];
+
 const documents = [
-  "Bachelor’s Degree Certificate:",
-  "Bachelor’s Transcript:",
-  "Masters certificate:",
-  "Masters transcript:",
-  "PhD Research Proposal:",
-  "Curriculum Vitae (CV):",
+  {
+    name: "englishCompetence",
+    tittle: "Evidence of English Language Competence:",
+  },
+   {
+    name: "bsDegreeCertificate",
+    tittle: "Bachelor’s Degree Certificate:",
+  },
+  {
+    name: "bsTranscript",
+    tittle: "Bachelor’s Transcript:",
+  },
+  {
+    name: "msCertificate",
+    tittle: "Masters certificate:",
+  },
+  {
+    name: "msTranscript",
+    tittle: "Masters transcript:",
+  },
+  {
+    name: "phdResearchProposal",
+    tittle: "PhD Research Proposal:",
+  },
+  {
+    name: "cv",
+    tittle: "Curriculum Vitae (CV):",
+  },
 ];
 
 const inputClass =
@@ -51,33 +82,33 @@ const ApplyNow = () => {
   // const [password, setPassword] = useState("");
   // const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    fatherName: "",
-    motherName: "",
-    cnic: "",
-    email: "",
-    gender: "",
-    maritalStatus: "",
-    dob: "",
-    nationality: "",
-    contact: "",
-    birthPlace: "",
-    program: "",
-    university: "",
-    course: "",
-    Photo: "",
-    passportCopy: "",
-    econdaryCertificate: "",
-    englishCompetence: "",
-    bsDegreeCertificate: "",
-    bsTranscript: "",
-    msCertificate: "",
-    msTranscript: "",
-    phdResearchProposal: "",
-    cv: "",
-  });
+const [formData, setFormData] = useState({
+  firstName: "",
+  lastName: "",
+  fatherName: "",
+  motherName: "",
+  cnic: "",
+  email: "",
+  gender: "",
+  maritalStatus: "",
+  dob: "",
+  nationality: "",
+  phoneNumber: "",
+  birthPlace: "",
+  program: "",
+  university: "",
+  course: "",
+  photo: null,
+  passportCopy: null,
+  secondaryCertificate: null,
+  englishCompetence: null,
+  bsDegreeCertificate: null,
+  bsTranscript: null,
+  msCertificate: null,
+  msTranscript: null,
+  phdResearchProposal: null,
+  cv: null,
+});
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
@@ -87,63 +118,50 @@ const ApplyNow = () => {
     }));
   };
 
+  
   const submitHandle = async (e) => {
     e.preventDefault();
-    if (
-      !formData.contact ||
-      !formData.firstName ||
-      !formData.email ||
-      !formData.lastName ||
-      !formData.password
-    ) {
-      setError("Please fill in all fields");
-      return;
-    }
+
+
+    const formPayload = new FormData();
+Object.keys(formData).forEach((key) => {
+  if (formData[key]) {
+    formPayload.append(key, formData[key]);
+  }
+});
+
+    // if (
+    //   !formData.contact ||
+    //   !formData.firstName ||
+    //   !formData.email ||
+    //   !formData.lastName ||
+    //   !formData.password
+    // ) {
+    //   setError("Please fill in all fields");
+    //   return;
+    // }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/applications/create-application",
-        {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          fatherName: formData.fatherName,
-          motherName: formData.motherName,
-          cnic: formData.cnic,
-          gender: formData.gender,
-          maritalStatus: formData.maritalStatus,
-          dob: formData.dob,
-          email: formData.email,
-          nationality: formData.nationality,
-          phoneNumber: formData.contact,
-          birthPlace: formData.birthPlace,
-          program: formData.program,
-          university: formData.university,
-          course: formData.course,
-          Photo: formData.Photo,
-          passportCopy: "",
-          econdaryCertificate: "",
-          englishCompetence: "",
-          bsDegreeCertificate: "",
-          bsTranscript: "",
-          msCertificate: "",
-          msTranscript: "",
-          phdResearchProposal: "",
-          cv: "",
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.contact,
-          email: formData.email,
-          password: formData.password,
-          confirmPassword: formData.confirmPassword,
-        }
-      );
-
       console.log(
         "this form data ::",
         formData,
-        " this is response from backend :: ",
-        response
       );
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/applications/create-application",
+        formPayload,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,}
+      );
+      console.log(
+        "this form data ::",
+        formData,
+        " this is response from backend :: ", response
+      );
+
+    
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
     }
@@ -201,7 +219,7 @@ const ApplyNow = () => {
               value={formData.motherName}
               onChange={handleChange}
             />
-               <input
+            <input
               type="text"
               name="email"
               required
@@ -275,11 +293,11 @@ const ApplyNow = () => {
             />
             <input
               type="text"
-              name="contact"
+              name="phoneNumber"
               required
               placeholder="Phone No."
               className={inputClass}
-              value={formData.contact}
+              value={formData.phoneNumber}
               onChange={handleChange}
             />
           </div>
@@ -341,32 +359,36 @@ const ApplyNow = () => {
               Fields marked with (*) are required in PDF or image
             </p>
             <div className="grid text-sm text-center sm:text-center grid-cols-1 gap-4">
-              {requiredDocument.map((label, i) => (
+              {requiredDocument.map((documents, i) => (
                 <div
                   key={i}
                   className="flex flex-col gap-5 sm:flex-row items-center justify-between border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 hover:shadow-sm transition"
                 >
-                  <p className="text-gray-700 text-sm font-semibold">{label}</p>
+                  <p className="text-gray-700 text-sm font-semibold">
+                    {documents.tittle}
+                  </p>
                   <input
                     type="file"
                     required
+                    placeholder={documents.tittle}
                     accept=".pdf,.jpg,.jpeg,.png"
-                    name={label}
+                    name={documents.name}
                     className="file:px-3 file:py-1 file:rounded-md file:bg-white file:border file:border-gray-300 file:text-gray-700"
                     onChange={handleChange}
                   />
                 </div>
               ))}
-              {documents.map((label, i) => (
+              {documents.map((document, i) => (
                 <div
                   key={i}
                   className="flex flex-col gap-5 sm:flex-row items-center justify-between border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 hover:shadow-sm transition"
                 >
-                  <p className="text-gray-700 text-sm font-semibold">{label}</p>
+                  <p className="text-gray-700 text-sm font-semibold">{document.tittle}</p>
                   <input
                     type="file"
+                    placeholder={document.tittle}
                     accept=".pdf,.jpg,.jpeg,.png"
-                    name={label}
+                    name={document.name}
                     className="file:px-3 file:py-1 file:rounded-md file:bg-white file:border file:border-gray-300 file:text-gray-700"
                     onChange={handleChange}
                   />
