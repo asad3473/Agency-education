@@ -42,7 +42,7 @@ const ApplicationSchema = new Schema(
       enum: ["male", "female", "other"],
       trim: true,
     },
-    status: {
+    maritalStatus: {
       type: String,
       requried: true,
       enum: ["single", "married", "divorced"],
@@ -90,12 +90,6 @@ const ApplicationSchema = new Schema(
       required: true,
       match: [/^\d{10,15}$/, "Invalid phone number"],
     },
-    academicStatus: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-
     photo: {
       type: String,
       required: true,

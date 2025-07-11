@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import img from "/login.jpg";
 
@@ -6,21 +7,36 @@ const Login = () => {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    rememberMe: false
+    rememberMe: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
-    // Here you would typically send the data to your backend
+    if (!formData.email || !formData.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    console.log("this form data ::", formData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+    } catch (error) {
+      console.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -50,7 +66,10 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
@@ -66,7 +85,10 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
@@ -93,13 +115,19 @@ const Login = () => {
                   checked={formData.rememberMe}
                   onChange={handleChange}
                 />
-                <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="rememberMe"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link to="/forgotpassword" className="font-medium text-indigo-700 hover:text-indigo-600">
+                <Link
+                  to="/forgotpassword"
+                  className="font-medium text-indigo-700 hover:text-indigo-600"
+                >
                   Forgot your password?
                 </Link>
               </div>
@@ -118,7 +146,10 @@ const Login = () => {
           <div className="mt-6 text-center text-sm">
             <p className="text-gray-600">
               Not a member?{" "}
-              <Link to="/signup" className="font-medium text-indigo-700 hover:text-indigo-600">
+              <Link
+                to="/signup"
+                className="font-medium text-indigo-700 hover:text-indigo-600"
+              >
                 Sign up now
               </Link>
             </p>

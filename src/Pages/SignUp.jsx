@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { RiIdCardFill } from "react-icons/ri";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,16 +9,16 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    gender: "",
-    maritalStatus: "",
-    cnic: "",
-    dob: "",
-    nationality: "",
+    // gender: "",
+    // maritalStatus: "",
+    // cnic: "",
+    // dob: "",
+    // nationality: "",
     contact: "",
-    address: "",
+    // address: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -26,20 +27,54 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setPopDiv(true);
-    console.log("Form submitted:", formData);
-    setTimeout(() => {
-      setPopDiv(false);
-      navigate("/login");
-    }, 2000);
+    if (
+      !formData.contact ||
+      !formData.firstName ||
+      !formData.email ||
+      !formData.confirmPassword ||
+      !formData.lastName ||
+      !formData.password
+    ) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/register",
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.contact,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        }
+      );
+
+      console.log(
+        "this form data ::",
+        formData,
+        " this is response from backend :: ",
+        response
+      );
+
+      setPopDiv(true);
+      setTimeout(() => {
+        setPopDiv(false);
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -47,7 +82,9 @@ const SignUp = () => {
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 py-8 px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white">Create Your Account</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            Create Your Account
+          </h1>
           <p className="mt-2 text-blue-100">Join us today and get started</p>
         </div>
 
@@ -57,7 +94,9 @@ const SignUp = () => {
             {/* Personal Information */}
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  First Name
+                </label>
                 <input
                   type="text"
                   name="firstName"
@@ -70,6 +109,21 @@ const SignUp = () => {
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Contact No.
+                </label>
+                <input
+                  type="tel"
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                  placeholder="Your phone number"
+                  required
+                />
+              </div>
+
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
                 <select
                   name="gender"
@@ -83,9 +137,9 @@ const SignUp = () => {
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
-              </div>
+              </div> */}
 
-              <div className="relative">
+              {/* <div className="relative">
                 <label className="block text-sm font-medium text-gray-700 mb-1">CNIC</label>
                 <RiIdCardFill className="absolute right-3 top-11 text-gray-400" />
                 <input
@@ -97,9 +151,9 @@ const SignUp = () => {
                   placeholder="Enter CNIC"
                   required
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
                 <input
                   type="text"
@@ -110,9 +164,9 @@ const SignUp = () => {
                   placeholder="Your nationality"
                   required
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Permanent Address</label>
                 <input
                   type="text"
@@ -123,13 +177,15 @@ const SignUp = () => {
                   placeholder="Your address"
                   required
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* Additional Information */}
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   name="lastName"
@@ -141,7 +197,7 @@ const SignUp = () => {
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
                 <select
                   name="maritalStatus"
@@ -155,9 +211,9 @@ const SignUp = () => {
                   <option value="Married">Married</option>
                   <option value="Other">Other</option>
                 </select>
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
                 <input
                   type="date"
@@ -167,9 +223,9 @@ const SignUp = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-700"
                   required
                 />
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Contact No.</label>
                 <input
                   type="tel"
@@ -180,10 +236,12 @@ const SignUp = () => {
                   placeholder="Your phone number"
                   required
                 />
-              </div>
+              </div> */}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -200,7 +258,9 @@ const SignUp = () => {
           {/* Password Section */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -222,7 +282,9 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Confirm Password
+              </label>
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
@@ -258,7 +320,10 @@ const SignUp = () => {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="font-medium text-indigo-700 hover:text-indigo-600">
+              <Link
+                to="/login"
+                className="font-medium text-indigo-700 hover:text-indigo-600"
+              >
                 Login
               </Link>
             </p>
@@ -292,9 +357,13 @@ const SignUp = () => {
                   ></path>
                 </svg>
               </div>
-              <h3 className="mt-4 text-2xl font-bold text-gray-900">Registration Successful!</h3>
+              <h3 className="mt-4 text-2xl font-bold text-gray-900">
+                Registration Successful!
+              </h3>
               <div className="mt-4">
-                <p className="text-gray-600">You're being redirected to login page...</p>
+                <p className="text-gray-600">
+                  You're being redirected to login page...
+                </p>
               </div>
             </div>
           </div>
