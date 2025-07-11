@@ -5,6 +5,7 @@ import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import  jwt from 'jsonwebtoken';
 import { sendVerificationCode } from "../utils/sendEmail.js";
+import { console } from "inspector/promises";
 
 
 const generateAcessAndRefreshtoken = async (userId) => {
@@ -152,7 +153,7 @@ const loginUser = asyncHandler(async (req, res) => {
  const {refreshToken, accessToken} = await generateAcessAndRefreshtoken(user._id)
 
 const loggedInUser = await User.findById(user._id).select(
-   "-password -refreshToken -varificationCode -varificationCodeExpiry -emailVerified"
+   "-password -refreshToken -varificationCode -varificationCodeExpiry "
 )
 
 const option = {
@@ -274,10 +275,12 @@ const changeCurrentPassword = asyncHandler(async(req, res)=>{
 
 
 const getCurrentUser = asyncHandler(async(req, res )=>{
-
+    const user = await User.findOne(req.user._id).select(
+   "-password -refreshToken -varificationCode -varificationCodeExpiry "
+)
   return res
   .status(200)
-  .json(new ApiResponse(200, req.user, "user fatch successfully"))
+  .json(new ApiResponse(200, "user fatch successfully" , user))
 })
 
 const updateUserDetails = asyncHandler(async(req, res)=>{

@@ -20,6 +20,7 @@ router.route("/create-application").post(
     { name: "phdResearchProposal", maxCount: 1 },
     { name: "cv", maxCount: 1 },
   ]),
+  verifyJWT,
   createApplication
 );
 

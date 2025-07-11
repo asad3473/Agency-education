@@ -19,6 +19,7 @@ import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
 
+
 // import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 // import './App.css'
 // import Navbar from './Pages/Navbar'
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
         path: "/Eastern-Mediterranean-University",
         element: <MediteraninUni />,
       },
+      {path: "/verify-account", element: <OTPverify/>},
       { path: "/Kyrenia-University", element: <KyreniaUni /> },
       { path: "/Final-International-University", element: <FinalUni /> },
       { path: "/Bahcesehir-Cyprus-University", element: <BauUni /> },

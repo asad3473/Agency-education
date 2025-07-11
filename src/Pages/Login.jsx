@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import img from "/login.jpg";
 import { useAuth } from "../contextApi/contextApi";
 
@@ -13,6 +13,7 @@ const Login = () => {
 
   const {setUser} = useAuth()
 
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -27,7 +28,6 @@ const Login = () => {
       console.error("Please fill in all fields");
       return;
     }
-    console.log("this form data ::", formData);
 
     try {
       const response = await axios.post(
@@ -43,6 +43,7 @@ const Login = () => {
       console.log("this is user response ::", response.data.data.user)
 
       setUser(response.data.data.user)
+      navigate("/applynow")
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
     }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import {useAuth} from "../contextApi/contextApi"
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from "../contextApi/contextApi";
+import axios from "axios";
 import {
   FaWhatsapp,
   FaSquareFacebook,
@@ -9,14 +10,32 @@ import {
 } from "react-icons/fa6";
 import { FaTwitterSquare } from "react-icons/fa";
 import { MdOutlineMenuBook, MdOutlineCancel } from "react-icons/md";
-
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
   const toggleLang = () => setIsLangOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
-  const {user} =useAuth()
+    const navigate = useNavigate();
+  const {user, setUser} =useAuth()
+
+  const logoutHnadler = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/api/v1/users/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        console.log("this is user::", res);
+        setUser(null);
+        navigate("/login")
+
+      } catch (error){
+          console.error(error)
+      }
+    };
 
   return (
     <div className="bg-[#0A0851] text-white">
@@ -66,7 +85,7 @@ export default function Navbar() {
               )}
             </div>
              { user?
-            <Link to="/logout">
+            <Link onClick={logoutHnadler}>
               <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
                 Logout
               </li>
@@ -124,11 +143,11 @@ export default function Navbar() {
                 </ul>
               )}
             </div>
-            {user? <Link to="/logout">
+            {user? <button onClick={logoutHnadler}>
               <li className="list-none px-4 py-2 rounded-md bg-[#F5891B] text-white hover:bg-orange-600 transition">
                 Logout
               </li>
-            </Link>:
+            </button>:
             <Link to="/login" onClick={closeMenu}>
               <button className="mt-4 px-4 py-2 w-full text-left bg-[#F5891B] rounded-sm">
                 Login

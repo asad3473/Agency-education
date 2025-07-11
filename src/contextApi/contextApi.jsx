@@ -4,6 +4,8 @@ import axios from "axios";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [email, setEmail] = useState(null);
+  const [verified, setVerified] = useState();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +18,8 @@ const AuthProvider = ({ children }) => {
             withCredentials: true,
           }
         );
-        console.log("this is user::", res)
+        setVerified(res.data.data.emailVerified)
+        setEmail(res.data.data.email)
         setUser(res.data.data);
       } catch (err) {
         setUser(null);
@@ -29,7 +32,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
    return (
-    <AuthContext.Provider value={{ user, loading, setUser }}>
+    <AuthContext.Provider value={{ user, loading, setUser, email, setVerified }}>
       {children}
     </AuthContext.Provider>
   );
