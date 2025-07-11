@@ -14,7 +14,7 @@ const OTPverify = () => {
           <label htmlFor="" className="block text-lg font-semibold mb-3">
             Enter OTP Code
           </label>
-          <input type="text" placeholder="___________" className="px-2 py-3 text-lg  border-2 border-[rgb(245,137,27)] focus:outline-none" />
+          <input type="text" placeholder="___________" className="px-2 py-3 text-lg  border-2 border-gray-700 rounded-sm focus:outline-none" />
         </div>
          <div className="text-3xl  bg-[rgba(245,136,27,0.7)] hover:bg-[rgb(245,137,27)] cursor-pointer text-white rounded-sm mt-10 min-w-xs font-semibold px-4 py-2  text-center">
         Verify

@@ -17,6 +17,7 @@ import OurUniversity from './Components/Home/OurUniversity';
 import ApplyNow from './Pages/ApplyNow';
 import ForgotPage from './Pages/ForgotPage';
 import OTPverify from './Pages/OTPverify';
+import ApplicationDash from './Pages/ApplicationDash';
 
 
 // import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
@@ -71,8 +72,12 @@ const router = createBrowserRouter([
       // {path:"/cypruspage",element:<CyprusInternational/>},
       {path:"/applynow",element:<ApplyNow/>},
       {path:"/forgotpassword",element:<ForgotPage/>},
-      {path:"/otpverify",element:<OTPverify/>}
+      {path:"/otpverify",element:<OTPverify/>},
+      
+         // Dashboard LInk 
+    {path:"/applicationpag",element:<ApplicationDash/>},
     ]
+ 
   }
 ])
 
