@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../contextApi/contextApi";
+import {useNavigate} from "react-router-dom"
 import axios from "axios";
 
 const OTPverify = () => {
@@ -8,6 +9,7 @@ const OTPverify = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   // Timer in seconds (10 minutes)
   const [timer, setTimer] = useState(20);
@@ -48,6 +50,8 @@ const OTPverify = () => {
 
       setSuccess("Email verified successfully!");
       setVerified(true);
+
+      navigate("/home")
     } catch (err) {
       setError(err.response?.data?.message || "Verification failed. Try again.");
     } finally {
