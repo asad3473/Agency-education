@@ -16,25 +16,9 @@ import BauUni from './Pages/BauUni';
 import OurUniversity from './Components/Home/OurUniversity';
 import ApplyNow from './Pages/ApplyNow';
 
-
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import './App.css'
-import Navbar from './Pages/Navbar'
-import Home from './Pages/Home'
-import Fotter from './Pages/Fotter'
-import ContactUs from './Pages/ContactUs'
-import Login from './Pages/Login'
-import SignUp from './Pages/SignUp'
-import CyprusInternational from './Pages/CyprusInternational'
-import CyprusUni from './Pages/CyprusUni'
-import NearEast from './Pages/NearEast'
-import MediteraninUni from './Pages/MediteraninUni'
-import KyreniaUni from './Pages/KyreniaUni'
-import FinalUni from './Pages/FinalUni'
-import BauUni from './Pages/BauUni'
-import OurUniversity from './Components/Home/OurUniversity'
-import ApplyNow from './Pages/ApplyNow'
-import About from './Pages/About'
+
+
 function MainLayout() {
   return (
     <div className="min-h-screen overflow-auto">
@@ -54,10 +38,7 @@ const router = createBrowserRouter([
       { path: '/about', element: <About/>},
       {path:"/contact",element:<ContactUs/>},
       {path:"/login",element:<Login/>},
-      {path:"/Signup",element:<SignUp/>},
-      // {path:"/cypruspage",element:<CyprusInternational/>},
-      {path:"/cypruspage",element:<CyprusInternational/>},
-     
+      {path:"/Signup",element:<SignUp/>},     
       { path: '/universities', element: <OurUniversity/>},
        {path:"/contact",element:<ContactUs/>},
       {path:"/Cyprus-International-University",element:<CyprusUni/>},
@@ -66,7 +47,6 @@ const router = createBrowserRouter([
       {path:"/Kyrenia-University",element:<KyreniaUni/>},
       {path:"/Final-International-University",element:<FinalUni/>},
       {path:"/Bahcesehir-Cyprus-University",element:<BauUni/>},
-      // {path:"/cypruspage",element:<CyprusInternational/>},
       {path:"/applynow",element:<ApplyNow/>}
     ]
   }
