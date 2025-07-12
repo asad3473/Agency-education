@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 app.use(cors({
@@ -27,5 +28,6 @@ import applicationRouter from "./routes/application.routes.js"
 //routes declearation 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/applications", applicationRouter)
+app.use(errorHandler)
 
 export {app};

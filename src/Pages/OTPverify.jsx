@@ -22,7 +22,9 @@ const [loading, setLoading] =useState()
          console.log("this is code from user ::", code)
          setVerified(true)}
          catch (error){
-          setError(error)
+          setError(error.message || "account not verified try again")
+          console.log("this is error response:: ",error.response
+          )
          }
       }
 
@@ -37,12 +39,13 @@ const [loading, setLoading] =useState()
         </div>
        <form onSubmit={sendCode}>
          <div className="mt-4">
-          <div className="text-red-500 text-sm">{error}</div>
+         
           <label htmlFor="" className="block text-lg font-semibold mb-3">
             Enter OTP Code
           </label>
           <input  type="text" placeholder="------" name="code" value={code} onChange={(e)=> setCode(e.target.value)} className="px-2 py-3 text-lg  border-2 border-[rgb(245,137,27)] focus:outline-none" minLength="6" maxLength="6" />
         </div>
+         <div className="text-red-500 text-sm">{error}</div>
          <button type="submit" className="text-3xl  bg-[rgba(245,136,27,0.7)] hover:bg-[rgb(245,137,27)] cursor-pointer text-white rounded-2xl mt-10 min-w-xs font-semibold px-4 py-2  text-center">
         Verify
       </button>
