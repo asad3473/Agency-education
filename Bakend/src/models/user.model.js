@@ -50,6 +50,10 @@ verificationCode:{
 verificationCodeExpiry:{
     type: Date
 },
+role: {
+    type: String,
+    default : "user"
+}
     },
 
 {

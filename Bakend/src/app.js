@@ -21,6 +21,7 @@ app.use(cookieParser())
 // import routes 
 import userRouter from "./routes/user.routes.js"
 import applicationRouter from "./routes/application.routes.js"
+import adminRouter from "./routes/admin.routes.js";
 
 
 
@@ -28,6 +29,7 @@ import applicationRouter from "./routes/application.routes.js"
 //routes declearation 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/applications", applicationRouter)
+app.use("/api/v1/admin", adminRouter);
 app.use(errorHandler)
 
 export {app};
