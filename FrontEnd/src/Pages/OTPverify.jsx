@@ -4,15 +4,17 @@ import {useNavigate} from "react-router-dom"
 import axios from "axios";
 
 const OTPverify = () => {
-  const { setVerified, email } = useAuth();
+  const { setVerified } = useAuth();
   const [code, setCode] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState(null)
   const navigate = useNavigate()
+  
 
   // Timer in seconds (10 minutes)
-  const [timer, setTimer] = useState(20);
+  const [timer, setTimer] = useState(600);
 
   // Format timer into MM:SS
   const formatTime = (seconds) => {
@@ -20,7 +22,13 @@ const OTPverify = () => {
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
-
+ 
+ useEffect(() => {
+  const storedEmail = localStorage.getItem("email");
+  if (storedEmail) {
+    setEmail(storedEmail);
+  }
+}, []);
   // Countdown effect
   useEffect(() => {
     if (timer === 0) return;
@@ -35,7 +43,7 @@ const OTPverify = () => {
     setLoading(true);
     setError(null);
     setSuccess(null);
-
+    console.log("this is a code::",code)
     if (timer === 0) {
       setError("OTP has expired. Please resend the code.");
       setLoading(false);

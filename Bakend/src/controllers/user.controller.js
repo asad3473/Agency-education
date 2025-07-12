@@ -79,7 +79,7 @@ const registerUser = asyncHandler(async (req, res) => {
     lastName,
     phone,
     avatar: avatar?.url || "",
-    varificationCode: code,
+    verificationCode: code,
     varificationCodeExpiry: Date.now() + 10 * 60 * 1000,
     password,
   });

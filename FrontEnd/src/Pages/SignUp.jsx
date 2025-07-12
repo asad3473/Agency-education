@@ -9,20 +9,14 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    // gender: "",
-    // maritalStatus: "",
-    // cnic: "",
-    // dob: "",
-    // nationality: "",
     contact: "",
-    // address: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [popDiv, setPopDiv] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,6 +29,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     if (
       !formData.contact ||
       !formData.firstName ||
@@ -59,21 +54,14 @@ const SignUp = () => {
           confirmPassword: formData.confirmPassword,
         }
       );
-
-      console.log(
-        "this form data ::",
-        formData,
-        " this is response from backend :: ",
-        response
-      );
-
-      setPopDiv(true);
+        localStorage.setItem("email",formData.email)
       setTimeout(() => {
-        setPopDiv(false);
-        navigate("/verify-account");
+        setLoading(false);
       }, 2000);
+       navigate("/verify-account");
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
+      setLoading(false)
     }
   };
 
@@ -122,62 +110,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  required
-                >
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div> */}
-
-              {/* <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">CNIC</label>
-                <RiIdCardFill className="absolute right-3 top-11 text-gray-400" />
-                <input
-                  type="text"
-                  name="cnic"
-                  value={formData.cnic}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="Enter CNIC"
-                  required
-                />
-              </div> */}
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
-                <input
-                  type="text"
-                  name="nationality"
-                  value={formData.nationality}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="Your nationality"
-                  required
-                />
-              </div> */}
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Permanent Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="Your address"
-                  required
-                />
-              </div> */}
             </div>
 
             {/* Additional Information */}
@@ -196,47 +128,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
-                <select
-                  name="maritalStatus"
-                  value={formData.maritalStatus}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  required
-                >
-                  <option value="">Select Status</option>
-                  <option value="Single">Single</option>
-                  <option value="Married">Married</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div> */}
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-                <input
-                  type="date"
-                  name="dob"
-                  value={formData.dob}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-gray-700"
-                  required
-                />
-              </div> */}
-
-              {/* <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Contact No.</label>
-                <input
-                  type="tel"
-                  name="contact"
-                  value={formData.contact}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                  placeholder="Your phone number"
-                  required
-                />
-              </div> */}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -312,7 +203,8 @@ const SignUp = () => {
               type="submit"
               className="w-full py-4 px-6 inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 cursor-pointer to-blue-900/90 hover:from-blue-800 hover:to-indigo-900 text-white font-bold rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Create Account
+              
+               {loading ? "Processing..." : "Create Account"}
             </button>
           </div>
 
@@ -332,7 +224,7 @@ const SignUp = () => {
       </div>
 
       {/* Success Popup */}
-      {popDiv && (
+      {loading && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full relative">
             <button
