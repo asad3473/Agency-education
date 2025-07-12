@@ -1,26 +1,52 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState} from "react";
+import axios from "axios";
+import { Link , useNavigate } from "react-router-dom";
 import img from "/login.jpg";
+import { useAuth } from "../contextApi/contextApi";
 
 const Login = () => {
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false
+    rememberMe: false,
   });
 
+  const {setUser} = useAuth()
+
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
-    // Here you would typically send the data to your backend
+    if (!formData.email || !formData.password) {
+      console.error("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+  withCredentials: true,
+}
+      );
+      console.log("this is user response ::", response.data.data.user)
+
+      setUser(response.data.data.user)
+      navigate("/applynow")
+    } catch (error) {
+      console.error(error?.response?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -50,7 +76,10 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
@@ -66,7 +95,10 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
@@ -93,13 +125,19 @@ const Login = () => {
                   checked={formData.rememberMe}
                   onChange={handleChange}
                 />
-                <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="rememberMe"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link to="/forgot-password" className="font-medium text-indigo-700 hover:text-indigo-600">
+                <Link
+                  to="/forgotpassword"
+                  className="font-medium text-indigo-700 hover:text-indigo-600"
+                >
                   Forgot your password?
                 </Link>
               </div>
@@ -108,7 +146,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white bg-gradient-to-r from-blue-700 to-indigo-900 hover:from-blue-800 hover:to-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
               >
                 Login
               </button>
@@ -118,7 +156,10 @@ const Login = () => {
           <div className="mt-6 text-center text-sm">
             <p className="text-gray-600">
               Not a member?{" "}
-              <Link to="/signup" className="font-medium text-indigo-700 hover:text-indigo-600">
+              <Link
+                to="/signup"
+                className="font-medium text-indigo-700 hover:text-indigo-600"
+              >
                 Sign up now
               </Link>
             </p>

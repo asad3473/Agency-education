@@ -42,7 +42,7 @@ const ApplicationSchema = new Schema(
       enum: ["male", "female", "other"],
       trim: true,
     },
-    status: {
+    maritalStatus: {
       type: String,
       requried: true,
       enum: ["single", "married", "divorced"],
@@ -77,10 +77,13 @@ const ApplicationSchema = new Schema(
       requried: true,
       trim: true,
     },
+    cnic: {
+     type: String,
+     required: true
+    },
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
@@ -90,12 +93,6 @@ const ApplicationSchema = new Schema(
       required: true,
       match: [/^\d{10,15}$/, "Invalid phone number"],
     },
-    academicStatus: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-
     photo: {
       type: String,
       required: true,

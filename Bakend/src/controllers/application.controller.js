@@ -11,7 +11,7 @@ const createApplication = asyncHandler(async (req, res) => {
     fatherName,
     motherName,
     gender,
-    status,
+    maritalStatus,
     birthPlace,
     dob,
     nationality,
@@ -20,17 +20,17 @@ const createApplication = asyncHandler(async (req, res) => {
     course,
     email,
     phoneNumber,
-    academicStatus,
+    cnic,
   } = req.body;
 
-  // Basic required field validation
+  
   if (
     !firstName ||
     !lastName ||
     !fatherName ||
     !motherName ||
     !gender ||
-    !status ||
+    !maritalStatus ||
     !birthPlace ||
     !dob ||
     !nationality ||
@@ -39,17 +39,14 @@ const createApplication = asyncHandler(async (req, res) => {
     !course ||
     !email ||
     !phoneNumber ||
-    !academicStatus
+    !cnic
   ) {
     throw new ApiError(400, "All required fields must be filled");
   }
 
-  // Check if email already submitted
+  
   const alreadyExists = await Application.findOne({
-    userId: req.user?._id,
-    university,
-    program,
-    course,
+  userId: req.user?._id, university, program, course 
   });
   if (alreadyExists) {
     throw new ApiError(
@@ -174,7 +171,7 @@ const createApplication = asyncHandler(async (req, res) => {
     fatherName,
     motherName,
     gender,
-    status,
+    maritalStatus,
     birthPlace,
     dob,
     nationality,
@@ -183,7 +180,7 @@ const createApplication = asyncHandler(async (req, res) => {
     course,
     email,
     phoneNumber,
-    academicStatus,
+    cnic,
     photo: photo?.url || "",
     passportCopy: passportCopy?.url || "",
     secondaryCertificate: secondaryCertificate?.url || "",
@@ -195,29 +192,30 @@ const createApplication = asyncHandler(async (req, res) => {
     phdResearchProposal: phdResearchProposal?.url || "",
     cv: cv?.url || "",
   });
+    
+  if(!application){
+    throw new ApiError(404, "application not created try again")
+  }
+  console.log(application)
+  res
+    .status(201)
+    .json(new ApiResponse(201, {}, "Application submitted successfully"));
+});
+
+const getApplication = asyncHandler(async (req, res) => {
+  const userId = req.user?._id;
+
+  const totalApplications = Application.findById(userId);
+
+  if (!totalApplications) {
+    throw new ApiError(409, "applications not found");
+  }
 
   res
     .status(201)
     .json(
-      new ApiResponse(201, {}, "Application submitted successfully")
+      new ApiResponse(201, totalApplications, "applications get successfully")
     );
 });
-
- const getApplication = asyncHandler(async (req, res)=>{
-
-          const userId = req.user?._id
-
-          const totalApplications = Application.findById(userId);
-
-          if (!totalApplications){
-          throw new ApiError(409, "applications not found")
-          }
-
-          res
-          .status(201)
-          .json(
-                    new ApiResponse(201, totalApplications, "applications get successfully")
-          )
-})
 
 export { createApplication, getApplication };

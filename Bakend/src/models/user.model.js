@@ -4,16 +4,6 @@ import bcrypt from "bcrypt";
 
 const userSchema = new Schema(
     {
-   userName:{
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    index : true,
-    minlength: 5,
-    maxlength: 20,
-    trim: true},
-
    email:{
     type: String,
     required: true,
@@ -45,10 +35,10 @@ const userSchema = new Schema(
     type: String
 
    },
-   googleId:{
-    type: String,
-    unique: true,
-    sparse: true
+   phone:{
+   type : String,
+   required : true,
+   
    },
    emailVerified:{
     type: Boolean,

@@ -5,6 +5,7 @@ import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import  jwt from 'jsonwebtoken';
 import { sendVerificationCode } from "../utils/sendEmail.js";
+import { console } from "inspector/promises";
 
 
 const generateAcessAndRefreshtoken = async (userId) => {
@@ -38,19 +39,23 @@ const registerUser = asyncHandler(async (req, res) => {
   //check for user creation
   // return response
 
-  const { email, userName, fullName, password } = req.body;
+  const { email, phone, firstName,lastName, password , confirmPassword } = req.body;
   console.log(req.body);
 
   if (
-    [email, userName, fullName, password].some((field) => field?.trim() === "")
+    [email, phone, firstName,lastName, password , confirmPassword].some((field) => field?.trim() === "")
   ) {
     throw new ApiError(400, "all fields are mendantory");
   }
   const userExisted = await User.findOne({
-    $or: [{ email }, { userName }],
+    $or: [{ email }],
   });
   if (userExisted) {
     throw new ApiError(409, "user already exist");
+  }
+
+  if (password !== confirmPassword){
+    throw new ApiError(400, "password does not match")
   }
 
 
@@ -63,14 +68,16 @@ const registerUser = asyncHandler(async (req, res) => {
     avatarLocalPath = req.files.avatar[0].path;
   }
 
-  const avatar = await uploadOnCloudinary(avatarLocalPath);
+    const avatar = await uploadOnCloudinary(avatarLocalPath);
+  
 
   const code = Math.floor(100000 + Math.random() * 900000).toString();
 
   const userCreation = await User.create({
     email,
-    fullName,
-    userName: userName?.toLowerCase(),
+    firstName,
+    lastName,
+    phone,
     avatar: avatar?.url || "",
     varificationCode: code,
     varificationCodeExpiry: Date.now() + 10 * 60 * 1000,
@@ -82,7 +89,7 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log("userCreation: ", userCreation);
 
   const createdUser = await User.findById(userCreation._id).select(
-    " -password -refreshToken -varificationCode -varificationCodeExpiry -googleId -emailVerified"
+    " -password -refreshToken -varificationCode -varificationCodeExpiry -emailVerified"
   );
   console.log("created user is : ", createdUser);
 
@@ -121,21 +128,21 @@ const loginUser = asyncHandler(async (req, res) => {
   // if password is correct
   // then return user data with access token and refresh token
 
-  const { email, userName, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!email && !userName) {
-    throw new ApiError(400, "username or email is required");
+  if (!email || !password) {
+    throw new ApiError(400, " email and password both are required");
   }
 
   // check user exist or not
   const user = await User.findOne({
-    $or: [{ email }, { userName }],
+    $or: [{ email }],
   });
 
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-
+  
   // compare password
   const correctPassword = await user.isPasswordCorrect(password);
 
@@ -146,7 +153,7 @@ const loginUser = asyncHandler(async (req, res) => {
  const {refreshToken, accessToken} = await generateAcessAndRefreshtoken(user._id)
 
 const loggedInUser = await User.findById(user._id).select(
-   "-password -refreshToken -varificationCode -varificationCodeExpiry -googleId -emailVerified"
+   "-password -refreshToken -varificationCode -varificationCodeExpiry "
 )
 
 const option = {
@@ -158,12 +165,13 @@ res.status(200)
 .cookie("accessToken", accessToken, option)
 .cookie("refreshToken", refreshToken, option)
 .json(
-   new ApiResponse(200, {
+   new ApiResponse(200, 
+   "User login in successfully" , 
+   {
     user: loggedInUser,
     accessToken,
     refreshToken
-   },
-   "User login in successfully"  
+   }
    )
 )
 
@@ -212,7 +220,7 @@ const refreshAccessToken = asyncHandler(async(req, res, next )=>{
    throw new ApiError(401,"invalid  refresh token")
  }
  
- if(incomingRefreshToken !== user?.refreshTokens){
+ if(incomingRefreshToken !== user?.refreshToken){
   throw new ApiError(401,"refresh token is expired or used")
  
  }
@@ -267,25 +275,30 @@ const changeCurrentPassword = asyncHandler(async(req, res)=>{
 
 
 const getCurrentUser = asyncHandler(async(req, res )=>{
-
+    const user = await User.findOne(req.user._id).select(
+   "-password -refreshToken -varificationCode -varificationCodeExpiry "
+)
   return res
   .status(200)
-  .json(new ApiResponse(200, req.user, "user fatch successfully"))
+  .json(new ApiResponse(200, "user fatch successfully" , user))
 })
 
 const updateUserDetails = asyncHandler(async(req, res)=>{
 
-  const {fullName, email} = req.body ;
+  const {firstName,lastName, phone, email} = req.body ;
 
-  if (!fullName || !email) {
-    throw new ApiError(400, "fullName and email are required");
+  if (!firstName || !lastName || !phone || !email) {
+    throw new ApiError(400, "all filed are required");
   }
 
   const user = await User.findByIdAndUpdate(req.user._id,
     {
       $set:{
-        fullName,
+        firstName,
         email,
+        lastName,
+        phone,
+
       }
     },
     {
