@@ -54,7 +54,7 @@ export const HomeHeader = () => {
   }, [currentSlides]);
 
   return (
-    <div className="relative w-full h-[80vh] overflow-hidden shadow-xl" dir={language === "ar" ? "rtl" : "ltr"}>
+    <div className="relative w-full h-[85vh] max-h-[600px] overflow-hidden shadow-xl" dir={language === "ar" ? "rtl" : "ltr"}>
       {currentSlides.map((slide, index) => (
         <div
           key={index}

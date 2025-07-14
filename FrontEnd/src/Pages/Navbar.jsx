@@ -54,7 +54,7 @@ export default function Navbar() {
 
   return (
     <div className="bg-[#0A0851] text-white" dir={language === "ar" ? "rtl" : "ltr"}>
-      <div className="w-[90vw] mx-auto">
+      <div className="px-10 mx-auto">
         <div className="flex justify-between items-center py-4 relative z-30">
           <Link to="/">
             <div className="w-10 h-10 mr-3">

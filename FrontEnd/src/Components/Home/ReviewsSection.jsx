@@ -7,7 +7,7 @@ import { useAuth } from "../../contextApi/contextApi";
 
 const ReviewsSection = () => {
   const { language } = useAuth();
-  const isArabic = language === 'ar';
+  const isArabic = language === "ar";
 
   const settings = {
     dots: true,
@@ -43,7 +43,6 @@ const ReviewsSection = () => {
         ? "بصفتي طالبة قطرية، ساعدني ستادي جيستس في التنقل بين الخيارات المحلية والدولية قبل أن أختار جامعة قطر. معرفتهم بنظام التعليم في قطر لا مثيل لها!"
         : "As a Qatari student, Study Gists helped me navigate both local and international options before I chose QU. Their knowledge of Qatar's education system is unmatched!",
       photo: "https://randomuser.me/api/portraits/women/68.jpg",
-      flag: "🇶🇦",
     },
     {
       name: isArabic ? "أحمد حسن" : "Ahmed Hassan",
@@ -54,7 +53,6 @@ const ReviewsSection = () => {
         ? "كان الانتقال من مدرستي الثانوية في الدوحة إلى جامعة تكساس إيه آند إم سلسًا بفضل برنامج التوجيه وجهات الاتصال المحلية."
         : "The transition from my high school in Doha to Texas A&M was seamless thanks to their orientation program and local contacts.",
       photo: "https://randomuser.me/api/portraits/men/22.jpg",
-      flag: "🇶🇦",
     },
     {
       name: isArabic ? "فاطمة الكواري" : "Fatima Al-Kuwari",
@@ -65,7 +63,6 @@ const ReviewsSection = () => {
         ? "كان مستشارو المنح الدراسية لديهم على دراية تامة بفرص التمويل المتاحة للمواطنين القطريين في جامعات المدينة التعليمية."
         : "Their scholarship advisors knew exactly which funding opportunities were available for Qatari nationals at Education City universities.",
       photo: "https://randomuser.me/api/portraits/women/72.jpg",
-      flag: "🇶🇦",
     },
     {
       name: isArabic ? "محمد السليطي" : "Mohammed Al-Sulaiti",
@@ -76,7 +73,6 @@ const ReviewsSection = () => {
         ? "تم قبولي في جامعة كارنيجي ميلون قطر بمساعدتهم! فهمهم لعملية القبول التنافسية في مؤسسات المدينة التعليمية رائع."
         : "Got into CMU Qatar with their help! They understand the competitive admission process at Education City institutions.",
       photo: "https://randomuser.me/api/portraits/men/41.jpg",
-      flag: "🇶🇦",
     },
     {
       name: isArabic ? "عائشة آل ثاني" : "Aisha Al-Thani",
@@ -87,8 +83,7 @@ const ReviewsSection = () => {
         ? "كانت ورش العمل الخاصة بهم حول كتابة البيان الشخصي حاسمة لقبولي الناجح في جامعة نورثويسترن قطر."
         : "Their workshops on personal statement writing were crucial for my successful application to NU-Q.",
       photo: "https://randomuser.me/api/portraits/women/85.jpg",
-      flag: "🇶🇦",
-    }
+    },
   ];
 
   return (
@@ -106,7 +101,7 @@ const ReviewsSection = () => {
         <Slider {...settings}>
           {reviews.map((review, index) => (
             <div key={index} className="px-2 mb-6">
-              <div className="bg-white p-6 rounded-lg shadow-md shadow-[#0A0851] h-[260px] flex flex-col justify-between">
+              <div className="bg-white p-6 rounded-lg shadow-md shadow-[#0A0851] h-[320px] flex flex-col justify-between">
                 <div>
                   <div className={`flex items-center mb-4 ${isArabic ? "flex-row-reverse" : ""}`}>
                     <img
