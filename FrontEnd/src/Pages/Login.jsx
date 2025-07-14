@@ -12,6 +12,7 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const {setUser} = useAuth()
 
@@ -44,11 +45,17 @@ const Login = () => {
 }
       );
     
+      if(response.data.data.user.role === "admin"){
+        navigate("/")
+      } 
 
       setUser(response.data.data.user)
       navigate("/applynow")
+
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
+      setError(error?.response?.data?.message)
+
       setLoading(false)
     }
   };
@@ -146,8 +153,9 @@ const Login = () => {
                 </Link>
               </div>
             </div>
-
+            {error && <p className="text-red-600 text-sm">{error}</p>}
             <div>
+              
               <button
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
