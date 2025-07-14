@@ -11,6 +11,8 @@ const Login = () => {
     rememberMe: false,
   });
 
+  const [loading, setLoading] = useState(false)
+
   const {setUser} = useAuth()
 
   const navigate = useNavigate()
@@ -24,6 +26,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+      setLoading(true)
     if (!formData.email || !formData.password) {
       console.error("Please fill in all fields");
       return;
@@ -40,12 +43,13 @@ const Login = () => {
   withCredentials: true,
 }
       );
-      console.log("this is user response ::", response.data.data.user)
+    
 
       setUser(response.data.data.user)
       navigate("/applynow")
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
+      setLoading(false)
     }
   };
 
@@ -148,7 +152,7 @@ const Login = () => {
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
               >
-                Login
+                {loading ? "Loging..." : "Login"}
               </button>
             </div>
           </form>

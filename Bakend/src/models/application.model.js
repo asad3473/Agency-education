@@ -39,13 +39,11 @@ const ApplicationSchema = new Schema(
     gender: {
       type: String,
       requried: true,
-      enum: ["male", "female", "other"],
       trim: true,
     },
     maritalStatus: {
       type: String,
       requried: true,
-      enum: ["single", "married", "divorced"],
       trim: true,
     },
     birthPlace: {

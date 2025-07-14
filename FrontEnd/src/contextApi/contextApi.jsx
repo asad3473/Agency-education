@@ -28,7 +28,13 @@ const AuthProvider = ({ children }) => {
         setEmail(res.data.data.email)
         setUser(res.data.data);
       } catch (err) {
-        setUser(null);
+        
+        if (err.response?.status === 401) {
+          console.log("this is error::", err.response.status)
+        setUser(null);}
+        else {
+        console.error("Unexpected error:", err);
+      }
       } finally {
         setLoading(false);
       }

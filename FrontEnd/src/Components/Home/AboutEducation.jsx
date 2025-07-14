@@ -135,6 +135,7 @@ const AboutEducation = () => {
 
       {/* Service Cards */}
       <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 sm:mt-22 ${isArabic ? 'text-right' : 'text-left'}`}>
+      <div className="grid grid-cols-1  md:grid-cols-3 gap-6 mt-30">
         {services.map((service, index) => (
           <motion.div
             key={index}
