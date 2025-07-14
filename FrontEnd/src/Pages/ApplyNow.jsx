@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Universities = [
@@ -13,7 +13,7 @@ const Universities = [
   "Rauf Denktas University",
 ];
 
-const Courses = [
+const BSCourses = [
   "Software Engineering",
   "Computer Science",
   "Information Technology",
@@ -23,6 +23,25 @@ const Courses = [
   "Web Development",
   "Mobile App Development",
   "Database Management",
+];
+
+const MasterCourses = [
+  "MS in Computer Science",
+  "MS in Software Engineering",
+  "MS in Data Science",
+  "MS in Artificial Intelligence",
+  "MS in Cyber Security",
+  "MS in Information Systems",
+  "MS in Network Engineering",
+];
+
+const PhDCourses = [
+  "PhD in Computer Science",
+  "PhD in Software Engineering",
+  "PhD in Artificial Intelligence",
+  "PhD in Data Science",
+  "PhD in Cyber Security",
+  "PhD in Information Technology",
 ];
 
 const requiredDocument = [
@@ -40,18 +59,48 @@ const requiredDocument = [
   },
 ];
 
-const documents = [
+const bsDocuments = [
   {
     name: "englishCompetence",
     tittle: "Evidence of English Language Competence:",
   },
-   {
+];
+
+const masterDocuments = [
+  {
+    name: "englishCompetence",
+    tittle: "Evidence of English Language Competence:",
+  },
+  {
     name: "bsDegreeCertificate",
-    tittle: "Bachelor’s Degree Certificate:",
+    tittle: "Bachelor's Degree Certificate:",
   },
   {
     name: "bsTranscript",
-    tittle: "Bachelor’s Transcript:",
+    tittle: "Bachelor's Transcript:",
+  },
+  {
+    name: "cv",
+    tittle: "Curriculum Vitae (CV):",
+  },
+  {
+    name: "statementOfPurpose",
+    tittle: "Statement of Purpose:",
+  },
+];
+
+const phdDocuments = [
+  {
+    name: "englishCompetence",
+    tittle: "Evidence of English Language Competence:",
+  },
+  {
+    name: "bsDegreeCertificate",
+    tittle: "Bachelor's Degree Certificate:",
+  },
+  {
+    name: "bsTranscript",
+    tittle: "Bachelor's Transcript:",
   },
   {
     name: "msCertificate",
@@ -69,46 +118,50 @@ const documents = [
     name: "cv",
     tittle: "Curriculum Vitae (CV):",
   },
+  {
+    name: "publications",
+    tittle: "Research Publications (if any):",
+  },
 ];
 
 const inputClass =
-  "w-full px-4 py-3  text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2b2e4a] shadow-sm transition-all duration-200";
+  "w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2b2e4a] shadow-sm transition-all duration-200";
 
 const ApplyNow = () => {
-  // const passwordRef = useRef(null);
-  // const confirmPasswordRef = useRef(null);
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [confirmVisible, setConfirmVisible] = useState(false);
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    fatherName: "",
+    motherName: "",
+    cnic: "",
+    email: "",
+    gender: "",
+    maritalStatus: "",
+    dob: "",
+    nationality: "",
+    phoneNumber: "",
+    birthPlace: "",
+    program: "",
+    university: "",
+    course: "",
+    photo: null,
+    passportCopy: null,
+    secondaryCertificate: null,
+    englishCompetence: null,
+    bsDegreeCertificate: null,
+    bsTranscript: null,
+    msCertificate: null,
+    msTranscript: null,
+    phdResearchProposal: null,
+    cv: null,
+    statementOfPurpose: null,
+    publications: null,
+  });
 
-const [formData, setFormData] = useState({
-  firstName: "",
-  lastName: "",
-  fatherName: "",
-  motherName: "",
-  cnic: "",
-  email: "",
-  gender: "",
-  maritalStatus: "",
-  dob: "",
-  nationality: "",
-  phoneNumber: "",
-  birthPlace: "",
-  program: "",
-  university: "",
-  course: "",
-  photo: null,
-  passportCopy: null,
-  secondaryCertificate: null,
-  englishCompetence: null,
-  bsDegreeCertificate: null,
-  bsTranscript: null,
-  msCertificate: null,
-  msTranscript: null,
-  phdResearchProposal: null,
-  cv: null,
-});
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
@@ -116,54 +169,125 @@ const [formData, setFormData] = useState({
       ...prev,
       [name]: type === "file" ? files[0] : value,
     }));
+
+    // Clear error when user makes changes
+    if (error) setError(null);
   };
 
-  
+  const getCoursesByProgram = () => {
+    switch (formData.program) {
+      case "BS (14 Years)":
+        return BSCourses;
+      case "Master":
+        return MasterCourses;
+      case "PhD":
+        return PhDCourses;
+      default:
+        return [];
+    }
+  };
+
+  const getProgramDocuments = () => {
+    switch (formData.program) {
+      case "BS (14 Years)":
+        return bsDocuments;
+      case "Master":
+        return masterDocuments;
+      case "PhD":
+        return phdDocuments;
+      default:
+        return [];
+    }
+  };
+
+  const validateForm = () => {
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      return "Please fill in all required personal information fields";
+    }
+
+    if (!formData.program || !formData.university || !formData.course) {
+      return "Please select university and program details";
+    }
+
+    if (!formData.photo || !formData.passportCopy || !formData.secondaryCertificate) {
+      return "Please upload all required documents";
+    }
+
+    return null;
+  };
+
   const submitHandle = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setIsLoading(true);
 
     const formPayload = new FormData();
-Object.keys(formData).forEach((key) => {
-  if (formData[key]) {
-    formPayload.append(key, formData[key]);
-  }
-});
-
-    // if (
-    //   !formData.contact ||
-    //   !formData.firstName ||
-    //   !formData.email ||
-    //   !formData.lastName ||
-    //   !formData.password
-    // ) {
-    //   setError("Please fill in all fields");
-    //   return;
-    // }
+    Object.keys(formData).forEach((key) => {
+      if (formData[key]) {
+        formPayload.append(key, formData[key]);
+      }
+    });
 
     try {
-      console.log(
-        "this form data ::",
-        formData,
-      );
       const response = await axios.post(
         "http://localhost:8000/api/v1/applications/create-application",
         formPayload,
-  {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    withCredentials: true,}
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
       );
-      console.log(
-        "this form data ::",
-        formData,
-        " this is response from backend :: ", response
-      );
-
-    
+      setSuccess(true);
+      console.log()
+      // Reset form after successful submission
+      setFormData({
+        firstName: "",
+        lastName: "",
+        fatherName: "",
+        motherName: "",
+        cnic: "",
+        email: "",
+        gender: "",
+        maritalStatus: "",
+        dob: "",
+        nationality: "",
+        phoneNumber: "",
+        birthPlace: "",
+        program: "",
+        university: "",
+        course: "",
+        photo: null,
+        passportCopy: null,
+        secondaryCertificate: null,
+        englishCompetence: null,
+        bsDegreeCertificate: null,
+        bsTranscript: null,
+        msCertificate: null,
+        msTranscript: null,
+        phdResearchProposal: null,
+        cv: null,
+        statementOfPurpose: null,
+        publications: null,
+      });
     } catch (error) {
-      console.error(error?.response?.data?.message || "Something went wrong");
+      console.error("Submission error:", error);
+      setError(
+        error?.response?.data?.message ||
+        error.message ||
+        "Failed to submit application. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -176,6 +300,23 @@ Object.keys(formData).forEach((key) => {
             Apply Now
           </h1>
         </div>
+
+        {/* Status Messages */}
+        {error && (
+          <div className="px-10 pt-6">
+            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p>{error}</p>
+            </div>
+          </div>
+        )}
+
+        {success && (
+          <div className="px-10 pt-6">
+            <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4">
+              <p>Application submitted successfully!</p>
+            </div>
+          </div>
+        )}
 
         <form
           className="flex flex-col gap-10 px-10 py-12"
@@ -220,7 +361,7 @@ Object.keys(formData).forEach((key) => {
               onChange={handleChange}
             />
             <input
-              type="text"
+              type="email"
               name="email"
               required
               placeholder="Enter your email"
@@ -292,7 +433,7 @@ Object.keys(formData).forEach((key) => {
               onChange={handleChange}
             />
             <input
-              type="text"
+              type="tel"
               name="phoneNumber"
               required
               placeholder="Phone No."
@@ -343,14 +484,17 @@ Object.keys(formData).forEach((key) => {
                 required
                 value={formData.course}
                 onChange={handleChange}
+                disabled={!formData.program}
               >
                 <option value="">Select Course</option>
-                {Courses.map((course, index) => (
+                {getCoursesByProgram().map((course, index) => (
                   <option key={index}>{course}</option>
                 ))}
               </select>
             </div>
           </div>
+          
+          {/* Documents Section */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-800 mb-1">
               Documents
@@ -378,32 +522,52 @@ Object.keys(formData).forEach((key) => {
                   />
                 </div>
               ))}
-              {documents.map((document, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col gap-5 sm:flex-row items-center justify-between border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 hover:shadow-sm transition"
-                >
-                  <p className="text-gray-700 text-sm font-semibold">{document.tittle}</p>
-                  <input
-                    type="file"
-                    placeholder={document.tittle}
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    name={document.name}
-                    className="file:px-3 file:py-1 file:rounded-md file:bg-white file:border file:border-gray-300 file:text-gray-700"
-                    onChange={handleChange}
-                  />
+              
+              {formData.program ? (
+                getProgramDocuments().map((document, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col gap-5 sm:flex-row items-center justify-between border border-gray-300 bg-gray-50 rounded-lg px-4 py-3 hover:shadow-sm transition"
+                  >
+                    <p className="text-gray-700 text-sm font-semibold">{document.tittle}</p>
+                    <input
+                      type="file"
+                      placeholder={document.tittle}
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      name={document.name}
+                      className="file:px-3 file:py-1 file:rounded-md file:bg-white file:border file:border-gray-300 file:text-gray-700"
+                      onChange={handleChange}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-4 text-gray-500">
+                  Please select a program to see required documents
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
           {/* Submit */}
           <div className="flex justify-end mt-6">
             <button
-              className="px-10 py-3 bg-[#F5891B] hover:bg-[#d77f18] text-white text-lg font-semibold rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+              className={`px-10 py-3 bg-[#F5891B] text-white text-lg font-semibold rounded-lg shadow-lg transition-transform duration-300 flex items-center justify-center min-w-32 ${
+                isLoading ? "opacity-75" : "hover:bg-[#d77f18] hover:scale-105"
+              }`}
               type="submit"
+              disabled={isLoading}
             >
-              Apply Now
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </>
+              ) : (
+                "Apply Now"
+              )}
             </button>
           </div>
         </form>

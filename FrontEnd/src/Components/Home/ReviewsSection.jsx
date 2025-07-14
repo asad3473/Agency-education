@@ -87,7 +87,7 @@ const ReviewsSection = () => {
   ];
 
   return (
-    <div className="bg-gray-50 mb-10 px-4">
+    <div className="bg-gray-50 mb-10 pt-10 md:pt-14 px-4">
       <div className={`max-w-6xl mx-auto ${isArabic ? "rtl text-right" : "ltr text-left"}`}>
         <h2 className="text-3xl font-bold text-center mb-4">
           {isArabic ? "قصص نجاح الطلاب" : "Student Success Stories"}

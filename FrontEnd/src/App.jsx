@@ -18,10 +18,12 @@ import ApplyNow from "./Pages/ApplyNow";
 import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
+import ScrollToTop from "./Components/ScrollToTop";
 
 function MainLayout() {
   return (
     <div className="min-h-screen overflow-auto">
+      <ScrollToTop />
       <Navbar />
       <Outlet />
       <Fotter />
