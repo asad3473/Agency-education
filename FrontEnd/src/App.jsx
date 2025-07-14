@@ -68,10 +68,10 @@ const router = createBrowserRouter([
         path: "/Eastern-Mediterranean-University",
         element: <MediteraninUni />,
       },
-      { path: "/verify-account", element: <OTPverify /> },
       { path: "/Kyrenia-University", element: <KyreniaUni /> },
       { path: "/Final-International-University", element: <FinalUni /> },
       { path: "/Bahcesehir-Cyprus-University", element: <BauUni /> },
+      { path: "/verify-account", element: <OTPverify /> },
       // {path:"/cypruspage",element:<CyprusInternational/>},
       {
         path: "/applynow",

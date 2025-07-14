@@ -63,7 +63,7 @@ export default function OurUniversity() {
             <h1 className='sm:text-2xl text-color font-semibold text-center mt-4 mb-2'>Choose your University</h1>
             <p className='text-xl sm:text-3xl font-bold text-center'>One of the Best Universities in the Middle East</p>
 
-            <div className='grid gap-2 grid-cols-1 sm:gap-10 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/15 mt-4 sm:mt-8 mx-auto mb-5'>
+            <div className='grid gap-2 grid-cols-1 sm:gap-10 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/12 mt-4 sm:mt-8 mx-auto mb-5'>
                 {
                     displayedUniversities.map((val, ind) => (
                         <div
