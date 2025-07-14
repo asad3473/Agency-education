@@ -83,7 +83,7 @@ const ContactUs = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 py-16 px-4"
+      className="w-full bg-gradient-to-br from-blue-50 to-gray-100 py-16 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}

@@ -36,16 +36,20 @@ export default function BAUintroduction() {
            <iframe width="560" height="315" src="https://www.youtube.com/embed/KItGnLjdI9Q?si=1QEKb5CDPn7B2caS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
-        <div className=" w-full p-2 h-auto lg:h-70 sm:w-[30%] shadow-md shadow-[#0A0851]">
-          <div className=" flex sm:justify-center sm:items-center">
-            <hr className=" h-1 bg-[#F5891B] sm:w-[14%] border-none hidden md:flex" />
-            <h1 className=" px-2 text-md text-nowrap lg:text-xl font-semibold">
-              Another Universities
-            </h1>
-            <hr className=" h-1 bg-[#F5891B] sm:w-[14%] border-none hidden md:flex" />
+         <div className="w-full sm:w-[30%] h-96 bg-white rounded-xl shadow-xl border border-blue-100 overflow-hidden">
+          <div className="bg-gradient-to-r from-[#0A0851] to-[#1A3D8F] p-4">
+            <div className="flex items-center justify-center">
+              <hr className="h-1 bg-[#F5891B] w-8 border-none" />
+              <h1 className="px-3 text-lg font-bold text-white whitespace-nowrap">
+                Another Universities
+              </h1>
+              <hr className="h-1 bg-[#F5891B] w-8 border-none" />
+            </div>
           </div>
-          <ol className="mt-4 px-3 flex flex-col gap-3">
-            <Link
+
+          <div className="p-4">
+            <ol className="space-y-3">
+              <Link
                 to="/Cyprus-International-University"
                 className="flex items-center gap-2"
               >
@@ -88,7 +92,8 @@ export default function BAUintroduction() {
                 <GiConvergenceTarget />
                 <li>Final International University</li>
               </Link>
-          </ol>
+            </ol>
+          </div>
         </div>
       </div>
     </div>

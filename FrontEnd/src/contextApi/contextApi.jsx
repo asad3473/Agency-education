@@ -9,6 +9,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [language, setLanguage] = useState("en");
+
+  const toggleLanguage = (lang) => {
+    setLanguage(lang);
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -37,12 +43,17 @@ const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-   return (
-    <AuthContext.Provider value={{ user, loading, setUser, email, setVerified }}>
+
+
+  return (
+    <AuthContext.Provider value={{ user, loading, setUser, email, setVerified,language,toggleLanguage }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-const useAuth =()=> useContext(AuthContext)
+
+
+
+const useAuth = () => useContext(AuthContext)
 export { AuthProvider, useAuth };
