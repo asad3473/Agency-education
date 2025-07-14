@@ -18,98 +18,118 @@ const ReviewsSection = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-        }
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
 
-   const reviews = [
+  const reviews = [
     {
       name: "Noor Al-Mansoori",
       university: "Qatar University",
       program: "Engineering",
       rating: 5,
-      review: "As a Qatari student, Study Gists helped me navigate both local and international options before I chose QU. Their knowledge of Qatar's education system is unmatched!",
+      review:
+        "Their scholarship advisors knew exactly which funding opportunities were available for Qatari nationals at Education City universities.",
       photo: "https://randomuser.me/api/portraits/women/68.jpg",
-      flag: "🇶🇦"
+      flag: "🇶🇦",
     },
     {
       name: "Ahmed Hassan",
       university: "Texas A&M Qatar",
       program: "Petroleum Engineering",
       rating: 5,
-      review: "The transition from my high school in Doha to Texas A&M was seamless thanks to their orientation program and local contacts.",
+      review:
+        "The transition from my high school in Doha to Texas A&M was seamless thanks to their orientation program and local contacts.",
       photo: "https://randomuser.me/api/portraits/men/22.jpg",
-      flag: "🇶🇦"
+      flag: "🇶🇦",
     },
     {
       name: "Fatima Al-Kuwari",
       university: "Georgetown Qatar",
       program: "International Relations",
       rating: 4,
-      review: "Their scholarship advisors knew exactly which funding opportunities were available for Qatari nationals at Education City universities.",
+      review:
+        "Their scholarship advisors knew exactly which funding opportunities were available for Qatari nationals at Education City universities.",
       photo: "https://randomuser.me/api/portraits/women/72.jpg",
-      flag: "🇶🇦"
+      flag: "🇶🇦",
     },
     {
       name: "Mohammed Al-Sulaiti",
       university: "Carnegie Mellon Qatar",
       program: "Computer Science",
       rating: 5,
-      review: "Got into CMU Qatar with their help! They understand the competitive admission process at Education City institutions.",
+      review:
+        "Got into CMU Qatar with their help! They understand the competitive admission process at Education City institutions.",
       photo: "https://randomuser.me/api/portraits/men/41.jpg",
-      flag: "🇶🇦"
+      flag: "🇶🇦",
     },
     {
       name: "Aisha Al-Thani",
       university: "Northwestern Qatar",
       program: "Journalism",
       rating: 4,
-      review: "Their workshops on personal statement writing were crucial for my successful application to NU-Q.",
+      review:
+        "Their workshops on personal statement writing were crucial for my successful application to NU-Q.",
       photo: "https://randomuser.me/api/portraits/women/85.jpg",
-      flag: "🇶🇦"
-    }
+      flag: "🇶🇦",
+    },
   ];
 
   return (
-    <div className="bg-gray-50  mb-10 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Student Success Stories</h2>
-        <p className="text-center text-gray-600 mb-12">Hear from students who achieved their academic dreams with our support</p>
-        
+    <div className="bg-gray-50 mb-10 px-4">
+      <div className="max-w-6xl mx-auto py-10">
+        <h2 className="text-3xl font-bold text-center mb-4">
+          Student Success Stories
+        </h2>
+        <p className="text-center text-gray-600 mb-12">
+          Hear from students who achieved their academic dreams with our
+          support
+        </p>
+
         <Slider {...settings}>
           {reviews.map((review, index) => (
-            <div key={index} className="px-2">
-              <div className="bg-white p-6 rounded-lg shadow-md shadow-[#0A0851] h-full">
+            <div key={index} className="px-2 py-5 ">
+              <div className="bg-white p-6 rounded-lg shadow-md shadow-[#0A0851] min-h-[320px] h-full flex flex-col justify-between">
                 <div className="flex items-center mb-4">
-                  <img 
-                    src={review.photo} 
-                    alt={review.name} 
+                  <img
+                    src={review.photo}
+                    alt={review.name}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
                     <h4 className="font-semibold">{review.name}</h4>
-                    <p className="text-sm text-gray-600">{review.program} at {review.university}</p>
+                    <p className="text-sm text-gray-600">
+                      {review.program} at {review.university}
+                    </p>
                   </div>
                 </div>
-                
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar 
-                      key={i} 
-                      className={i < review.rating ? "text-yellow-400" : "text-gray-300"} 
-                    />
-                  ))}
+
+                <div className="mb-3">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar
+                        key={i}
+                        className={
+                          i < review.rating
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }
+                      />
+                    ))}
+                  </div>
                 </div>
-                
-                <FaQuoteLeft className="text-gray-300 text-xl mb-2" />
-                <p className="text-gray-700 italic mb-4">{review.review}</p>
+
+                <div className="flex-grow">
+                  <FaQuoteLeft className="text-gray-300 text-xl mb-2" />
+                  <p className="text-gray-700 italic">{review.review}</p>
+                </div>
               </div>
             </div>
           ))}

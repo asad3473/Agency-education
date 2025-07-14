@@ -103,7 +103,7 @@ const AboutEducation = () => {
       </div>
 
       {/* Service Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+      <div className="grid grid-cols-1  md:grid-cols-3 gap-6 mt-30">
         {services.map((service, index) => (
           <motion.div
             key={index}

@@ -60,15 +60,15 @@ export default function OurUniversity() {
     const displayedUniversities = isUniversitiesPage || showAll ? uni : uni.slice(0, 3);
 
     return (
-        <div className='w-full'>
+        <div className='w-full py-10'>
             <h1 className='sm:text-2xl text-color font-semibold text-center mt-4 mb-2'>Choose your University</h1>
             <p className='text-xl sm:text-3xl font-bold text-center'>One of the Best Universities in the Middle East</p>
 
-            <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/12 mt-4 sm:mt-8 mx-auto mb-5'>
+            <div className='grid gap-2 grid-cols-1 sm:gap-10 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/15 mt-4 sm:mt-8 mx-auto mb-5'>
                 {
                     displayedUniversities.map((val, ind) => (
                         <div
-                            className='group relative shadow-md hover:shadow-amber-50 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full'
+                            className='group relative shadow-md hover:shadow-amber-50 transition-all duration-50 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full hover:border hover:border-gray-400'
                             key={ind}
                         >
                             <div
@@ -94,7 +94,7 @@ export default function OurUniversity() {
 
             {
                 !isUniversitiesPage && (
-                    <div className='mt-4 flex justify-center items-center mb-3'>
+                    <div className='mt-10 flex justify-center items-center mb-3'>
                         <button
                             className=' px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'
                             onClick={() => setShowAll(true)}
