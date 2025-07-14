@@ -71,20 +71,20 @@ const registerUser = asyncHandler(async (req, res) => {
     const avatar = await uploadOnCloudinary(avatarLocalPath);
   
 
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
-
+  const verificationCode  = Math.floor(100000 + Math.random() * 900000).toString();
+          console.log("this is verifyEmailCode code ::", verificationCode)
   const userCreation = await User.create({
     email,
     firstName,
     lastName,
     phone,
     avatar: avatar?.url || "",
-    verificationCode: code,
+    verificationCode,
     varificationCodeExpiry: Date.now() + 10 * 60 * 1000,
     password,
   });
 
-   await sendVerificationCode(email, code);
+   await sendVerificationCode(email, verificationCode);
 
   console.log("userCreation: ", userCreation);
 
@@ -103,11 +103,16 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const verifyEmailCode =  asyncHandler(async (req, res)=> {
- const { email, code } = req.body;
+ const { email, verificationCode } = req.body;
+ console.log("this req.body::", req.body) 
+ if (!email || !verificationCode){
+   throw new ApiError(401, "email or code both are required")
+ }
 
  const user = await User.findOne({email});
-
-  if (!user || user.verificationCode !== code || Date.now() > user.verificationCodeExpiry) {
+      
+    
+  if (!user || user.verificationCode !== verificationCode || Date.now() > user.verificationCodeExpiry) {
     throw new ApiError(400, "Invalid or expired verification code");
   }
   user.emailVerified = true;
@@ -116,7 +121,7 @@ const verifyEmailCode =  asyncHandler(async (req, res)=> {
 
   await user.save();
   
-  res.status(200).json(new ApiResponse(200, {}, "Email verified successfully"));
+  res.status(200).json(new ApiResponse(200, "Email verified successfully" , {}));
 
 })
 

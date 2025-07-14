@@ -46,7 +46,6 @@ const userSchema = new Schema(
 },
 verificationCode:{
     type: String,
-    required : true,
 },
 verificationCodeExpiry:{
     type: Date
