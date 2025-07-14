@@ -5,8 +5,7 @@ const ApplicationSchema = new Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
-      index: true,
+
     },
     firstName: {
       type: String,
@@ -39,17 +38,18 @@ const ApplicationSchema = new Schema(
     gender: {
       type: String,
       requried: true,
-      trim: true,
     },
     maritalStatus: {
       type: String,
       requried: true,
-      trim: true,
+    },
+    applicationStatus:{
+     type : String,
+     default: "pending"
     },
     birthPlace: {
       type: String,
       requried: true,
-      trim: true,
     },
     dob: {
       type: Date,

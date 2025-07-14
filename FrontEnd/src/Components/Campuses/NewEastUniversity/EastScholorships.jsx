@@ -1,90 +1,224 @@
 import React from 'react';
-import { FaAward, FaUsers, FaHeart, FaRunning, FaGraduationCap } from 'react-icons/fa';
-import { GiMoneyStack } from 'react-icons/gi';
+import { FaUniversity, FaSchool, FaUserGraduate, FaUserTie, FaBriefcase } from 'react-icons/fa';
+import { useAuth } from '../../../contextApi/contextApi';
 
-const EastScholorships = () => {
-  const scholarships = [
-    {
-      title: "Automatic 50% Scholarship",
-      description: "Granted to all international undergraduate students registering at NEU",
-      icon: <GiMoneyStack className="text-3xl text-yellow-500" />,
-      bgColor: "bg-blue-50"
+const EastPrograms = () => {
+  const { language } = useAuth();
+  const isArabic = language === 'ar';
+
+  // Arabic translations
+  const translations = {
+    title: isArabic ? 'برامجنا الأكاديمية' : 'Our Academic Programs',
+    'Associate Degree Programs': isArabic ? 'برامج الدبلوم المشارك' : 'Associate Degree Programs',
+    'Undergraduate Programs': isArabic ? 'برامج البكالوريوس' : 'Undergraduate Programs',
+    'Masters Programs': isArabic ? 'برامج الماجستير' : 'Masters Programs',
+    'Doctoral Programs (PhD)': isArabic ? 'برامج الدكتوراه (PhD)' : 'Doctoral Programs (PhD)',
+    'Professional Doctorates (DBA)': isArabic ? 'برامج الدكتوراه المهنية (DBA)' : 'Professional Doctorates (DBA)',
+  };
+
+  const programs = {
+    'Associate Degree Programs': [
+      'Computer Technologies and Programming',
+      'Construction Technology',
+      'First and Emergency Aid',
+      'Public Relations and Advertising',
+      'Radio & Tv Programming'
+    ],
+    'Undergraduate Programs': {
+      'Faculty of Agricultural Sciences & Technologies': ['Plant Production and Technologies (BSc)'],
+      'Faculty of Arts and Sciences': [
+        'Molecular Biology & Genetics (BSc)',
+        'Psychology (BA)',
+        'Translation and Interpretation (BA)'
+      ],
+      'Faculty of Communication': [
+        'Advertising and Public Relations (BA)',
+        'Journalism (BA)',
+        'Radio and Television (BA)',
+        'Visual Communication Design (BA)'
+      ],
+      'Faculty of Economics & Administrative Sciences': [
+        'Accounting and Finance (BSc)',
+        'Business Administration (BA)',
+        'International Relations (BA)',
+        'Digital Media and Marketing (BA)',
+        'Economics (BSc)'
+      ],
+      'Faculty of Education': [
+        'English Language Teaching (BA)',
+        'Computer and Instructional Technology Teaching Education (BSc)',
+        'Pre School Teaching (BA)'
+      ],
+      'Faculty of Engineering': [
+        'Artificial Intelligence Engineering',
+        'Bioengineering (BSc)',
+        'Biomedical Engineering (BSc)',
+        'Civil Engineering (BSc)',
+        'Computer Engineering (BSc)',
+        'Electrical and Electronics Engineering (BSc)',
+        'Energy Systems Engineering (BSc)',
+        'Environmental Engineering (BSc)',
+        'Information Systems Engineering (BSc)',
+        'Management Engineering (BSc)',
+        'Mechanical Engineering (BSc)',
+        'Mechatronics Engineering (BSc)',
+        'Medical Engineering (BSc)',
+        'Petroleum & Natural Gas Engineering (BSc)',
+        'Software Engineering (BSc)'
+      ],
+      'Faculty of Fine Arts, Design and Architecture': [
+        'Architecture (BA)',
+        'Graphic Design (BA)',
+        'Interior Design (BA)'
+      ],
+      'Faculty of Health Sciences': [
+        'Midwifery',
+        'Nutrition and Dietetics',
+        'Nursing (BSc)',
+        'Social Work (BA)',
+        'Physiotherapy and Rehabilitation (BSc)'
+      ],
+      'Faculty of Law': ['International Law (LLB)'],
+      'Faculty of Medicine': ['Medicine'],
+      'Faculty of Dentistry': ['Dentistry (Dent)'],
+      'Faculty of Pharmacy': ['Pharmacy (MPharm)', 'Pharmacy (Pharm D.)'],
+      'School of Applied Sciences': [
+        'Information Technologies (BSc)',
+        'Information Security Technologies (BSc)',
+        'Management Information Systems (BSc)',
+        'Computer Technologies and Programming (Technician)'
+      ],
+      'School of Tourism & Hotel Management': [
+        'Tourism and Hotel Management (BA)',
+        'Gastronomy and Culinary Arts (BA)'
+      ]
     },
-    {
-      title: "Academic Excellence Scholarships",
-      description: "50%, 75% or 100% off tuition fee each semester based on academic performance",
-      icon: <FaAward className="text-3xl text-blue-600" />,
-      bgColor: "bg-blue-100"
-    },
-    {
-      title: "Siblings Discount",
-      description: "25% discount for each sibling attending (proof of kinship required)",
-      icon: <FaUsers className="text-3xl text-green-600" />,
-      bgColor: "bg-green-50"
-    },
-    {
-      title: "Married Couples Discount",
-      description: "25% discount for married couples attending together (marriage proof required)",
-      icon: <FaHeart className="text-3xl text-red-500" />,
-      bgColor: "bg-red-50"
-    },
-    {
-      title: "Athletic Scholarships",
-      description: "For students with national-level sports performance or joining NEU sports teams",
-      icon: <FaRunning className="text-3xl text-purple-600" />,
-      bgColor: "bg-purple-50"
-    },
-    {
-      title: "Graduate Scholarships",
-      description: "For graduate students with minimum 3.50 CGPA (valid bachelor diploma required)",
-      icon: <FaGraduationCap className="text-3xl text-indigo-600" />,
-      bgColor: "bg-indigo-50"
-    }
-  ];
+    'Masters Programs': [
+      'Accounting and Finance (MSc/MAF)',
+      'Architecture (MArch)',
+      'Bioengineering (MSc)',
+      'Business Administration(MBA)',
+      'Business Administration*(Dual MBA program with EU)',
+      'Chemistry (MSc)',
+      'Civil Engineering (MSc)',
+      'Communication and Media Studies (MA)',
+      'Computer Engineering (MSc)',
+      'Economy (MSc)',
+      'Educational Administration and Planning (MA)',
+      'Electrical and Electronics Engineering (MSc)',
+      'Energy Systems Engineering (MSc)',
+      'Engineering Management (MSc)',
+      'English Language and Literature (MA)',
+      'English Language Teaching (MA)',
+      'Environmental Engineering (MSc)g',
+      'Graphic Design (MA)',
+      'Guidance and Psychological Counseling (MA)',
+      'Health Care Organizations Management (MA)',
+      'Information and Communication Technologies in Education (MSc)',
+      'Information Systems Engineering (MSc)',
+      'Information Technologies (MSc)',
+      'Interior Architecture (MID)',
+      'Interior Design (MID)',
+      'International Banking and Finance (MA)',
+      'International Law (LLM)',
+      'International Relations (MA)',
+      'Management Information Systems (MSc)',
+      'Marketing Management (MSc)',
+      'Mechanical Engineering (MSc)',
+      'Pharmacognosy (MSc)',
+      'Plant Sciences and Technologies (MSc)',
+      'Social Work',
+      'Tourism and Hospitality Management (MA)'
+    ],
+    'Doctoral Programs (PhD)': [
+      'Architecture',
+      'Bioengineering',
+      'Business Administration',
+      'Civil Engineering',
+      'Communication and Media Studies',
+      'Computer Engineering',
+      'Electrical and Electronics Engineering',
+      'Energy Systems Engineering',
+      'Health Care Organizations Management',
+      'English Language Teaching',
+      'Environmental Engineering',
+      'Environmental Sciences',
+      'International Relations',
+      'Management Information Systems',
+      'Pharmaceutical Sciences',
+      'Tourism Management'
+    ],
+    'Professional Doctorates (DBA)': [
+      'Business Administration',
+      'Health Care Organizations Management'
+    ]
+  };
+
+  const programIcons = {
+    'Associate Degree Programs': <FaSchool className="text-white text-2xl" />,
+    'Undergraduate Programs': <FaUniversity className="text-white text-2xl" />,
+    'Masters Programs': <FaUserGraduate className="text-white text-2xl" />,
+    'Doctoral Programs (PhD)': <FaUserTie className="text-white text-2xl" />,
+    'Professional Doctorates (DBA)': <FaBriefcase className="text-white text-2xl" />
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-[#0A0851] mb-4">Available Scholarships</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          NEU offers generous financial support to help international students achieve their academic dreams
-        </p>
-      </div>
+    <div className={`max-w-7xl mx-auto px-4 py-8 ${isArabic ? "rtl text-right" : "text-left"}`}>
+      <h1 className="text-3xl font-bold text-center mb-8 text-[#0A0851]">
+        {translations.title}
+      </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {scholarships.map((scholarship, index) => (
-          <div 
-            key={index} 
-            className={`${scholarship.bgColor} rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300`}
-          >
+      <div className="space-y-8">
+        {Object.entries(programs).map(([programType, programData]) => (
+          <div key={programType} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-[#0A0851] p-4 flex items-center">
+              {programIcons[programType]}
+              <h2 className={`ml-3 text-xl font-semibold text-white ${isArabic ? "ml-0 mr-3" : ""}`}>
+                {translations[programType] || programType}
+              </h2>
+            </div>
+
             <div className="p-6">
-              <div className="flex items-center mb-4">
-                <div className="mr-4">
-                  {scholarship.icon}
+              {Array.isArray(programData) ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {programData.map((program) => (
+                    <div key={program} className="flex items-start">
+                      <div className="flex-shrink-0 mt-1">
+                        <FaUniversity className="text-[#F5891B]" />
+                      </div>
+                      <p className={`ml-2 text-gray-700 ${isArabic ? "ml-0 mr-2" : ""}`}>
+                        {program}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">{scholarship.title}</h3>
-              </div>
-              <p className="text-gray-600 text-lg">{scholarship.description}</p>
-             
+              ) : (
+                Object.entries(programData).map(([faculty, facultyPrograms]) => (
+                  <div key={faculty} className="mb-6">
+                    <h3 className="text-lg font-medium text-[#0A0851] mb-3 border-b pb-1">
+                      {faculty}
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {facultyPrograms.map((program) => (
+                        <div key={program} className="flex items-start">
+                          <div className="flex-shrink-0 mt-1">
+                            <FaUniversity className="text-[#F5891B]" />
+                          </div>
+                          <p className={`ml-2 text-gray-700 ${isArabic ? "ml-0 mr-2" : ""}`}>
+                            {program}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="mt-12 bg-gradient-to-r from-[#0A0851] to-blue-600 rounded-xl p-8 text-white">
-        <h2 className="text-2xl font-bold mb-4">How to Apply for Scholarships</h2>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Submit your application for admission</li>
-          <li>Include all required academic documents</li>
-          <li>For special scholarships, provide supporting evidence</li>
-          <li>Scholarships are automatically considered upon application</li>
-        </ul>
-        <button className="mt-6 px-6 py-3 bg-white text-[#0A0851] font-bold rounded-lg hover:bg-gray-100 transition-colors">
-          Apply Now
-        </button>
       </div>
     </div>
   );
 };
 
-export default EastScholorships;
+export default EastPrograms;
