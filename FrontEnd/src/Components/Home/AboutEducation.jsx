@@ -169,6 +169,7 @@ const AboutEducation = () => {
         ))}
       </div>
     </div>
+    </div>
   );
 };
 

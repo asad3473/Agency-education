@@ -65,87 +65,49 @@ export default function OurUniversity() {
 
   const displayedUniversities = isUniversitiesPage ? uni : uni.slice(0, 3);
 
-    return (
-        <div className='w-full py-10'>
-            <h1 className='sm:text-2xl text-color font-semibold text-center mt-4 mb-2'>Choose your University</h1>
-            <p className='text-xl sm:text-3xl font-bold text-center'>One of the Best Universities in the Middle East</p>
   return (
-    <div className='w-full'>
-      <h1 className='sm:text-2xl text-color font-semibold text-center mt-4 mb-2'>
-        {language === 'ar' ? 'اختر جامعتك' : 'Choose your University'}
-      </h1>
-      <p className='text-xl sm:text-3xl font-bold text-center'>
-        {language === 'ar' ? 'واحدة من أفضل الجامعات في الشرق الأوسط' : 'One of the Best Universities in the Middle East'}
-      </p>
+    <div className='w-full py-10'>
 
-            <div className='grid gap-2 grid-cols-1 sm:gap-10 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/15 mt-4 sm:mt-8 mx-auto mb-5'>
-                {
-                    displayedUniversities.map((val, ind) => (
-                        <div
-                            className='group relative shadow-md hover:shadow-amber-50 transition-all duration-50 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full hover:border hover:border-gray-400'
-                            key={ind}
-                        >
-                            <div
-                                className='absolute transition-all ease-in delay-100 text-white text-center right-0 h-14 w-14 group-hover:bg-[#F5891B] bg-[#0A0851]'
-                                style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 76% 59%, 51% 44%, 33% 54%, 0% 75%)' }}
-                            >
-                                <span>{ind + 1}</span>
-                            </div>
-                            <div className='p-3 flex flex-col h-full'>
-                                <img src={val.img} className='w-full h-50' alt={val.title} />
-                                <hr />
-                                <div className='flex flex-col items-center h-full text-center mt-3'>
-                                    <p className='text-color mb-4'>{val.description}</p>
-                                    <button className='mt-auto w-fit px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'>
-                                        <Link to={val.link}>{val.btn}</Link>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-      <div className='grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/12 mt-4 sm:mt-8 mx-auto mb-5'>
-        {
-          displayedUniversities.map((val, ind) => (
-            <div
-              className='group relative shadow-md hover:shadow-amber-50 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full'
-              key={ind}
-            >
+      <div className='w-full'>
+        <h1 className='sm:text-2xl text-color font-semibold text-center mt-4 mb-2'>
+          {language === 'ar' ? 'اختر جامعتك' : 'Choose your University'}
+        </h1>
+        <p className='text-xl sm:text-3xl font-bold text-center'>
+          {language === 'ar' ? 'واحدة من أفضل الجامعات في الشرق الأوسط' : 'One of the Best Universities in the Middle East'}
+        </p>
+
+      <div className='grid gap-2 grid-cols-1 sm:gap-10 sm:grid-cols-2 md:grid-cols-3 w-full sm:w-10/15 mt-4 sm:mt-8 mx-auto mb-5'>
+          {
+            displayedUniversities.map((val, ind) => (
               <div
-                className='absolute transition-all ease-in delay-100 text-white text-center right-0 h-14 w-14 group-hover:bg-[#F5891B] bg-[#0A0851]'
-                style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 76% 59%, 51% 44%, 33% 54%, 0% 75%)' }}
+                className='group relative shadow-md hover:shadow-amber-50 transition-all duration-50 ease-in-out transform hover:scale-105 shadow-[#0A0851] flex flex-col h-full hover:border hover:border-gray-400'
+                key={ind}
               >
-                <span>{ind + 1}</span>
-              </div>
-              <div className='p-3 flex flex-col h-full'>
-                <img src={val.img} className='w-full h-50' alt={val.title} />
-                <hr />
-                <div className='flex flex-col items-center h-full text-center mt-3'>
-                  <p className='text-color mb-4'>{val.description}</p>
-                  <button className='mt-auto w-fit px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white cursor-pointer hover:bg-[#F5891B]'>
-                    <Link to={val.link}>{val.btn}</Link>
-                  </button>
+                <div
+                  className='absolute transition-all ease-in delay-100 text-white text-center right-0 h-14 w-14 group-hover:bg-[#F5891B] bg-[#0A0851]'
+                  style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 76% 59%, 51% 44%, 33% 54%, 0% 75%)' }}
+                >
+                  <span>{ind + 1}</span>
+                </div>
+                <div className='p-3 flex flex-col h-full'>
+                  <img src={val.img} className='w-full h-50' alt={val.title} />
+                  <hr />
+                  <div className='flex flex-col items-center h-full text-center mt-3'>
+                    <p className='text-color mb-4'>{val.description}</p>
+                    <button className='mt-auto w-fit px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'>
+                      <Link to={val.link}>{val.btn}</Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
+
+
+
       </div>
 
-            {
-                !isUniversitiesPage && (
-                    <div className='mt-10 flex justify-center items-center mb-3'>
-                        <button
-                            className=' px-10 py-2 rounded-md bg-[#0A0851] text-white transition-all delay-100 duration-300 hover:text-white  cursor-pointer hover:bg-[#F5891B]'
-                        >
-                            <Link to='/universities'>View all universities</Link>
-                        </button>
-                    </div>
-                )
-            }
-        </div>
-    );
       {
         !isUniversitiesPage && (
           <div className='mt-4 flex justify-center items-center mb-3'>
