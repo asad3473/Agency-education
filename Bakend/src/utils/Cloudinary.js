@@ -15,8 +15,10 @@ import fs from "fs"
                 resource_type : "auto"
             })
 
-          //  console.log("file Uploaded on cloudinary", response.url)
-          fs.unlinkSync(localFilePath)
+          //  console.log("file Uploaded on cloudinary", response.url)  
+                if(fs.existsSync(localFilePath)){
+                    fs.unlinkSync(localFilePath)
+                }
             return response
         }
         catch (error) {

@@ -39,13 +39,11 @@ const ApplicationSchema = new Schema(
     gender: {
       type: String,
       requried: true,
-      enum: ["male", "female", "other"],
       trim: true,
     },
     maritalStatus: {
       type: String,
       requried: true,
-      enum: ["single", "married", "divorced"],
       trim: true,
     },
     birthPlace: {
@@ -77,10 +75,13 @@ const ApplicationSchema = new Schema(
       requried: true,
       trim: true,
     },
+    cnic: {
+     type: String,
+     required: true
+    },
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Invalid email format"],
