@@ -18,6 +18,7 @@ import ApplyNow from "./Pages/ApplyNow";
 import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 
 // import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       },
       { path: "/forgotpassword", element: <ForgotPage /> },
       { path: "/otpverify", element: <OTPverify /> },
+      { path: "/dashboard", element: <Dashboard /> }
     ],
   },
 ]);
