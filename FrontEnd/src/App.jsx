@@ -18,6 +18,7 @@ import ApplyNow from "./Pages/ApplyNow";
 import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
+import StdUniversiteisAply from "./Pages/StdUniversiteisAply";
 
 function MainLayout() {
   return (
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
       { path: "/universities/Kyrenia-University", element: <KyreniaUni /> },
       { path: "/universities/Final-International-University", element: <FinalUni /> },
       { path: "/universities/Bahcesehir-Cyprus-University", element: <BauUni /> },
+      {path:"/stduniapplied",element:<StdUniversiteisAply/>},
       {
         path: "/applynow",
         element: (
