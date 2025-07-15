@@ -19,6 +19,7 @@ import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
 import ScrollToTop from "./Components/ScrollToTop";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function MainLayout() {
   return (
