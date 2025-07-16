@@ -52,6 +52,7 @@ const router = createBrowserRouter([
       { path: "/universities/Kyrenia-University", element: <KyreniaUni /> },
       { path: "/universities/Final-International-University", element: <FinalUni /> },
       { path: "/universities/Bahcesehir-Cyprus-University", element: <BauUni /> },
+      {path:"/stduniapplied",element:<StdUniversiteisAply/>},
       {
         path: "/applynow",
         element: (
