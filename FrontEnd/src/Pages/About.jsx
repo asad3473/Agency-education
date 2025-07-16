@@ -10,6 +10,8 @@ import {
   FaHandshake,
   FaUserGraduate,
 } from "react-icons/fa";
+import { useAuth } from "../contextApi/contextApi";
+
 
 // FAQ Item Component with enhanced animation
 const FaqItem = ({ question, answer }) => {
@@ -70,101 +72,219 @@ const FaqItem = ({ question, answer }) => {
   );
 };
 
-// Data arrays (unchanged)
-const stats = [
-  {
-    icon: <FaUserGraduate className="text-4xl text-[#F5891B] mx-auto mb-4" />,
-    value: "500+",
-    label: "Students Placed",
-  },
-  {
-    icon: <FaUniversity className="text-4xl text-[#F5891B] mx-auto mb-4" />,
-    value: "10+",
-    label: "Partner Universities",
-  },
-  {
-    icon: <FaHandshake className="text-4xl text-[#F5891B] mx-auto mb-4" />,
-    value: "100%",
-    label: "Free Services",
-  },
-];
-
-const reasons = [
-  {
-    icon: <FaUniversity className="text-white text-2xl" />,
-    title: "Reliable Agency",
-    desc: "Officially recognized by all major universities in North Cyprus with years of proven success",
-  },
-  {
-    icon: <FaCheckCircle className="text-white text-2xl" />,
-    title: "100% Free Services",
-    desc: "No hidden charges - our consultation, application, and visa services are completely free",
-  },
-  {
-    icon: <FaGift className="text-white text-2xl" />,
-    title: "Exclusive Scholarships",
-    desc: "Access to special scholarships and discounts available only through our agency",
-  },
-];
-
-const faqs = [
-  {
-    question: "How To Apply?",
-    answer: (
-      <>
-        You can apply by filling out our online application form with your
-        academic details. <br />
-        Our team will guide you through the university and program selection
-        process. <br />
-        Click <span className="text-[#0A0851] font-semibold">Apply Now</span> to
-        get started and begin your academic journey.
-      </>
-    ),
-  },
-  {
-    question: "What is a Free Consultation?",
-    answer: (
-      <>
-        A free consultation is a one-on-one session with our education advisors.{" "}
-        <br />
-        We assess your academic background and help you choose the right
-        university and course. <br />
-        This service is offered at no cost and is designed to simplify your
-        study abroad process.
-      </>
-    ),
-  },
-  {
-    question: "How many days does it take to get admission?",
-    answer: (
-      <>
-        Admission timelines vary by university, but most applications are
-        processed within 2–5 days. <br />
-        We help ensure your documents are complete and submitted correctly to
-        avoid delays. <br />
-        Fast-track options may also be available for select universities and
-        programs.
-      </>
-    ),
-  },
-  {
-    question: "Are your Services Free?",
-    answer: (
-      <>
-        Yes, all our student counseling and application support services are
-        100% free. <br />
-        We are funded by partner universities, so you never pay for our expert
-        guidance. <br />
-        From choosing a course to securing admission, there are no hidden fees
-        involved.
-      </>
-    ),
-  },
-];
-
 const About = () => {
+  const { language } = useAuth();
+
+  // Translations
+  const translations = {
+    heroTitle: {
+      en: "About Our Agency",
+      ar: "حول وكالتنا"
+    },
+    heroSubtitle: {
+      en: "Your trusted partner for academic success in North Cyprus",
+      ar: "شريكك الموثوق للنجاح الأكاديمي في شمال قبرص"
+    },
+    aboutCompany: {
+      en: "ABOUT COMPANY",
+      ar: "حول الشركة"
+    },
+    trustedAgency: {
+      en: "Trusted Academic Agency for North Cyprus Universities",
+      ar: "وكالة أكاديمية موثوقة لجامعات شمال قبرص"
+    },
+    welcomeText: {
+      en: "Welcome to our agency... accommodation assistance.",
+      ar: "مرحبًا بكم في وكالتنا... مساعدة في السكن."
+    },
+    contactUs: {
+      en: "CONTACT US",
+      ar: "اتصل بنا"
+    },
+    ourCommitment: {
+      en: "Our Commitment",
+      ar: "التزامنا"
+    },
+    commitmentText: {
+      en: "At our agency, we understand...",
+      ar: "في وكالتنا، نحن ندرك..."
+    },
+    exclusiveAgents: {
+      en: "Exclusive agents for various universities",
+      ar: "وكلاء حصريون للعديد من الجامعات"
+    },
+    privilegedAccess: {
+      en: "Privileged access to resources",
+      ar: "وصول مميز إلى الموارد"
+    },
+    comprehensiveSupport: {
+      en: "Comprehensive support...",
+      ar: "دعم شامل..."
+    },
+    studentsPlaced: {
+      en: "Students Placed",
+      ar: "طلاب تم تسكينهم"
+    },
+    partnerUniversities: {
+      en: "Partner Universities",
+      ar: "جامعات شريكة"
+    },
+    freeServices: {
+      en: "Free Services",
+      ar: "خدمات مجانية"
+    },
+    whyChooseUs: {
+      en: "WHY CHOOSE US",
+      ar: "لماذا تختارنا"
+    },
+    reasonsTitle: {
+      en: "Reasons For Choosing Our Agency",
+      ar: "أسباب لاختيار وكالتنا"
+    },
+    reasonsSubtitle: {
+      en: "We stand out... student-focused approach",
+      ar: "نحن متميزون... نهج يركز على الطالب"
+    },
+    reliableAgency: {
+      en: "Reliable Agency",
+      ar: "وكالة موثوقة"
+    },
+    agencyDesc: {
+      en: "Officially recognized by all major universities in North Cyprus with years of proven success",
+      ar: "معترف بها رسميًا من قبل جميع الجامعات الكبرى في شمال قبرص مع سنوات من النجاح المثبت"
+    },
+    freeServicesTitle: {
+      en: "100% Free Services",
+      ar: "خدمات مجانية 100%"
+    },
+    freeServicesDesc: {
+      en: "No hidden charges - our consultation, application, and visa services are completely free",
+      ar: "لا توجد رسوم خفية - خدمات الاستشارة والتقديم والتأشيرة لدينا مجانية تمامًا"
+    },
+    scholarshipsTitle: {
+      en: "Exclusive Scholarships",
+      ar: "منح دراسية حصرية"
+    },
+    scholarshipsDesc: {
+      en: "Access to special scholarships and discounts available only through our agency",
+      ar: "الوصول إلى منح دراسية خاصة وخصومات متاحة فقط من خلال وكالتنا"
+    },
+    haveQuestions: {
+      en: "HAVE QUESTIONS?",
+      ar: "لديك أسئلة؟"
+    },
+    faqTitle: {
+      en: "Frequently Asked Questions",
+      ar: "الأسئلة الشائعة"
+    },
+    faqSubtitle: {
+      en: "Find answers to common questions...",
+      ar: "ابحث عن إجابات للأسئلة الشائعة..."
+    },
+    howToApply: {
+      en: "How To Apply?",
+      ar: "كيفية التقديم؟"
+    },
+    howToApplyAnswer: {
+      en: "You can apply by filling out our online application form with your academic details. Our team will guide you through the university and program selection process. Click Apply Now to get started and begin your academic journey.",
+      ar: "يمكنك التقديم عن طريق ملء نموذج الطلب عبر الإنترنت ببياناتك الأكاديمية. سيرشدك فريقنا خلال عملية اختيار الجامعة والبرنامج. انقر فوق تقديم الآن للبدء وبدء رحلتك الأكاديمية."
+    },
+    freeConsultation: {
+      en: "What is a Free Consultation?",
+      ar: "ما هي الاستشارة المجانية؟"
+    },
+    freeConsultationAnswer: {
+      en: "A free consultation is a one-on-one session with our education advisors. We assess your academic background and help you choose the right university and course. This service is offered at no cost and is designed to simplify your study abroad process.",
+      ar: "الاستشارة المجانية هي جلسة فردية مع مستشارينا التعليميين. نقيم خلفيتك الأكاديمية ونساعدك في اختيار الجامعة والدورة المناسبة. هذه الخدمة مقدمة بدون تكلفة ومصممة لتبسيط عملية الدراسة في الخارج."
+    },
+    admissionTime: {
+      en: "How many days does it take to get admission?",
+      ar: "كم يوم يستغرق الحصول على القبول؟"
+    },
+    admissionTimeAnswer: {
+      en: "Admission timelines vary by university, but most applications are processed within 2–5 days. We help ensure your documents are complete and submitted correctly to avoid delays. Fast-track options may also be available for select universities and programs.",
+      ar: "تختلف أوقات القبول حسب الجامعة، ولكن يتم معالجة معظم الطلبات في غضون 2-5 أيام. نساعد في التأكد من اكتمال مستنداتك وتقديمها بشكل صحيح لتجنب التأخير. قد تكون هناك أيضًا خيارات سريعة متاحة لبعض الجامعات والبرامج المحددة."
+    },
+    servicesFree: {
+      en: "Are your Services Free?",
+      ar: "هل خدماتكم مجانية؟"
+    },
+    servicesFreeAnswer: {
+      en: "Yes, all our student counseling and application support services are 100% free. We are funded by partner universities, so you never pay for our expert guidance. From choosing a course to securing admission, there are no hidden fees involved.",
+      ar: "نعم، جميع خدمات الإرشاد الطلابي ودعم التقديم لدينا مجانية بنسبة 100٪. نحن ممولون من قبل الجامعات الشريكة، لذلك لا تدفع أبدًا مقابل إرشاداتنا الخبيرة. من اختيار الدورة إلى الحصول على القبول، لا توجد رسوم خفية."
+    },
+    stillQuestions: {
+      en: "Still have questions?",
+      ar: "لا تزال لديك أسئلة؟"
+    },
+    hereToHelp: {
+      en: "We're here to help",
+      ar: "نحن هنا لمساعدتك"
+    },
+    contactSupport: {
+      en: "CONTACT SUPPORT",
+      ar: "اتصل بالدعم"
+    }
+  };
+
+  // Data arrays with translations
+  const stats = [
+    {
+      icon: <FaUserGraduate className="text-4xl text-[#F5891B] mx-auto mb-4" />,
+      value: "500+",
+      label: translations.studentsPlaced[language],
+    },
+    {
+      icon: <FaUniversity className="text-4xl text-[#F5891B] mx-auto mb-4" />,
+      value: "10+",
+      label: translations.partnerUniversities[language],
+    },
+    {
+      icon: <FaHandshake className="text-4xl text-[#F5891B] mx-auto mb-4" />,
+      value: "100%",
+      label: translations.freeServices[language],
+    },
+  ];
+
+  const reasons = [
+    {
+      icon: <FaUniversity className="text-white text-2xl" />,
+      title: translations.reliableAgency[language],
+      desc: translations.agencyDesc[language],
+    },
+    {
+      icon: <FaCheckCircle className="text-white text-2xl" />,
+      title: translations.freeServicesTitle[language],
+      desc: translations.freeServicesDesc[language],
+    },
+    {
+      icon: <FaGift className="text-white text-2xl" />,
+      title: translations.scholarshipsTitle[language],
+      desc: translations.scholarshipsDesc[language],
+    },
+  ];
+
+  const faqs = [
+    {
+      question: translations.howToApply[language],
+      answer: translations.howToApplyAnswer[language],
+    },
+    {
+      question: translations.freeConsultation[language],
+      answer: translations.freeConsultationAnswer[language],
+    },
+    {
+      question: translations.admissionTime[language],
+      answer: translations.admissionTimeAnswer[language],
+    },
+    {
+      question: translations.servicesFree[language],
+      answer: translations.servicesFreeAnswer[language],
+    },
+  ];
+
   return (
-    <div className="text-gray-800">
+    <div className={`text-gray-800 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section with enhanced animations */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -190,7 +310,7 @@ const About = () => {
             }}
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
-            About Our Agency
+            {translations.heroTitle[language]}
           </motion.h1>
           <motion.p
             initial={{ y: 30, opacity: 0 }}
@@ -206,7 +326,7 @@ const About = () => {
             }}
             className="text-xl text-white opacity-90 max-w-2xl mx-auto"
           >
-            Your trusted partner for academic success in North Cyprus
+            {translations.heroSubtitle[language]}
           </motion.p>
         </div>
       </motion.div>
@@ -232,7 +352,7 @@ const About = () => {
       >
         <div className="max-w-6xl sm:py-10 mx-auto grid md:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ x: -50, opacity: 0 }}
+            initial={{ x: language === 'ar' ? 50 : -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{
@@ -242,13 +362,13 @@ const About = () => {
             }}
           >
             <span className="text-sm text-[#F5891B] font-semibold tracking-wider mb-2 inline-block">
-              ABOUT COMPANY
+              {translations.aboutCompany[language]}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#0A0851] mb-6 leading-tight">
-              Trusted Academic Agency for North Cyprus Universities
+              {translations.trustedAgency[language]}
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Welcome to our agency… accommodation assistance.
+              {translations.welcomeText[language]}
             </p>
             <motion.button
               whileHover={{
@@ -259,11 +379,11 @@ const About = () => {
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
               className="bg-[#0A0851] text-white font-medium py-3 px-8 rounded-md shadow-md"
             >
-              CONTACT US
+              {translations.contactUs[language]}
             </motion.button>
           </motion.div>
           <motion.div
-            initial={{ x: 50, opacity: 0 }}
+            initial={{ x: language === 'ar' ? -50 : 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{
@@ -275,16 +395,16 @@ const About = () => {
           >
             <div className="bg-white p-8 rounded-lg h-full">
               <h3 className="text-xl font-bold text-[#0A0851] mb-4">
-                Our Commitment
+                {translations.ourCommitment[language]}
               </h3>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                At our agency, we understand…
+                {translations.commitmentText[language]}
               </p>
               <div className="space-y-4">
                 {[
-                  "Exclusive agents for various universities",
-                  "Privileged access to resources",
-                  "Comprehensive support …",
+                  translations.exclusiveAgents[language],
+                  translations.privilegedAccess[language],
+                  translations.comprehensiveSupport[language],
                 ].map((text, idx) => (
                   <motion.div
                     key={idx}
@@ -298,7 +418,7 @@ const About = () => {
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                     >
-                      <FaCheckCircle className="text-[#F5891B] mt-1 mr-3" />
+                      <FaCheckCircle className="text-[#F5891B] mt-1" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
                     </motion.div>
                     <p className="text-gray-600">{text}</p>
                   </motion.div>
@@ -386,13 +506,13 @@ const About = () => {
       >
         <div className="max-w-4xl mx-auto text-center mb-16">
           <span className="text-sm text-[#F5891B] font-semibold tracking-wider">
-            WHY CHOOSE US
+            {translations.whyChooseUs[language]}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-[#0A0851] mt-2 mb-4">
-            Reasons For Choosing Our Agency
+            {translations.reasonsTitle[language]}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We stand out… student-focused approach
+            {translations.reasonsSubtitle[language]}
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -448,13 +568,13 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-sm text-[#F5891B] font-semibold tracking-wider">
-              HAVE QUESTIONS?
+              {translations.haveQuestions[language]}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-[#0A0851] mt-2 mb-4">
-              Frequently Asked Questions
+              {translations.faqTitle[language]}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Find answers to common questions …
+              {translations.faqSubtitle[language]}
             </p>
           </div>
           <div className="space-y-6">
@@ -489,13 +609,13 @@ const About = () => {
                   repeatType: "reverse",
                 }}
               >
-                <FaHeadset className="text-3xl text-[#F5891B] mr-4" />
+                <FaHeadset className="text-3xl text-[#F5891B]" style={language === 'ar' ? { marginLeft: '1rem' } : { marginRight: '1rem' }} />
               </motion.div>
               <div>
                 <h4 className="font-bold text-[#0A0851] text-2xl">
-                  Still have questions?
+                  {translations.stillQuestions[language]}
                 </h4>
-                <p className="text-gray-600 text-xl">We're here to help</p>
+                <p className="text-gray-600 text-xl">{translations.hereToHelp[language]}</p>
               </div>
             </motion.div>
             <motion.button
@@ -506,7 +626,7 @@ const About = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-[#0A0851] border-1 border-[#0A0851] text-white text-sx font-medium py-2 px-4 sm:px-6 transition hover:scale-105 shadow-md"
             >
-              CONTACT SUPPORT
+              {translations.contactSupport[language]}
             </motion.button>
           </motion.div>
         </div>
