@@ -53,13 +53,13 @@ const OTPverify = () => {
     try {
       const res = await axios.post("http://localhost:8000/api/v1/users/verify-email", {
         email: email,
-        code: code,
+        verificationCode: code,
       });
 
       setSuccess("Email verified successfully!");
       setVerified(true);
 
-      navigate("/home")
+      navigate("/")
     } catch (err) {
       setError(err.response?.data?.message || "Verification failed. Try again.");
     } finally {

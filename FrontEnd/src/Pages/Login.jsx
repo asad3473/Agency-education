@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "/login.jpg";
 import { useAuth } from "../contextApi/contextApi";
 
@@ -11,11 +11,12 @@ const Login = () => {
     rememberMe: false,
   });
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const {setUser} = useAuth()
+  const { setUser } = useAuth();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -26,7 +27,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      setLoading(true)
+    setLoading(true);
     if (!formData.email || !formData.password) {
       console.error("Please fill in all fields");
       return;
@@ -40,16 +41,21 @@ const Login = () => {
           password: formData.password,
         },
         {
-  withCredentials: true,
-}
+          withCredentials: true,
+        }
       );
-    
 
-      setUser(response.data.data.user)
-      navigate("/applynow")
+      if (response.data.data.user.role === "admin") {
+        navigate("/");
+      }
+
+      setUser(response.data.data.user);
+      navigate("/applynow");
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
-      setLoading(false)
+      setError(error?.response?.data?.message);
+
+      setLoading(false);
     }
   };
 
@@ -146,7 +152,7 @@ const Login = () => {
                 </Link>
               </div>
             </div>
-
+            {error && <p className="text-red-600 text-sm">{error}</p>}
             <div>
               <button
                 type="submit"

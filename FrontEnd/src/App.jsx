@@ -18,10 +18,13 @@ import ApplyNow from "./Pages/ApplyNow";
 import ForgotPage from "./Pages/ForgotPage";
 import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
+import ScrollToTop from "./Components/ScrollToTop";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function MainLayout() {
   return (
     <div className="min-h-screen overflow-auto">
+      <ScrollToTop />
       <Navbar />
       <Outlet />
       <Fotter />
@@ -49,6 +52,7 @@ const router = createBrowserRouter([
       { path: "/universities/Kyrenia-University", element: <KyreniaUni /> },
       { path: "/universities/Final-International-University", element: <FinalUni /> },
       { path: "/universities/Bahcesehir-Cyprus-University", element: <BauUni /> },
+      {path:"/stduniapplied",element:<StdUniversiteisAply/>},
       {
         path: "/applynow",
         element: (
@@ -59,6 +63,7 @@ const router = createBrowserRouter([
       },
       { path: "/forgotpassword", element: <ForgotPage /> },
       { path: "/otpverify", element: <OTPverify /> },
+      { path: "/dashboard", element: <Dashboard /> }
     ],
   },
 ]);

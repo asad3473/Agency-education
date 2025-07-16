@@ -108,7 +108,7 @@ const createApplication = asyncHandler(async (req, res) => {
     Array.isArray(req.files.bsDegreeCertificate) &&
     req.files.bsDegreeCertificate.length > 0
   ) {
-    bsDegreeLocalPath = req.files.englishCompetence[0].path;
+    bsDegreeLocalPath = req.files.bsDegreeCertificate[0].path;
   }
 
   let transcriptLocalPath;
