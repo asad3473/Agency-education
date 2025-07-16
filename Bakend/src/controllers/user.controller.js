@@ -281,11 +281,24 @@ const changeCurrentPassword = asyncHandler(async(req, res)=>{
 
 const getCurrentUser = asyncHandler(async(req, res )=>{
     const user = await User.findOne(req.user._id).select(
-   "-password -refreshToken -varificationCode -varificationCodeExpiry "
+   "-password -refreshToken -varificationCode -varificationCodeExpiry " 
 )
   return res
   .status(200)
   .json(new ApiResponse(200, "user fatch successfully" , user))
+})
+
+const getAllUsers = asyncHandler( async (req, res)=>{
+  
+  const users = await User.find().select(" -password -verificationCode -refreshToken -verificationCodeExpiry -updatedAt -createdAt -__v -res")
+
+  if (!users){
+    throw new ApiError(404, "Something wrong in fetching Users")
+  }
+
+  res
+  .status(200)
+  .json(new ApiResponse(200, "No user found", users))
 })
 
 const updateUserDetails = asyncHandler(async(req, res)=>{
@@ -361,5 +374,6 @@ export { registerUser,
          getCurrentUser, 
          updateUserDetails,
          updateUserAvatar,
-         verifyEmailCode
+         verifyEmailCode,
+         getAllUsers
          };
