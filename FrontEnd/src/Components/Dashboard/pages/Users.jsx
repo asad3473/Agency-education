@@ -1,23 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserProfile from '../components/UserProfile';
 import { FiUser, FiMail, FiShield, FiActivity, FiEye, FiTrash2, FiX } from 'react-icons/fi';
+import axios from 'axios';
 
 const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [userToDelete, setUserToDelete] = useState(null);
-  const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active', image: '' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active', image: 'https://i.pravatar.cc/150?img=1' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive', image: '' },
-    { id: 4, name: 'Alice Williams', email: 'alice@example.com', role: 'User', status: 'Active', image: 'https://i.pravatar.cc/150?img=2' },
-  ]);
+  const [users, setUsers] = useState([]);
+  const [userCount, setUserCount] = useState({
+  user: 0,
+  activeUsers: 0,
+  inactiveUsers: 0,
+  admin: 0,
+})
 
   const handleViewProfile = (user) => {
     setSelectedUser(user);
     setShowProfile(true);
   };
+
+
 
   const handleUpdateUser = (updatedUser) => {
     setUsers(users.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
@@ -41,7 +46,44 @@ const Users = () => {
     setUserToDelete(null);
   };
 
-  return (
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // Get user stats (active/inactive/admin)
+        const statsRes = await axios.get("http://localhost:8000/api/v1/admin/users", {
+          withCredentials: true,
+        });
+
+        // Get full user list
+        const userRes = await axios.get("http://localhost:8000/api/v1/users/get-allusers", {
+          withCredentials: true,
+        });
+
+        // Set state
+        setUserCount(statsRes.data.data);
+        setUsers(userRes.data.data);
+
+        setLoading(false);
+
+      } catch (err) {
+        setLoading(false);
+        if (err.response?.status === 401) {
+          console.log("❌ Unauthorized:", err.response.status);
+          setUsers(null);
+        } else {
+          console.error("Unexpected error:", err);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+ //console.log("User count (from userCount)::",userCount);
+   //     console.log("Users list (from users):", users);
+  return (loading ? <h1>Loading</h1> :
     <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -58,7 +100,7 @@ const Users = () => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm font-medium text-gray-500">Total Users</p>
-                <p className="text-2xl font-bold mt-1">{users.length}</p>
+                <p className="text-2xl font-bold mt-1">{userCount.user}</p>
               </div>
               <div className="bg-blue-100 p-3 rounded-full">
                 <FiUser className="w-5 h-5 text-blue-600" />
@@ -71,7 +113,7 @@ const Users = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Active Users</p>
                 <p className="text-2xl font-bold mt-1">
-                  {users.filter(user => user.status === 'Active').length}
+                  {userCount.activeUsers}
                 </p>
               </div>
               <div className="bg-green-100 p-3 rounded-full">
@@ -85,7 +127,7 @@ const Users = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Admins</p>
                 <p className="text-2xl font-bold mt-1">
-                  {users.filter(user => user.role === 'Admin').length}
+                  {userCount.admin}
                 </p>
               </div>
               <div className="bg-purple-100 p-3 rounded-full">
@@ -99,7 +141,7 @@ const Users = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Inactive Users</p>
                 <p className="text-2xl font-bold mt-1">
-                  {users.filter(user => user.status === 'Inactive').length}
+                  {userCount.inactiveUsers}
                 </p>
               </div>
               <div className="bg-red-100 p-3 rounded-full">
@@ -142,24 +184,24 @@ const Users = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={user._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
-                          {user.image ? (
+                          {user.avatar ? (
                             <img
-                              src={user.image}
-                              alt={user.name}
+                              src={user.avatar}
+                              alt={user.firstName}
                               className="h-10 w-10 rounded-full object-cover"
                             />
                           ) : (
                             <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center justify-center font-bold">
-                              {user.name.charAt(0)}
+                              {user.firstName.charAt(0)}
                             </div>
                           )}
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{user.name}</div>
+                          <div className="text-sm font-medium text-gray-900">{user.firstName}</div>
                         </div>
                       </div>
                     </td>
@@ -175,9 +217,9 @@ const Users = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${user.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      {/* <span className={`px-3 py-1 rounded-full text-xs font-semibold ${ === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                         {user.status}
-                      </span>
+                      </span> */}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">
@@ -189,7 +231,7 @@ const Users = () => {
                           <FiEye className="w-5 h-5" />
                         </button>
                         <button
-                          onClick={() => handleDeleteClick(user.id)}
+                          onClick={() => handleDeleteClick(user._id)}
                           className="text-red-600 hover:text-red-900 p-2 rounded-full hover:bg-red-50 transition-colors"
                           title="Delete User"
                         >

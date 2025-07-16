@@ -40,9 +40,9 @@ const UserProfile = ({ user, onClose, onEdit }) => {
 
           <div className="flex flex-col items-center">
             <div className="h-20 w-20 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white text-3xl font-bold mb-3">
-              {user.name.charAt(0).toUpperCase()}
+              {user.firstName.charAt(0).toUpperCase()}
             </div>
-            <h2 className="text-xl font-bold text-white">{user.name}</h2>
+            <h2 className="text-xl font-bold text-white">{user.firstName}</h2>
             <p className="text-indigo-100 text-sm mt-1">{user.role}</p>
           </div>
         </div>
@@ -52,7 +52,7 @@ const UserProfile = ({ user, onClose, onEdit }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gray-50 p-3 rounded-lg">
               <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">Name</label>
-              <p className="mt-1 text-sm text-gray-900 font-medium">{user.name}</p>
+              <p className="mt-1 text-sm text-gray-900 font-medium">{user.firstName}</p>
             </div>
             <div className="bg-gray-50 p-3 rounded-lg">
               <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">Email</label>
