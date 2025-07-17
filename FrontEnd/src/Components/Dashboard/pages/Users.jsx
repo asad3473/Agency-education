@@ -8,8 +8,10 @@ const Users = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(false)
-  const [userToDelete, setUserToDelete] = useState(null);
+  const [deleteLoading, setDeleteLoading]= useState(false)
+  const [userDeleteId, setUserDeleteId] = useState(null);
   const [users, setUsers] = useState([]);
+  const [updatedUsers,setUpdatedUsers] = useState(null)
   const [userCount, setUserCount] = useState({
   user: 0,
   activeUsers: 0,
@@ -24,26 +26,43 @@ const Users = () => {
 
 
 
-  const handleUpdateUser = (updatedUser) => {
-    setUsers(users.map((user) => (user.id === updatedUser.id ? updatedUser : user)));
-    setSelectedUser(updatedUser);
-  };
+  // const handleUpdateUser = (updatedUser) => {
+  //   setSelectedUser(updatedUser);
+  // };
 
-  const handleDeleteClick = (id) => {
-    const user = users.find(u => u.id === id);
-    setUserToDelete(user);
+  const handleDeleteClick = (userId) => {
     setShowDeleteModal(true);
+    setUserDeleteId(userId)
   };
 
-  const handleConfirmDelete = () => {
-    setUsers(users.filter((user) => user.id !== userToDelete.id));
+  const handleConfirmDelete = async() => {
+    try {
+      console.log("user Id:: ", userDeleteId)
+        setDeleteLoading(true);
+        // Get user stats (active/inactive/admin)
+        const deleteRes = await axios.delete("http://localhost:8000/api/v1/admin/delete-user",
+           {data:{userDeleteId} },
+           {
+          withCredentials: true,
+        }
+      )
+      setUpdatedUsers(deleteRes)
+       
+        setDeleteLoading(false)
+      } catch (err) {
+        setDeleteLoading(false);
+        if (err.response?.status === 401) {
+          console.log("❌ Unauthorized:", err.response.status);
+        } else {
+          console.error("Unexpected error:", err);
+        }
+      }
+
     setShowDeleteModal(false);
-    setUserToDelete(null);
   };
 
   const handleCancelDelete = () => {
     setShowDeleteModal(false);
-    setUserToDelete(null);
   };
 
 useEffect(() => {
@@ -56,14 +75,8 @@ useEffect(() => {
           withCredentials: true,
         });
 
-        // Get full user list
-        const userRes = await axios.get("http://localhost:8000/api/v1/users/get-allusers", {
-          withCredentials: true,
-        });
-
         // Set state
         setUserCount(statsRes.data.data);
-        setUsers(userRes.data.data);
 
         setLoading(false);
 
@@ -79,11 +92,11 @@ useEffect(() => {
     };
 
     fetchData();
-  }, []);
+  }, [updatedUsers]);
 
  //console.log("User count (from userCount)::",userCount);
    //     console.log("Users list (from users):", users);
-  return (loading ? <h1>Loading</h1> :
+  return (
     <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -100,7 +113,8 @@ useEffect(() => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-sm font-medium text-gray-500">Total Users</p>
-                <p className="text-2xl font-bold mt-1">{userCount.user}</p>
+                <p className="text-2xl font-bold mt-1">
+                  {loading? "Loading" :userCount.user}</p>
               </div>
               <div className="bg-blue-100 p-3 rounded-full">
                 <FiUser className="w-5 h-5 text-blue-600" />
@@ -113,7 +127,7 @@ useEffect(() => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Active Users</p>
                 <p className="text-2xl font-bold mt-1">
-                  {userCount.activeUsers}
+                  {loading? "Loading" :userCount.activeUsers}
                 </p>
               </div>
               <div className="bg-green-100 p-3 rounded-full">
@@ -127,7 +141,7 @@ useEffect(() => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Admins</p>
                 <p className="text-2xl font-bold mt-1">
-                  {userCount.admin}
+                 {loading? "Loading" :userCount.admin}
                 </p>
               </div>
               <div className="bg-purple-100 p-3 rounded-full">
@@ -141,7 +155,7 @@ useEffect(() => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Inactive Users</p>
                 <p className="text-2xl font-bold mt-1">
-                  {userCount.inactiveUsers}
+                 {loading? "Loading" :userCount.inactiveUsers}
                 </p>
               </div>
               <div className="bg-red-100 p-3 rounded-full">
@@ -183,7 +197,7 @@ useEffect(() => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {users.map((user) => (
+                {loading? <td>Loading</td> : userCount.allUsers?.map((user) => (
                   <tr key={user._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -251,12 +265,12 @@ useEffect(() => {
           <UserProfile
             user={selectedUser}
             onClose={() => setShowProfile(false)}
-            onEdit={handleUpdateUser}
+           // onEdit={handleUpdateUser}
           />
         )}
-
+    
         {/* Delete Confirmation Modal */}
-        {showDeleteModal && userToDelete && (
+        {showDeleteModal && users && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
               <div className="flex justify-between items-start mb-4">
@@ -270,31 +284,31 @@ useEffect(() => {
               </div>
               
               <div className="mb-6">
-                <div className="flex items-center mb-4">
+                {/* <div className="flex items-center mb-4">
                   <div className="flex-shrink-0 h-12 w-12 mr-4">
-                    {userToDelete.image ? (
+                    {users.avatar ? (
                       <img
-                        src={userToDelete.image}
-                        alt={userToDelete.name}
+                        src={users.avatar}
+                        alt={users.firstName}
                         className="h-12 w-12 rounded-full object-cover"
                       />
                     ) : (
                       <div className="h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center justify-center font-bold text-xl">
-                        {userToDelete.name.charAt(0)}
+                        {users.firstName.charAt(0)}
                       </div>
                     )}
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900">{userToDelete.name}</h4>
-                    <p className="text-gray-600">{userToDelete.email}</p>
+                    <h4 className="text-lg font-semibold text-gray-900">{users.firstName}</h4>
+                    <p className="text-gray-600">{users.email}</p>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="grid grid-cols-2 gap-4">
+                {/* <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-500">Role</p>
-                    <p className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${userToDelete.role === 'Admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}`}>
-                      {userToDelete.role}
+                    <p className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${users.role === 'Admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}`}>
+                      {users.role}
                     </p>
                   </div>
                   <div>
@@ -303,7 +317,7 @@ useEffect(() => {
                       {userToDelete.status}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <p className="text-gray-600 mb-6">
@@ -312,17 +326,19 @@ useEffect(() => {
               
               <div className="flex justify-end space-x-3">
                 <button
+                  onClick={handleConfirmDelete}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                {deleteLoading ? "deleting..." : "delete"}
+                </button>
+
+                <button
                   onClick={handleCancelDelete}
                   className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                   Cancel
                 </button>
-                <button
-                  onClick={handleConfirmDelete}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                >
-                  Delete
-                </button>
+                
               </div>
             </div>
           </div>
