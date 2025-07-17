@@ -7,6 +7,7 @@ import {
   deleteUser,
   activeUsers,
   deleteApplication,
+  updateRole
 } from "../controllers/admin.controller.js";
 
 const router = Router();
@@ -14,8 +15,9 @@ const router = Router();
 
 //router.use(verifyJWT, isAdmin); // Protect all admin routes
 
-router.get("/users", activeUsers);
-router.delete("/user/:id", deleteUser);
-router.delete("/application/:id", deleteApplication);
+router.route("/users").get( activeUsers);
+router.route("/delete-user").delete( deleteUser);
+router.route("/application/:id").delete( deleteApplication);
+router.route("/update-role").post(updateRole)
 
 export default router;

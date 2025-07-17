@@ -12,7 +12,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 // });
 
 const deleteUser = asyncHandler(async (req, res) => {
-  const user = await User.findByIdAndDelete(req.params.id);
+  const {userDeleteId} = req.body
+  console.log("this is req.body deleteUser::", userDeleteId)
+  const user = await User.findByIdAndDelete(userDeleteId);
+  console.log("this is deleted User from database::", user)
   if (!user) throw new ApiError(404, "User not found");
   res.status(200).json(new ApiResponse(200, {}, "User deleted"));
 });
@@ -34,9 +37,7 @@ const activeUsers = asyncHandler(async (req, res) => {
     email : {$in : appliedUserEmails},
   })
   
-  if(!activeUsers){
-    throw new ApiError(404, "active users not found")
-  }
+
 
   const inactiveUsers = await User.countDocuments({
     email: {$nin : appliedUserEmails},
@@ -46,9 +47,15 @@ const activeUsers = asyncHandler(async (req, res) => {
   if(!inactiveUsers){
     throw new ApiError(404, "inactive users not found")
   }
+  
+  const allUsers = await User.find().select(" -password -verificationCode -refreshToken -verificationCodeExpiry -updatedAt -createdAt -__v -res")
+
+  if (!allUsers){
+    throw new ApiError(404, "Something wrong in fetching Users")
+  }
   res
     .status(200)
-    .json(new ApiResponse(200, "active users fetch successfully", {user, activeUsers, inactiveUsers, admin }));
+    .json(new ApiResponse(200, "active users fetch successfully", {user, activeUsers, inactiveUsers, admin , allUsers }));
 });
 
 // const totalAdmins =asyncHandler(async()=>{
@@ -77,4 +84,21 @@ const deleteApplication = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, "Application deleted", {}));
 });
 
-export {activeUsers, deleteUser, deleteApplication}
+const updateRole = asyncHandler(async (req, res)=>{
+  const {role, userId} =req.body
+
+  const updateUser = User.findByIdAndUpdate(userId,
+    {
+      $set:{role}
+    },
+    {
+      new: true,
+    }
+  ).select("-password -refreshToken -varificationCode -varificationCodeExpiry -updatedAt -createdAt -__v ")
+
+   if (!updateUser) throw new ApiError(404, "User not found");
+   
+  res.status(200).json(new ApiResponse(200, "User Role Updated", updateUser));
+})
+
+export {activeUsers, deleteUser, deleteApplication, updateRole}
