@@ -5,8 +5,10 @@ import { MdEmail, MdOutlineSupportAgent } from "react-icons/md";
 import { IoPerson, IoTime } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAuth } from "../contextApi/contextApi";
 
 const ContactUs = () => {
+  const { language } = useAuth();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -78,18 +80,73 @@ const ContactUs = () => {
     }),
   };
 
+  // Text content based on language
+  const content = {
+    en: {
+      title: "Get in",
+      coloredTitle: "Touch",
+      subtitle: "We'd love to hear from you! Whether you have questions about our services or just want to say hello, our team is ready to help.",
+      contactInfo: "Contact Information",
+      contactSubtitle: "Fill out the form or reach us directly",
+      phone: "Phone",
+      phoneHours: "Mon-Fri, 9am-5pm",
+      email: "Email",
+      emailResponse: "Response within 24 hours",
+      office: "Office",
+      hours: "Hours",
+      workingHours1: "Monday - Friday: 9am - 5pm",
+      workingHours2: "Saturday: 10am - 2pm",
+      sendMessage: "Send Us a Message",
+      firstName: "First Name",
+      lastName: "Last Name",
+      emailAddress: "Email Address",
+      phoneNumber: "Phone Number",
+      yourMessage: "Your Message",
+      placeholderMessage: "How can we help you?",
+      sendButton: "Send Message",
+      ourLocation: "Our Location",
+    },
+    ar: {
+      title: "تواصل",
+      coloredTitle: "معنا",
+      subtitle: "نحن نحب أن نسمع منك! سواء كان لديك أسئلة حول خدماتنا أو فقط تريد أن تقول مرحبًا، فريقنا جاهز للمساعدة.",
+      contactInfo: "معلومات الاتصال",
+      contactSubtitle: "املأ النموذج أو تواصل معنا مباشرة",
+      phone: "الهاتف",
+      phoneHours: "من الاثنين إلى الجمعة، من 9 صباحًا إلى 5 مساءً",
+      email: "البريد الإلكتروني",
+      emailResponse: "رد خلال 24 ساعة",
+      office: "المكتب",
+      hours: "ساعات العمل",
+      workingHours1: "الاثنين إلى الجمعة: 9 صباحًا - 5 مساءً",
+      workingHours2: "السبت: 10 صباحًا - 2 ظهرًا",
+      sendMessage: "أرسل لنا رسالة",
+      firstName: "الاسم الأول",
+      lastName: "اسم العائلة",
+      emailAddress: "البريد الإلكتروني",
+      phoneNumber: "رقم الهاتف",
+      yourMessage: "رسالتك",
+      placeholderMessage: "كيف يمكننا مساعدتك؟",
+      sendButton: "إرسال الرسالة",
+      ourLocation: "موقعنا",
+    }
+  };
+
+  const currentContent = content[language] || content.en;
+
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={containerVariants}
       className="w-full bg-gradient-to-br from-blue-50 to-gray-100 py-16 px-4"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Get in <span className="text-blue-600">Touch</span>
+            {currentContent.title} <span className="text-blue-600">{currentContent.coloredTitle}</span>
           </h1>
           <motion.p 
             className="text-lg text-gray-600 max-w-2xl mx-auto"
@@ -97,7 +154,7 @@ const ContactUs = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            We'd love to hear from you! Whether you have questions about our services or just want to say hello, our team is ready to help.
+            {currentContent.subtitle}
           </motion.p>
         </motion.div>
 
@@ -121,8 +178,8 @@ const ContactUs = () => {
               >
                 <MdOutlineSupportAgent className="text-blue-600 text-4xl" />
               </motion.div>
-              <h2 className="text-2xl font-bold text-gray-800">Contact Information</h2>
-              <p className="text-gray-500 mt-2">Fill out the form or reach us directly</p>
+              <h2 className="text-2xl font-bold text-gray-800">{currentContent.contactInfo}</h2>
+              <p className="text-gray-500 mt-2">{currentContent.contactSubtitle}</p>
             </motion.div>
 
             <motion.div 
@@ -139,9 +196,9 @@ const ContactUs = () => {
                   <FaPhone className="text-blue-600 text-xl" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold text-gray-700">Phone</h3>
+                  <h3 className="font-semibold text-gray-700">{currentContent.phone}</h3>
                   <p className="text-gray-600">+90 808 080 08088</p>
-                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 9am-5pm</p>
+                  <p className="text-sm text-gray-500 mt-1">{currentContent.phoneHours}</p>
                 </div>
               </motion.div>
 
@@ -153,9 +210,9 @@ const ContactUs = () => {
                   <MdEmail className="text-blue-600 text-xl" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold text-gray-700">Email</h3>
+                  <h3 className="font-semibold text-gray-700">{currentContent.email}</h3>
                   <p className="text-gray-600">info@AgencyEducation.com</p>
-                  <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
+                  <p className="text-sm text-gray-500 mt-1">{currentContent.emailResponse}</p>
                 </div>
               </motion.div>
 
@@ -167,7 +224,7 @@ const ContactUs = () => {
                   <FaMapMarkerAlt className="text-blue-600 text-xl" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold text-gray-700">Office</h3>
+                  <h3 className="font-semibold text-gray-700">{currentContent.office}</h3>
                   <p className="text-gray-600">123 Education Street</p>
                   <p className="text-gray-600">Bahawalpur, Pakistan</p>
                 </div>
@@ -181,9 +238,9 @@ const ContactUs = () => {
                   <IoTime className="text-blue-600 text-xl" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold text-gray-700">Hours</h3>
-                  <p className="text-gray-600">Monday - Friday: 9am - 5pm</p>
-                  <p className="text-gray-600">Saturday: 10am - 2pm</p>
+                  <h3 className="font-semibold text-gray-700">{currentContent.hours}</h3>
+                  <p className="text-gray-600">{currentContent.workingHours1}</p>
+                  <p className="text-gray-600">{currentContent.workingHours2}</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -204,7 +261,7 @@ const ContactUs = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                Send Us a Message
+                {currentContent.sendMessage}
               </motion.h2>
 
               <form className="space-y-6" onSubmit={handleSubmit}>
@@ -214,10 +271,10 @@ const ContactUs = () => {
                     custom={0}
                   >
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                      First Name
+                      {currentContent.firstName}
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <div className={`absolute inset-y-0 ${language === 'ar' ? 'right-0 pr-3' : 'left-0 pl-3'} flex items-center pointer-events-none`}>
                         <IoPerson className="text-gray-400" />
                       </div>
                       <input
@@ -225,8 +282,8 @@ const ContactUs = () => {
                         id="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="John"
+                        className={`block w-full ${language === 'ar' ? 'pr-10' : 'pl-10'} px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                        placeholder={language === 'ar' ? "الاسم الأول" : "John"}
                       />
                     </div>
                   </motion.div>
@@ -236,10 +293,10 @@ const ContactUs = () => {
                     custom={1}
                   >
                     <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                      Last Name
+                      {currentContent.lastName}
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <div className={`absolute inset-y-0 ${language === 'ar' ? 'right-0 pr-3' : 'left-0 pl-3'} flex items-center pointer-events-none`}>
                         <IoPerson className="text-gray-400" />
                       </div>
                       <input
@@ -247,8 +304,8 @@ const ContactUs = () => {
                         id="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
-                        className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="Doe"
+                        className={`block w-full ${language === 'ar' ? 'pr-10' : 'pl-10'} px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                        placeholder={language === 'ar' ? "اسم العائلة" : "Doe"}
                       />
                     </div>
                   </motion.div>
@@ -259,10 +316,10 @@ const ContactUs = () => {
                   custom={2}
                 >
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
+                    {currentContent.emailAddress}
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div className={`absolute inset-y-0 ${language === 'ar' ? 'right-0 pr-3' : 'left-0 pl-3'} flex items-center pointer-events-none`}>
                       <MdEmail className="text-gray-400" />
                     </div>
                     <input
@@ -270,8 +327,8 @@ const ContactUs = () => {
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      placeholder="your@email.com"
+                      className={`block w-full ${language === 'ar' ? 'pr-10' : 'pl-10'} px-3 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                      placeholder={language === 'ar' ? "بريدك@الإلكتروني.com" : "your@email.com"}
                     />
                   </div>
                 </motion.div>
@@ -281,10 +338,10 @@ const ContactUs = () => {
                   custom={3}
                 >
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
+                    {currentContent.phoneNumber}
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <div className={`absolute inset-y-0 ${language === 'ar' ? 'right-0 pr-3' : 'left-0 pl-3'} flex items-center pointer-events-none`}>
                       <FaPhone className="text-gray-400" />
                     </div>
                     <input
@@ -292,8 +349,8 @@ const ContactUs = () => {
                       id="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      placeholder="+1 (555) 123-4567"
+                      className={`block w-full ${language === 'ar' ? 'pr-10' : 'pl-10'} px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                      placeholder={language === 'ar' ? "+1 (555) 123-4567" : "+1 (555) 123-4567"}
                     />
                   </div>
                 </motion.div>
@@ -303,7 +360,7 @@ const ContactUs = () => {
                   custom={4}
                 >
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Your Message
+                    {currentContent.yourMessage}
                   </label>
                   <textarea
                     id="message"
@@ -311,7 +368,7 @@ const ContactUs = () => {
                     value={formData.message}
                     onChange={handleChange}
                     className="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="How can we help you?"
+                    placeholder={currentContent.placeholderMessage}
                   ></textarea>
                 </motion.div>
 
@@ -325,8 +382,8 @@ const ContactUs = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <FaPaperPlane className="mr-2" />
-                    Send Message
+                    <FaPaperPlane className={language === 'ar' ? "ml-2" : "mr-2"} />
+                    {currentContent.sendButton}
                   </motion.button>
                 </motion.div>
               </form>
@@ -355,7 +412,7 @@ const ContactUs = () => {
             ></iframe>
           </div>
           <div className="p-6">
-            <h3 className="text-xl font-semibold text-gray-800">Our Location</h3>
+            <h3 className="text-xl font-semibold text-gray-800">{currentContent.ourLocation}</h3>
             <p className="text-gray-600 mt-2">123 Education Street, Bahawalpur, Pakistan</p>
           </div>
         </motion.div>

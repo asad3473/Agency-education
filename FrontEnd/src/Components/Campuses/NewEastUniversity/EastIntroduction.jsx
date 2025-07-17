@@ -6,28 +6,65 @@ export default function EastIntroduction() {
   const { language } = useAuth();
   const isArabic = language === "ar";
 
+  const content = {
+    paragraphs: [
+      {
+        en: "Near East University, established in 1988 is a premier institution of higher learning located in Northern Cyprus. This university is renowned for its commitment to academic excellence, innovation, research, and global outreach. It offers a wide range of undergraduate, graduate, and doctoral programs in various fields of study extensive undergraduate and postgraduate education opportunities to over 26 thousand students coming from over 100 countries.",
+        ar: "تأسست جامعة الشرق الأدنى في عام 1988، وهي مؤسسة تعليمية مرموقة تقع في شمال قبرص. تشتهر الجامعة بالتفوق الأكاديمي، والابتكار، والبحث العلمي، والانفتاح العالمي. تقدم مجموعة واسعة من برامج البكالوريوس والماجستير والدكتوراه، وتوفر فرص تعليمية لأكثر من 26 ألف طالب من أكثر من 100 دولة."
+      },
+      {
+        en: "The Near East University has 20 faculties comprising 220 departments and programs, 8 graduate schools with around 218 graduate and postgraduate programs, and 3 high schools, 28 research institutes.",
+        ar: "تضم جامعة الشرق الأدنى 20 كلية تشمل 220 قسماً وبرنامجاً، و8 كليات للدراسات العليا بحوالي 218 برنامج دراسات عليا، بالإضافة إلى 3 مدارس ثانوية و28 معهداً بحثياً."
+      },
+      {
+        en: "The university has received accreditation from The Turkish Republic Higher Education Board (YÖK)” and “The Turkish Republic of Northern Cyprus Board of Higher Education Planning Accreditation and Coordination Board (YÖDAK)” which has acceptance globally as academic qualification.",
+        ar: "حصلت الجامعة على الاعتماد من مجلس التعليم العالي في جمهورية تركيا (YÖK) ومجلس اعتماد وتخطيط التعليم العالي في جمهورية شمال قبرص التركية (YÖDAK)، مما يمنحها اعترافًا عالميًا كمؤهل أكاديمي."
+      }
+    ],
+    universities: {
+      title: {
+        en: "Another Universities",
+        ar: "جامعات أخرى"
+      },
+      list: [
+        {
+          en: "Cyprus International University",
+          ar: "الجامعة القبرصية الدولية"
+        },
+        {
+          en: "Near East University",
+          ar: "جامعة الشرق الأدنى"
+        },
+        {
+          en: "Eastern Mediterranean University",
+          ar: "جامعة شرق المتوسط"
+        },
+        {
+          en: "Kyrenia University",
+          ar: "جامعة كيرينيا"
+        },
+        {
+          en: "Bahcesehir Cyprus University",
+          ar: "جامعة بهشة شهير قبرص"
+        },
+        {
+          en: "Final International University",
+          ar: "الجامعة الدولية النهائية"
+        }
+      ]
+    }
+  };
+
   return (
     <div className={`w-full mx-auto sm:w-11/12 p-3 ${isArabic ? "rtl" : ""}`}>
       <div className="flex flex-wrap justify-between gap-6">
         {/* Main Content */}
         <div className={`w-full sm:w-[65%] ${isArabic ? "text-right" : "text-left"}`}>
-          <p className="text-md leading-relaxed">
-            {isArabic
-              ? "تأسست جامعة الشرق الأدنى في عام 1988، وهي مؤسسة تعليمية مرموقة تقع في شمال قبرص. تشتهر الجامعة بالتفوق الأكاديمي، والابتكار، والبحث العلمي، والانفتاح العالمي. تقدم مجموعة واسعة من برامج البكالوريوس والماجستير والدكتوراه، وتوفر فرص تعليمية لأكثر من 26 ألف طالب من أكثر من 100 دولة."
-              : "Near East University, established in 1988 is a premier institution of higher learning located in Northern Cyprus. This university is renowned for its commitment to academic excellence, innovation, research, and global outreach. It offers a wide range of undergraduate, graduate, and doctoral programs in various fields of study extensive undergraduate and postgraduate education opportunities to over 26 thousand students coming from over 100 countries."}
-          </p>
-
-          <p className="mt-2 text-md leading-relaxed">
-            {isArabic
-              ? "تضم جامعة الشرق الأدنى 20 كلية تشمل 220 قسماً وبرنامجاً، و8 كليات للدراسات العليا بحوالي 218 برنامج دراسات عليا، بالإضافة إلى 3 مدارس ثانوية و28 معهداً بحثياً."
-              : "The Near East University has 20 faculties comprising 220 departments and programs, 8 graduate schools with around 218 graduate and postgraduate programs, and 3 high schools, 28 research institutes."}
-          </p>
-
-          <p className="mt-2 text-md leading-relaxed">
-            {isArabic
-              ? "حصلت الجامعة على الاعتماد من مجلس التعليم العالي في جمهورية تركيا (YÖK) ومجلس اعتماد وتخطيط التعليم العالي في جمهورية شمال قبرص التركية (YÖDAK)، مما يمنحها اعترافًا عالميًا كمؤهل أكاديمي."
-              : "The university has received accreditation from The Turkish Republic Higher Education Board (YÖK)” and “The Turkish Republic of Northern Cyprus Board of Higher Education Planning Accreditation and Coordination Board (YÖDAK)” which has acceptance globally as academic qualification."}
-          </p>
+          {content.paragraphs.map((paragraph, index) => (
+            <p key={index} className="text-md leading-relaxed mt-2 first:mt-0">
+              {paragraph[language]}
+            </p>
+          ))}
 
           {/* YouTube Embed */}
           <div className="mt-4 w-full mb-4">
@@ -43,12 +80,14 @@ export default function EastIntroduction() {
             ></iframe>
           </div>
         </div>
-         <div className="w-full sm:w-[30%] h-96 bg-white rounded-xl shadow-xl border border-blue-100 overflow-hidden">
+
+        {/* Universities Sidebar */}
+        <div className="w-full sm:w-[30%] h-96 bg-white rounded-xl shadow-xl border border-blue-100 overflow-hidden">
           <div className="bg-gradient-to-r from-[#0A0851] to-[#1A3D8F] p-4">
             <div className="flex items-center justify-center">
               <hr className="h-1 bg-[#F5891B] w-8 border-none" />
               <h1 className="px-3 text-lg font-bold text-white whitespace-nowrap">
-                Another Universities
+                {content.universities.title[language]}
               </h1>
               <hr className="h-1 bg-[#F5891B] w-8 border-none" />
             </div>
@@ -56,49 +95,23 @@ export default function EastIntroduction() {
 
           <div className="p-4">
             <ol className="space-y-3">
-              <Link
-                to="/Cyprus-International-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Cyprus International University</li>
-              </Link>
-              <Link
-                to="/Near-East-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Near East University</li>
-              </Link>
-
-              <Link
-                to="/Eastern-Mediterranean-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Eastern Mediterranean University</li>
-              </Link>
-              <Link
-                to="/Kyrenia-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Kyrenia University</li>
-              </Link>
-              <Link
-                to="/Bahcesehir-Cyprus-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Bahcesehir Cyprus University</li>
-              </Link>
-              <Link
-                to="/Final-International-University"
-                className="flex items-center gap-2"
-              >
-                <GiConvergenceTarget />
-                <li>Final International University</li>
-              </Link>
+              {content.universities.list.map((university, index) => (
+                <Link
+                  key={index}
+                  to={
+                    index === 0 ? "/Cyprus-International-University" :
+                    index === 1 ? "/Near-East-University" :
+                    index === 2 ? "/Eastern-Mediterranean-University" :
+                    index === 3 ? "/Kyrenia-University" :
+                    index === 4 ? "/Bahcesehir-Cyprus-University" :
+                    "/Final-International-University"
+                  }
+                  className={`flex items-center gap-2 ${isArabic ? "flex-row-reverse" : ""}`}
+                >
+                  <GiConvergenceTarget />
+                  <li>{university[language]}</li>
+                </Link>
+              ))}
             </ol>
           </div>
         </div>

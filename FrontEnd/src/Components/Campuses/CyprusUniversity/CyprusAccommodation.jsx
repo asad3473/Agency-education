@@ -1,51 +1,289 @@
-import React from 'react';
+
 import { FaWifi, FaTv, FaUtensils, FaBed, FaChair, FaPhone, FaStar, FaShieldAlt } from 'react-icons/fa';
 import { GiHomeGarage, GiKitchenScale, GiBookshelf, GiLaurelsTrophy } from 'react-icons/gi';
 import { IoIosPeople, IoMdFitness } from 'react-icons/io';
 import { MdCleaningServices, MdSecurity } from 'react-icons/md';
+import { useAuth } from '../../../contextApi/contextApi';
 
 const CyprusAccommodation = () => {
+  const { language } = useAuth();
+
+  // Translations
+  const translations = {
+    heroTitle: {
+      en: "Campus Living",
+      ar: "السكن الجامعي"
+    },
+    heroSubtitle: {
+      en: "Premium student accommodation designed for comfort, community, and academic success",
+      ar: "سكن طلابي فاخر مصمم للراحة والمجتمع والنجاح الأكاديمي"
+    },
+    featureTitle: {
+      en: "17 Modern Dormitory Buildings",
+      ar: "17 مبنى سكني حديث"
+    },
+    featureDescription: {
+      en: "Experience university life in our award-winning residences featuring cutting-edge design, premium amenities, and vibrant student communities. Each building offers study lounges, recreational spaces, and 24/7 support services.",
+      ar: "جرب الحياة الجامعية في مساكننا الحاصلة على جوائز والتي تتميز بتصميم حديث ومرافق فاخرة ومجتمعات طلابية نابضة بالحياة. كل مبنى يوفر صالات دراسة ومساحات ترفيهية وخدمات دعم على مدار الساعة."
+    },
+    security: {
+      en: "24/7 Security",
+      ar: "أمن على مدار الساعة"
+    },
+    cleaning: {
+      en: "Weekly Cleaning",
+      ar: "تنظيف أسبوعي"
+    },
+    fitness: {
+      en: "Fitness Access",
+      ar: "وصول لمرافق اللياقة"
+    },
+    amenitiesTitle: {
+      en: "Premium Amenities",
+      ar: "مرافق فاخرة"
+    },
+    amenitiesSubtitle: {
+      en: "Everything you need for comfortable living and academic success",
+      ar: "كل ما تحتاجه للعيش المريح والنجاح الأكاديمي"
+    },
+    highSpeedWifi: {
+      en: "High-Speed WiFi",
+      ar: "واي فاي عالي السرعة"
+    },
+    smartTV: {
+      en: "Smart TV",
+      ar: "تلفزيون ذكي"
+    },
+    ergonomicFurniture: {
+      en: "Ergonomic Furniture",
+      ar: "أثاث مريح"
+    },
+    premiumBedding: {
+      en: "Premium Bedding",
+      ar: "فراش فاخر"
+    },
+    miniFridge: {
+      en: "Mini-Fridge",
+      ar: "ثلاجة صغيرة"
+    },
+    directPhoneLine: {
+      en: "Direct Phone Line",
+      ar: "خط هاتف مباشر"
+    },
+    mealPlans: {
+      en: "Meal Plans",
+      ar: "خطط وجبات"
+    },
+    socialEvents: {
+      en: "Social Events",
+      ar: "فعاليات اجتماعية"
+    },
+    optionsTitle: {
+      en: "Living Options",
+      ar: "خيارات السكن"
+    },
+    optionsSubtitle: {
+      en: "Choose the perfect space for your university journey",
+      ar: "اختر المساحة المثالية لرحلتك الجامعية"
+    },
+    studioTitle: {
+      en: "Studio Dormitories",
+      ar: "غرف الاستوديو"
+    },
+    studioDescription: {
+      en: "Modern single, double, or 4-bedroom units with private bathrooms and premium furnishings. The Soli dormitory features soundproof walls and designer interiors.",
+      ar: "وحدات حديثة فردية أو مزدوجة أو بغرف نوم 4 مع حمامات خاصة وأثاث فاخر. يتميز سكن سولي بجدران عازلة للصوت وديكورات مصممة."
+    },
+    studioFeature1: {
+      en: "Private bathroom in each unit",
+      ar: "حمام خاص في كل وحدة"
+    },
+    studioFeature2: {
+      en: "Weekly professional cleaning",
+      ar: "تنظيف أسبوعي محترف"
+    },
+    studioFeature3: {
+      en: "24/7 academic support",
+      ar: "دعم أكاديمي على مدار الساعة"
+    },
+    studioIncludes: {
+      en: "Includes accommodation + 1-year cafeteria membership",
+      ar: "يشمل السكن + عضوية الكافتيريا لمدة عام"
+    },
+    apartmentTitle: {
+      en: "Apartment Dormitories",
+      ar: "شقق سكنية"
+    },
+    apartmentDescription: {
+      en: "2-3 bedroom apartments with shared living room, balcony, and fully equipped kitchen - perfect for students who value independence and community living.",
+      ar: "شقق بغرفتي أو 3 غرف نوم مع صالة معيشة مشتركة وشرفة ومطبخ مجهز بالكامل - مثالية للطلاب الذين يقدرون الاستقلالية والعيش المجتمعي."
+    },
+    apartmentFeature1: {
+      en: "Full kitchen with appliances",
+      ar: "مطبخ كامل مع أجهزة"
+    },
+    apartmentFeature2: {
+      en: "Spacious common areas",
+      ar: "مناطق مشتركة واسعة"
+    },
+    apartmentFeature3: {
+      en: "Private balcony/terrace",
+      ar: "شرفة/تراس خاص"
+    },
+    apartmentIncludes: {
+      en: "Optional meal plans available",
+      ar: "خطط وجبات اختيارية متاحة"
+    },
+    loyaltyTitle: {
+      en: "Loyalty Rewards Program",
+      ar: "برنامج مكافآت الولاء"
+    },
+    loyaltyDescription: {
+      en: "We value your continued stay with us. Enjoy increasing benefits the longer you're part of our campus community.",
+      ar: "نقدر بقاءك المستمر معنا. استمتع بفوائد متزايدة كلما طالت مدة انضمامك إلى مجتمع الحرم الجامعي لدينا."
+    },
+    loyaltyNote: {
+      en: "* Discounts apply to consecutive years of residence. All benefits are cumulative.",
+      ar: "* تنطبق الخصومات على سنوات الإقامة المتتالية. جميع الفوائد تراكمية."
+    },
+    secondYear: {
+      en: "2nd Year",
+      ar: "السنة الثانية"
+    },
+    thirdYear: {
+      en: "3rd Year",
+      ar: "السنة الثالثة"
+    },
+    fourthYear: {
+      en: "4th Year",
+      ar: "السنة الرابعة"
+    },
+    fifthYear: {
+      en: "5th Year+",
+      ar: "السنة الخامسة+"
+    },
+    prioritySelection: {
+      en: "Priority room selection",
+      ar: "أولوية اختيار الغرفة"
+    },
+    freeLaundry: {
+      en: "Free laundry package",
+      ar: "حزمة غسيل مجانية"
+    },
+    personalStorage: {
+      en: "Personal storage unit",
+      ar: "وحدة تخزين شخصية"
+    },
+    wifiUpgrade: {
+      en: "Premium WiFi upgrade",
+      ar: "ترقية وايفاي متميزة"
+    },
+    monthlyCleaning: {
+      en: "Monthly cleaning service",
+      ar: "خدمة تنظيف شهرية"
+    },
+    guestPasses: {
+      en: "Guest passes",
+      ar: "تصاريح ضيوف"
+    },
+    vipGraduation: {
+      en: "VIP graduation package",
+      ar: "حزمة تخرج VIP"
+    },
+    alumniBenefits: {
+      en: "Alumni benefits",
+      ar: "مزايا الخريجين"
+    }
+  };
+
+  const amenities = [
+    { icon: <FaWifi className="text-3xl" />, text: translations.highSpeedWifi[language], bg: "from-blue-100 to-blue-50" },
+    { icon: <FaTv className="text-3xl" />, text: translations.smartTV[language], bg: "from-purple-100 to-purple-50" },
+    { icon: <FaChair className="text-3xl" />, text: translations.ergonomicFurniture[language], bg: "from-green-100 to-green-50" },
+    { icon: <FaBed className="text-3xl" />, text: translations.premiumBedding[language], bg: "from-amber-100 to-amber-50" },
+    { icon: <GiHomeGarage className="text-3xl" />, text: translations.miniFridge[language], bg: "from-cyan-100 to-cyan-50" },
+    { icon: <FaPhone className="text-3xl" />, text: translations.directPhoneLine[language], bg: "from-indigo-100 to-indigo-50" },
+    { icon: <FaUtensils className="text-3xl" />, text: translations.mealPlans[language], bg: "from-red-100 to-red-50" },
+    { icon: <IoIosPeople className="text-3xl" />, text: translations.socialEvents[language], bg: "from-emerald-100 to-emerald-50" }
+  ];
+
+  const loyaltyTiers = [
+    { 
+      years: translations.secondYear[language], 
+      discount: "15% OFF", 
+      perks: [translations.prioritySelection[language], translations.freeLaundry[language]] 
+    },
+    { 
+      years: translations.thirdYear[language], 
+      discount: "20% OFF", 
+      perks: [translations.personalStorage[language], translations.wifiUpgrade[language]] 
+    },
+    { 
+      years: translations.fourthYear[language], 
+      discount: "25% OFF", 
+      perks: [translations.monthlyCleaning[language], translations.guestPasses[language]] 
+    },
+    { 
+      years: translations.fifthYear[language], 
+      discount: "30% OFF", 
+      perks: [translations.vipGraduation[language], translations.alumniBenefits[language]] 
+    }
+  ];
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className={`max-w-6xl mx-auto px-4 py-12 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Header */}
       <div className="text-center mb-16 relative">
         <h1 className="text-5xl font-extrabold text-[#0A0851] mb-4 relative">
           <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-[#0A0851] to-blue-500">
-            Campus Living
+            {translations.heroTitle[language]}
           </span>
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
-          Premium student accommodation designed for <span className="font-semibold text-[#0A0851]">comfort</span>, <span className="font-semibold text-[#0A0851]">community</span>, and <span className="font-semibold text-[#0A0851]">academic success</span>
+          {translations.heroSubtitle[language].split('comfort')[0]}
+          <span className="font-semibold text-[#0A0851]">
+            {language === 'en' ? 'comfort' : 'راحة'}
+          </span>
+          {language === 'en' ? ', ' : '، '}
+          <span className="font-semibold text-[#0A0851]">
+            {language === 'en' ? 'community' : 'مجتمع'}
+          </span>
+          {language === 'en' ? ', and ' : '، و '}
+          <span className="font-semibold text-[#0A0851]">
+            {language === 'en' ? 'academic success' : 'نجاح أكاديمي'}
+          </span>
         </p>
         <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-[#0A0851] mx-auto rounded-full mb-8"></div>
       </div>
 
       {/* Feature Highlight */}
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 mb-16 relative overflow-hidden border border-blue-200 shadow-sm ">
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 mb-16 relative overflow-hidden border border-blue-200 shadow-sm">
         <div className="absolute -right-10 -top-10 w-40 h-40 bg-blue-200 rounded-full opacity-20"></div>
         <div className="absolute -left-10 -bottom-10 w-40 h-40 bg-blue-200 rounded-full opacity-20"></div>
         <div className="relative z-10">
-          <div className="flex items-center mb-4">
-            <div className="bg-[#0A0851] p-2 rounded-lg mr-4">
+          <div className="flex items-center mb-4" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            <div className="bg-[#0A0851] p-2 rounded-lg" style={language === 'ar' ? { marginLeft: '1rem' } : { marginRight: '1rem' }}>
               <GiLaurelsTrophy className="text-white text-2xl" />
             </div>
-            <h2 className="text-2xl sm:text-3xl  font-bold text-[#0A0851]">17 Modern Dormitory Buildings</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#0A0851]">
+              {translations.featureTitle[language]}
+            </h2>
           </div>
           <p className="text-lg text-gray-700 mb-6 max-w-3xl">
-            Experience university life in our award-winning residences featuring cutting-edge design, premium amenities, and vibrant student communities. Each building offers study lounges, recreational spaces, and 24/7 support services.
+            {translations.featureDescription[language]}
           </p>
           <div className="flex flex-wrap gap-3">
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs">
-              <MdSecurity className="text-blue-500 mr-2" />
-              <span className="text-sm font-medium">24/7 Security</span>
+            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              <MdSecurity className="text-blue-500" style={language === 'ar' ? { marginLeft: '0.5rem' } : { marginRight: '0.5rem' }} />
+              <span className="text-sm font-medium">{translations.security[language]}</span>
             </div>
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs">
-              <MdCleaningServices className="text-blue-500 mr-2" />
-              <span className="text-sm font-medium">Weekly Cleaning</span>
+            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              <MdCleaningServices className="text-blue-500" style={language === 'ar' ? { marginLeft: '0.5rem' } : { marginRight: '0.5rem' }} />
+              <span className="text-sm font-medium">{translations.cleaning[language]}</span>
             </div>
-            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs">
-              <IoMdFitness className="text-blue-500 mr-2" />
-              <span className="text-sm font-medium">Fitness Access</span>
+            <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-xs" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              <IoMdFitness className="text-blue-500" style={language === 'ar' ? { marginLeft: '0.5rem' } : { marginRight: '0.5rem' }} />
+              <span className="text-sm font-medium">{translations.fitness[language]}</span>
             </div>
           </div>
         </div>
@@ -54,21 +292,12 @@ const CyprusAccommodation = () => {
       {/* Amenities Section */}
       <div className="mb-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#0A0851] mb-3">Premium Amenities</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Everything you need for comfortable living and academic success</p>
+          <h2 className="text-3xl font-bold text-[#0A0851] mb-3">{translations.amenitiesTitle[language]}</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">{translations.amenitiesSubtitle[language]}</p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { icon: <FaWifi className="text-3xl" />, text: "High-Speed WiFi", bg: "from-blue-100 to-blue-50" },
-            { icon: <FaTv className="text-3xl" />, text: "Smart TV", bg: "from-purple-100 to-purple-50" },
-            { icon: <FaChair className="text-3xl" />, text: "Ergonomic Furniture", bg: "from-green-100 to-green-50" },
-            { icon: <FaBed className="text-3xl" />, text: "Premium Bedding", bg: "from-amber-100 to-amber-50" },
-            { icon: <GiHomeGarage className="text-3xl" />, text: "Mini-Fridge", bg: "from-cyan-100 to-cyan-50" },
-            { icon: <FaPhone className="text-3xl" />, text: "Direct Phone Line", bg: "from-indigo-100 to-indigo-50" },
-            { icon: <FaUtensils className="text-3xl" />, text: "Meal Plans", bg: "from-red-100 to-red-50" },
-            { icon: <IoIosPeople className="text-3xl" />, text: "Social Events", bg: "from-emerald-100 to-emerald-50" }
-          ].map((item, index) => (
+          {amenities.map((item, index) => (
             <div key={index} className={`bg-gradient-to-br ${item.bg} p-6 rounded-2xl shadow-xs text-center transition-all hover:shadow-md hover:-translate-y-1`}>
               <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center bg-white shadow-sm`}>
                 <div className="text-blue-500">{item.icon}</div>
@@ -82,43 +311,41 @@ const CyprusAccommodation = () => {
       {/* Accommodation Options */}
       <div className="mb-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#0A0851] mb-3">Living Options</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">Choose the perfect space for your university journey</p>
+          <h2 className="text-3xl font-bold text-[#0A0851] mb-3">{translations.optionsTitle[language]}</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">{translations.optionsSubtitle[language]}</p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Studio Option */}
           <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
             <div className="bg-[#0A0851] p-6 text-white">
-              <div className="flex items-center">
-                <div className="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+              <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                <div className="bg-white bg-opacity-20 p-3 rounded-full" style={language === 'ar' ? { marginLeft: '1rem' } : { marginRight: '1rem' }}>
                   <GiHomeGarage className="text-2xl text-yellow-500" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold">Studio Dormitories</h3>
+                <h3 className="text-xl sm:text-2xl font-bold">{translations.studioTitle[language]}</h3>
               </div>
             </div>
             <div className="p-6">
-              <p className="text-gray-700 mb-6">
-                Modern single, double, or 4-bedroom units with private bathrooms and premium furnishings. The Soli dormitory features soundproof walls and designer interiors.
-              </p>
+              <p className="text-gray-700 mb-6">{translations.studioDescription[language]}</p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>Private bathroom in each unit</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.studioFeature1[language]}</span>
                 </div>
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>Weekly professional cleaning</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.studioFeature2[language]}</span>
                 </div>
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>24/7 academic support</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.studioFeature3[language]}</span>
                 </div>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
                 <p className="text-blue-600 font-medium text-center">
-                  <GiHomeGarage className="inline mr-2" />
-                  Includes accommodation + 1-year cafeteria membership
+                  <GiHomeGarage className="inline" style={language === 'ar' ? { marginLeft: '0.5rem' } : { marginRight: '0.5rem' }} />
+                  {translations.studioIncludes[language]}
                 </p>
               </div>
             </div>
@@ -127,35 +354,33 @@ const CyprusAccommodation = () => {
           {/* Apartment Option */}
           <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
             <div className="bg-gradient-to-r from-blue-600 to-blue-400 p-6 text-white">
-              <div className="flex items-center">
-                <div className="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+              <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                <div className="bg-white bg-opacity-20 p-3 rounded-full" style={language === 'ar' ? { marginLeft: '1rem' } : { marginRight: '1rem' }}>
                   <GiKitchenScale className="text-2xl text-yellow-500" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold">Apartment Dormitories</h3>
+                <h3 className="text-xl sm:text-2xl font-bold">{translations.apartmentTitle[language]}</h3>
               </div>
             </div>
             <div className="p-6">
-              <p className="text-gray-700 mb-6">
-                2-3 bedroom apartments with shared living room, balcony, and fully equipped kitchen - perfect for students who value independence and community living.
-              </p>
+              <p className="text-gray-700 mb-6">{translations.apartmentDescription[language]}</p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>Full kitchen with appliances</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.apartmentFeature1[language]}</span>
                 </div>
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>Spacious common areas</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.apartmentFeature2[language]}</span>
                 </div>
-                <div className="flex items-center">
-                  <FaStar className="text-yellow-400 mr-3" />
-                  <span>Private balcony/terrace</span>
+                <div className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                  <FaStar className="text-yellow-400" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
+                  <span>{translations.apartmentFeature3[language]}</span>
                 </div>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
                 <p className="text-blue-600 font-medium text-center">
-                  <GiKitchenScale className="inline mr-2" />
-                  Optional meal plans available
+                  <GiKitchenScale className="inline" style={language === 'ar' ? { marginLeft: '0.5rem' } : { marginRight: '0.5rem' }} />
+                  {translations.apartmentIncludes[language]}
                 </p>
               </div>
             </div>
@@ -171,25 +396,20 @@ const CyprusAccommodation = () => {
           </svg>
         </div>
         <div className="relative z-10">
-          <div className="flex items-center mb-6">
-            <div className="bg-white bg-opacity-20 p-3 rounded-full mr-4">
+          <div className="flex items-center mb-6" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            <div className="bg-white bg-opacity-20 p-3 rounded-full" style={language === 'ar' ? { marginLeft: '1rem' } : { marginRight: '1rem' }}>
               <GiLaurelsTrophy className="text-2xl text-yellow-300" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold">Loyalty Rewards Program</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold">{translations.loyaltyTitle[language]}</h2>
           </div>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl">
-            We value your continued stay with us. Enjoy increasing benefits the longer you're part of our campus community.
+            {translations.loyaltyDescription[language]}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { years: "2nd Year", discount: "15% OFF", perks: ["Priority room selection", "Free laundry package"] },
-              { years: "3rd Year", discount: "20% OFF", perks: ["Personal storage unit", "Premium WiFi upgrade"] },
-              { years: "4th Year", discount: "25% OFF", perks: ["Monthly cleaning service", "Guest passes"] },
-              { years: "5th Year+", discount: "30% OFF", perks: ["VIP graduation package", "Alumni benefits"] }
-            ].map((tier, index) => (
+            {loyaltyTiers.map((tier, index) => (
               <div key={index} className="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm border border-white border-opacity-20">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex justify-between items-start mb-4" dir={language === 'ar' ? 'rtl' : 'ltr'}>
                   <h3 className="text-xl text-blue-900 font-bold">{tier.years}</h3>
                   <span className="text-2xl font-bold bg-gradient-to-r from-yellow-300 to-yellow-400 bg-clip-text text-transparent">
                     {tier.discount}
@@ -197,8 +417,8 @@ const CyprusAccommodation = () => {
                 </div>
                 <ul className="space-y-2">
                   {tier.perks.map((perk, i) => (
-                    <li key={i} className="flex items-center">
-                      <FaShieldAlt className="text-blue-500 mr-3 text-sm" />
+                    <li key={i} className="flex items-center" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                      <FaShieldAlt className="text-blue-500 text-sm" style={language === 'ar' ? { marginLeft: '0.75rem' } : { marginRight: '0.75rem' }} />
                       <span className="text-blue-500">{perk}</span>
                     </li>
                   ))}
@@ -208,7 +428,7 @@ const CyprusAccommodation = () => {
           </div>
           
           <div className="mt-8 text-center text-blue-200 text-sm">
-            * Discounts apply to consecutive years of residence. All benefits are cumulative.
+            {translations.loyaltyNote[language]}
           </div>
         </div>
       </div>
