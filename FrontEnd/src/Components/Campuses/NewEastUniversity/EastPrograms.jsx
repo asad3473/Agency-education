@@ -135,7 +135,7 @@ const EastPrograms = () => {
   };
 
   return (
-    <div className={`max-w-7xl mx-auto px-4 py-8 ${isArabic ? 'rtl text-right' : 'text-left'}`}>
+    <div className={`max-w-7xl mx-auto px-4 py-8 ${isArabic ? 'rtl text-right' : 'ltr text-left'}`}>
       <h1 className="text-3xl font-bold text-center mb-8 text-[#0A0851]">
         {translations.title[language]}
       </h1>
@@ -143,6 +143,7 @@ const EastPrograms = () => {
       <div className="space-y-8">
         {Object.entries(programs).map(([category, content]) => (
           <div key={category} className="bg-white rounded-lg shadow-md overflow-hidden">
+            {/* Header */}
             <div className="bg-[#0A0851] p-4 flex items-center" dir={isArabic ? 'rtl' : 'ltr'}>
               {programIcons[category]}
               <h2 className={`${isArabic ? 'mr-3' : 'ml-3'} text-xl font-semibold text-white`}>
@@ -150,31 +151,28 @@ const EastPrograms = () => {
               </h2>
             </div>
 
+            {/* Program List */}
             <div className="p-6">
               {Array.isArray(content) ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {content.map((program) => (
                     <div key={program.en} className="flex items-start" dir={isArabic ? 'rtl' : 'ltr'}>
                       <FaUniversity className={`text-[#F5891B] mt-1 ${isArabic ? 'ml-2' : 'mr-2'}`} />
-                      <p className="text-gray-700">
-                        {program[language]}
-                      </p>
+                      <p className="text-gray-700">{program[language]}</p>
                     </div>
                   ))}
                 </div>
               ) : (
-                Object.entries(content).map(([faculty, programs]) => (
+                Object.entries(content).map(([faculty, facultyPrograms]) => (
                   <div key={faculty} className="mb-6">
                     <h3 className="text-lg font-medium text-[#0A0851] mb-3 border-b pb-1" dir={isArabic ? 'rtl' : 'ltr'}>
                       {translations.faculties[faculty][language]}
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {programs.map((program) => (
+                      {facultyPrograms.map((program) => (
                         <div key={program.en} className="flex items-start" dir={isArabic ? 'rtl' : 'ltr'}>
                           <FaUniversity className={`text-[#F5891B] mt-1 ${isArabic ? 'ml-2' : 'mr-2'}`} />
-                          <p className="text-gray-700">
-                            {program[language]}
-                          </p>
+                          <p className="text-gray-700">{program[language]}</p>
                         </div>
                       ))}
                     </div>

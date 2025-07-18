@@ -33,7 +33,7 @@ export default function CyprusHeader() {
   ];
 
   return (
-    <div className={`mt-4 ${isArabic ? 'rtl text-right' : 'ltr text-left'}`}>
+    <div dir={isArabic ? 'rtl' : 'ltr'} className={`${isArabic ? 'text-right' : 'text-left'} mt-4`}>
       {/* Navigation Tabs */}
       <div className='rounded-sm bg-[#0A0851] p-4 mb-2 w-full sm:w-10/12 mx-auto'>
         <nav className='flex flex-wrap justify-around items-center gap-4 sm:gap-6 md:gap-8 text-white text-sm sm:text-base'>

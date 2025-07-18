@@ -14,9 +14,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { setUser } = useAuth();
+  const { setUser, language } = useAuth();
+  const isArabic = language === "ar";
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -40,9 +42,7 @@ const Login = () => {
           email: formData.email,
           password: formData.password,
         },
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
 
       if (response.data.data.user.role === "admin") {
@@ -54,13 +54,58 @@ const Login = () => {
     } catch (error) {
       console.error(error?.response?.data?.message || "Something went wrong");
       setError(error?.response?.data?.message);
-
       setLoading(false);
     }
   };
 
+  const labels = {
+    welcome: {
+      en: "Welcome Back",
+      ar: "مرحبًا بعودتك",
+    },
+    loginToAccount: {
+      en: "Login to your account",
+      ar: "تسجيل الدخول إلى حسابك",
+    },
+    email: {
+      en: "Email Address",
+      ar: "البريد الإلكتروني",
+    },
+    password: {
+      en: "Password",
+      ar: "كلمة المرور",
+    },
+    rememberMe: {
+      en: "Remember me",
+      ar: "تذكرني",
+    },
+    forgotPassword: {
+      en: "Forgot your password?",
+      ar: "هل نسيت كلمة المرور؟",
+    },
+    login: {
+      en: "Login",
+      ar: "تسجيل الدخول",
+    },
+    loggingIn: {
+      en: "Logging...",
+      ar: "جارٍ تسجيل الدخول...",
+    },
+    notMember: {
+      en: "Not a member?",
+      ar: "لست عضوا؟",
+    },
+    signup: {
+      en: "Sign up now",
+      ar: "سجل الآن",
+    },
+  };
+
   return (
-    <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      dir={isArabic ? "rtr" : "ltr"}
+      className="flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+    >
       <div className="max-w-6xl w-full flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 bg-white rounded-3xl overflow-hidden shadow-2xl">
         {/* Image Section */}
         <div className="md:w-1/2 lg:w-7/12 hidden md:block relative">
@@ -74,29 +119,26 @@ const Login = () => {
 
         {/* Form Section */}
         <div className="md:w-1/2 lg:w-5/12 py-8 px-6 sm:px-10 lg:px-12 flex flex-col justify-center">
-          {/* Header */}
-          <div className="text-center mb-10">
+          <div className={`text-center mb-10 ${isArabic ? "text-right" : "text-left"}`}>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-900">
-              Welcome Back
+              {labels.welcome[language]}
             </h2>
-            <p className="mt-2 text-gray-600">Login to your account</p>
+            <p className="mt-2 text-gray-600">{labels.loginToAccount[language]}</p>
           </div>
 
-          {/* Form */}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className={`block text-sm font-medium text-gray-700 ${isArabic ? "text-right" : "text-left"}`}
                 >
-                  Email Address
+                  {labels.email[language]}
                 </label>
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
                   required
                   className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg transition-all"
                   placeholder="your@email.com"
@@ -104,18 +146,18 @@ const Login = () => {
                   onChange={handleChange}
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className={`block text-sm font-medium text-gray-700 ${isArabic ? "text-right" : "text-left"}`}
                 >
-                  Password
+                  {labels.password[language]}
                 </label>
                 <input
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
                   required
                   className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg transition-all"
                   placeholder="••••••••"
@@ -137,9 +179,9 @@ const Login = () => {
                 />
                 <label
                   htmlFor="rememberMe"
-                  className="ml-2 block text-sm text-gray-700"
+                  className={`ml-2 block text-sm text-gray-700 ${isArabic ? "ml-0 mr-2" : ""}`}
                 >
-                  Remember me
+                  {labels.rememberMe[language]}
                 </label>
               </div>
 
@@ -148,29 +190,31 @@ const Login = () => {
                   to="/forgotpassword"
                   className="font-medium text-indigo-700 hover:text-indigo-600"
                 >
-                  Forgot your password?
+                  {labels.forgotPassword[language]}
                 </Link>
               </div>
             </div>
+
             {error && <p className="text-red-600 text-sm">{error}</p>}
+
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white inset-0 bg-gradient-to-r from-blue-900/90 via-orange-400/100 to-blue-900/90 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-lg font-medium text-white bg-gradient-to-r from-blue-900 via-orange-400 to-blue-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105"
               >
-                {loading ? "Loging..." : "Login"}
+                {loading ? labels.loggingIn[language] : labels.login[language]}
               </button>
             </div>
           </form>
 
-          <div className="mt-6 text-center text-sm">
+          <div className={`mt-6 text-center text-sm ${isArabic ? "text-right" : "text-left"}`}>
             <p className="text-gray-600">
-              Not a member?{" "}
+              {labels.notMember[language]}{" "}
               <Link
                 to="/signup"
                 className="font-medium text-indigo-700 hover:text-indigo-600"
               >
-                Sign up now
+                {labels.signup[language]}
               </Link>
             </p>
           </div>

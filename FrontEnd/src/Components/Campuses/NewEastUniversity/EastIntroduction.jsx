@@ -23,7 +23,7 @@ export default function EastIntroduction() {
     ],
     universities: {
       title: {
-        en: "Another Universities",
+        en: "Other Universities",
         ar: "جامعات أخرى"
       },
       list: [
@@ -56,32 +56,11 @@ export default function EastIntroduction() {
   };
 
   return (
-    <div className={`w-full mx-auto sm:w-11/12 p-3 ${isArabic ? "rtl" : ""}`}>
-      <div className="flex flex-wrap justify-between gap-6">
-        {/* Main Content */}
-        <div className={`w-full sm:w-[65%] ${isArabic ? "text-right" : "text-left"}`}>
-          {content.paragraphs.map((paragraph, index) => (
-            <p key={index} className="text-md leading-relaxed mt-2 first:mt-0">
-              {paragraph[language]}
-            </p>
-          ))}
-
-          {/* YouTube Embed */}
-          <div className="mt-4 w-full mb-4">
-            <iframe
-              width="100%"
-              height="315"
-              src="https://www.youtube.com/embed/PhK_tioBixo?si=A6JYdT-ye_iIAd6j"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-
-        {/* Universities Sidebar */}
+    <div className={`w-full mx-auto sm:w-11/12 p-3 ${isArabic ? "rtl text-right" : "ltr text-left"}`}>
+      {/* Main Flex Container: sidebar position changes here */}
+      <div className={`flex flex-col sm:flex-row ${isArabic ? "flex-row" : "flex-row-reverse"} gap-6`}>
+        
+        {/* Sidebar */}
         <div className="w-full sm:w-[30%] h-96 bg-white rounded-xl shadow-xl border border-blue-100 overflow-hidden">
           <div className="bg-gradient-to-r from-[#0A0851] to-[#1A3D8F] p-4">
             <div className="flex items-center justify-center">
@@ -93,26 +72,53 @@ export default function EastIntroduction() {
             </div>
           </div>
 
-          <div className="p-4">
+          <div className={`p-4 ${isArabic ? "text-right" : "text-left"}`}>
             <ol className="space-y-3">
-              {content.universities.list.map((university, index) => (
-                <Link
-                  key={index}
-                  to={
-                    index === 0 ? "/Cyprus-International-University" :
-                    index === 1 ? "/Near-East-University" :
-                    index === 2 ? "/Eastern-Mediterranean-University" :
-                    index === 3 ? "/Kyrenia-University" :
-                    index === 4 ? "/Bahcesehir-Cyprus-University" :
-                    "/Final-International-University"
-                  }
-                  className={`flex items-center gap-2 ${isArabic ? "flex-row-reverse" : ""}`}
-                >
-                  <GiConvergenceTarget />
-                  <li>{university[language]}</li>
-                </Link>
-              ))}
+              {content.universities.list.map((university, index) => {
+                const path = [
+                  "/Cyprus-International-University",
+                  "/Near-East-University",
+                  "/Eastern-Mediterranean-University",
+                  "/Kyrenia-University",
+                  "/Bahcesehir-Cyprus-University",
+                  "/Final-International-University"
+                ][index];
+
+                return (
+                  <Link
+                    key={index}
+                    to={path}
+                    className={`flex items-center gap-2 hover:text-[#F5891B] transition-all duration-200 ${isArabic ? "flex-row-reverse" : ""}`}
+                  >
+                    <GiConvergenceTarget />
+                    <li>{university[language]}</li>
+                  </Link>
+                );
+              })}
             </ol>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="w-full sm:w-[65%]">
+          {content.paragraphs.map((paragraph, index) => (
+            <p key={index} className="text-md leading-relaxed mt-2 first:mt-0">
+              {paragraph[language]}
+            </p>
+          ))}
+
+          {/* YouTube Video */}
+          <div className="mt-4 w-full mb-4">
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/PhK_tioBixo?si=A6JYdT-ye_iIAd6j"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </div>
