@@ -219,48 +219,9 @@ const getApplication = asyncHandler(async (req, res) => {
     );
 });
 
-const totalApplications = asyncHandler(async(req, res)=>{
-
-  const [pending, approved, rejected, total]= await Promise.all(
-    [
- Application.countDocuments({applicationStatus:"pending"}),
- Application.countDocuments({applicationStatus:"approved"}),
- Application.countDocuments({applicationStatus:"rejected"}),
- Application.countDocuments()
-    ]
-  )
-
-  if(!pending || !approved || !rejected || !total){
-    throw new ApiError(500, "something wrong in fetching pending approved rejected and total application")
-  }
-
-res.status(200).json( new ApiResponse(200, "all Applications fetch successfully", {data:{pending, approved, rejected, total}}))
-})
-
-const updateApplication = asyncHandler(async(req, res)=>{
-  const [applicationId, applicationStatus] = req.body
-
-  const application = Application.findByIdAndUpdate(applicationId,
-      {
-      $set:{
-        applicationStatus
-      }
-    },
-    {
-      new: true,
-    }
-  )
 
 
-})
-const getAllApplications = asyncHandler(async(req, res)=>{
 
-  const applications = await Application.find()
-  if (applications){
-    res.status(200).json( new ApiResponse(200,"pending Applications fetch successfully", applications))
-  }
 
-res.status(200).json( new ApiResponse(200, "No pending Applications Found", {}))
-})
 
-export { createApplication, getApplication, getAllApplications , totalApplications ,updateApplication};
+export { createApplication, getApplication };
