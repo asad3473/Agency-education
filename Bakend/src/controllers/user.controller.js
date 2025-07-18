@@ -281,7 +281,7 @@ const changeCurrentPassword = asyncHandler(async(req, res)=>{
 
 const getCurrentUser = asyncHandler(async(req, res )=>{
     const user = await User.findOne(req.user._id).select(
-   "-password -refreshToken -varificationCode -varificationCodeExpiry "
+   "-password -refreshToken -varificationCode -varificationCodeExpiry " 
 )
   return res
   .status(200)
@@ -361,5 +361,5 @@ export { registerUser,
          getCurrentUser, 
          updateUserDetails,
          updateUserAvatar,
-         verifyEmailCode
+         verifyEmailCode,
          };

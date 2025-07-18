@@ -20,7 +20,8 @@ import OTPverify from "./Pages/OTPverify";
 import ProtectedRoute from "../src/contextApi/ProtectedRoute";
 import ScrollToTop from "./Components/ScrollToTop";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import StdUniversiteisAply from '../src/Pages/StdUniversiteisAply'
+import StdUniversiteisAply from "./Pages/StdUniversiteisAply";
+
 function MainLayout() {
   return (
     <div className="min-h-screen overflow-auto">

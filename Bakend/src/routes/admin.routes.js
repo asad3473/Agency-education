@@ -4,19 +4,20 @@ import { Router } from "express";
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import { isAdmin } from "../middlewares/role.middlewares.js";
 import {
-  getAllUsers,
   deleteUser,
-  getAllApplications,
+  activeUsers,
   deleteApplication,
+  updateRole
 } from "../controllers/admin.controller.js";
 
 const router = Router();
 
-router.use(verifyJWT, isAdmin); // Protect all admin routes
 
-router.get("/users", getAllUsers);
-router.delete("/user/:id", deleteUser);
-router.get("/applications", getAllApplications);
-router.delete("/application/:id", deleteApplication);
+//router.use(verifyJWT, isAdmin); // Protect all admin routes
+
+router.route("/users").get( activeUsers);
+router.route("/delete-user").delete( deleteUser);
+router.route("/application/:id").delete( deleteApplication);
+router.route("/update-role").post(updateRole)
 
 export default router;
