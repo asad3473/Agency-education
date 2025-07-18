@@ -1,84 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTimes, FaTrashAlt, FaEye, FaCheck, FaClock, FaTimesCircle, FaSearch, FaFilter } from 'react-icons/fa';
+import axios from 'axios';
 
 const Applications = () => {
   const [applications, setApplications] = useState([
-    {
-      id: 1,
-      cnic: '12345-1234567-1',
-      name: 'Ali Khan',
-      university: 'Punjab University',
-      program: 'BSCS',
-      date: '2025-07-10',
-      status: 'Pending',
-      fullForm: {
-        firstName: 'Ali',
-        lastName: 'Khan',
-        fatherName: 'Aslam Khan',
-        motherName: 'Fatima Khan',
-        email: 'ali@example.com',
-        cnic: '12345-1234567-1',
-        gender: 'Male',
-        maritalStatus: 'Single',
-        dob: '2000-01-01',
-        nationality: 'Pakistani',
-        phoneNumber: '03001234567',
-        birthPlace: 'Lahore',
-        program: 'BS Computer Science',
-        university: 'Punjab University',
-        course: 'Computer Science',
-        documents: {
-          photo: 'https://images.unsplash.com/photo-1742198832597-e43588e8ad28?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-          passportCopy: 'https://images.unsplash.com/photo-1612365922929-eb3b5b4bddb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzc3BvcnRDb3B5fGVufDB8fDB8fHww',
-          secondaryCertificate: 'https://media.istockphoto.com/id/93177402/photo/happy-graduates.webp?a=1&b=1&s=612x612&w=0&k=20&c=ErVUPCbAXZwJ9ZKtxFNBaPn9RIorjf652wRHg5y8zFI=',
-          englishCompetence: 'https://media.istockphoto.com/id/2158398318/photo/confident-student-smiling-at-friend.webp?a=1&b=1&s=612x612&w=0&k=20&c=_9LKy1I4qjbqlxGwTTv3-lGFd59wJvGKMnkigjIXwRY=',
-          bsDegreeCertificate: 'https://media.istockphoto.com/id/1067505660/photo/certificate.webp?a=1&b=1&s=612x612&w=0&k=20&c=FkvEmUb0C24pDP-TGC4UmXzm1KfZuqDyKF2mMyuQ9iI=',
-          bsTranscript: 'https://media.istockphoto.com/id/1021460044/photo/orf.webp?a=1&b=1&s=612x612&w=0&k=20&c=MVUsktzlisQpS2Sp_S8FsWGaN2RbMIIkmf1sQSZwmkc=',
-          msCertificate: 'https://media.istockphoto.com/id/1055048530/photo/label-seal-of-made-in-mississippi.webp?a=1&b=1&s=612x612&w=0&k=20&c=C7qUql6X0Btc_LWlJZQA-p701Fc5rGShHPMLh0-QZbo=',
-          msTranscript: 'https://media.istockphoto.com/id/1763174626/photo/screenwriter-holds-folder-of-documents-labeled-script.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tz2deOOHVKd-TjIGd-q4u1g3qVMV0Ip3mEhUEavu_hc=',
-          phdResearchProposal: 'https://media.istockphoto.com/id/184902657/photo/optical-glass-with-words-pr.webp?a=1&b=1&s=612x612&w=0&k=20&c=kp8mJImTyZwKUqHWNNgTkIZu7gYt9R-JH6F7ycQrRp4=',
-          cv: 'https://images.unsplash.com/photo-1698047681432-006d2449c631?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3Z8ZW58MHx8MHx8fDA%3D'
-        }
-      },
-    },
-    {
-      id: 2,
-      cnic: '67890-1234567-2',
-      name: 'Sara Ahmed',
-      university: 'FAST NUCES',
-      program: 'BBA',
-      date: '2025-07-12',
-      status: 'Approved',
-      fullForm: {
-        firstName: 'Sara',
-        lastName: 'Ahmed',
-        fatherName: 'Ahmed Raza',
-        motherName: 'Ayesha Raza',
-        email: 'sara@example.com',
-        cnic: '67890-1234567-2',
-        gender: 'Female',
-        maritalStatus: 'Single',
-        dob: '1999-05-10',
-        nationality: 'Pakistani',
-        phoneNumber: '03111234567',
-        birthPlace: 'Karachi',
-        program: 'BBA',
-        university: 'FAST NUCES',
-        course: 'Business Administration',
-        documents: {
-          photo: 'https://images.unsplash.com/photo-1742198832597-e43588e8ad28?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-          passportCopy: 'https://images.unsplash.com/photo-1612365922929-eb3b5b4bddb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzc3BvcnRDb3B5fGVufDB8fDB8fHww',
-          secondaryCertificate: 'https://media.istockphoto.com/id/93177402/photo/happy-graduates.webp?a=1&b=1&s=612x612&w=0&k=20&c=ErVUPCbAXZwJ9ZKtxFNBaPn9RIorjf652wRHg5y8zFI=',
-          englishCompetence: 'https://media.istockphoto.com/id/2158398318/photo/confident-student-smiling-at-friend.webp?a=1&b=1&s=612x612&w=0&k=20&c=_9LKy1I4qjbqlxGwTTv3-lGFd59wJvGKMnkigjIXwRY=',
-          bsDegreeCertificate: 'https://media.istockphoto.com/id/1067505660/photo/certificate.webp?a=1&b=1&s=612x612&w=0&k=20&c=FkvEmUb0C24pDP-TGC4UmXzm1KfZuqDyKF2mMyuQ9iI=',
-          bsTranscript: 'https://media.istockphoto.com/id/1021460044/photo/orf.webp?a=1&b=1&s=612x612&w=0&k=20&c=MVUsktzlisQpS2Sp_S8FsWGaN2RbMIIkmf1sQSZwmkc=',
-          msCertificate: 'https://media.istockphoto.com/id/1055048530/photo/label-seal-of-made-in-mississippi.webp?a=1&b=1&s=612x612&w=0&k=20&c=C7qUql6X0Btc_LWlJZQA-p701Fc5rGShHPMLh0-QZbo=',
-          msTranscript: 'https://media.istockphoto.com/id/1763174626/photo/screenwriter-holds-folder-of-documents-labeled-script.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tz2deOOHVKd-TjIGd-q4u1g3qVMV0Ip3mEhUEavu_hc=',
-          phdResearchProposal: 'https://media.istockphoto.com/id/184902657/photo/optical-glass-with-words-pr.webp?a=1&b=1&s=612x612&w=0&k=20&c=kp8mJImTyZwKUqHWNNgTkIZu7gYt9R-JH6F7ycQrRp4=',
-          cv: 'https://images.unsplash.com/photo-1698047681432-006d2449c631?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3Z8ZW58MHx8MHx8fDA%3D'
-        }
-      },
-    },
+  
+    // {
+    //   id: 2,
+    //   cnic: '67890-1234567-2',
+    //   name: 'Sara Ahmed',
+    //   university: 'FAST NUCES',
+    //   program: 'BBA',
+    //   date: '2025-07-12',
+    //   status: 'Approved',
+    //   fullForm: {
+    //     firstName: 'Sara',
+    //     lastName: 'Ahmed',
+    //     fatherName: 'Ahmed Raza',
+    //     motherName: 'Ayesha Raza',
+    //     email: 'sara@example.com',
+    //     cnic: '67890-1234567-2',
+    //     gender: 'Female',
+    //     maritalStatus: 'Single',
+    //     dob: '1999-05-10',
+    //     nationality: 'Pakistani',
+    //     phoneNumber: '03111234567',
+    //     birthPlace: 'Karachi',
+    //     program: 'BBA',
+    //     university: 'FAST NUCES',
+    //     course: 'Business Administration',
+    //     documents: {
+    //       photo: 'https://images.unsplash.com/photo-1742198832597-e43588e8ad28?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    //       passportCopy: 'https://images.unsplash.com/photo-1612365922929-eb3b5b4bddb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzc3BvcnRDb3B5fGVufDB8fDB8fHww',
+    //       secondaryCertificate: 'https://media.istockphoto.com/id/93177402/photo/happy-graduates.webp?a=1&b=1&s=612x612&w=0&k=20&c=ErVUPCbAXZwJ9ZKtxFNBaPn9RIorjf652wRHg5y8zFI=',
+    //       englishCompetence: 'https://media.istockphoto.com/id/2158398318/photo/confident-student-smiling-at-friend.webp?a=1&b=1&s=612x612&w=0&k=20&c=_9LKy1I4qjbqlxGwTTv3-lGFd59wJvGKMnkigjIXwRY=',
+    //       bsDegreeCertificate: 'https://media.istockphoto.com/id/1067505660/photo/certificate.webp?a=1&b=1&s=612x612&w=0&k=20&c=FkvEmUb0C24pDP-TGC4UmXzm1KfZuqDyKF2mMyuQ9iI=',
+    //       bsTranscript: 'https://media.istockphoto.com/id/1021460044/photo/orf.webp?a=1&b=1&s=612x612&w=0&k=20&c=MVUsktzlisQpS2Sp_S8FsWGaN2RbMIIkmf1sQSZwmkc=',
+    //       msCertificate: 'https://media.istockphoto.com/id/1055048530/photo/label-seal-of-made-in-mississippi.webp?a=1&b=1&s=612x612&w=0&k=20&c=C7qUql6X0Btc_LWlJZQA-p701Fc5rGShHPMLh0-QZbo=',
+    //       msTranscript: 'https://media.istockphoto.com/id/1763174626/photo/screenwriter-holds-folder-of-documents-labeled-script.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tz2deOOHVKd-TjIGd-q4u1g3qVMV0Ip3mEhUEavu_hc=',
+    //       phdResearchProposal: 'https://media.istockphoto.com/id/184902657/photo/optical-glass-with-words-pr.webp?a=1&b=1&s=612x612&w=0&k=20&c=kp8mJImTyZwKUqHWNNgTkIZu7gYt9R-JH6F7ycQrRp4=',
+    //       cv: 'https://images.unsplash.com/photo-1698047681432-006d2449c631?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3Z8ZW58MHx8MHx8fDA%3D'
+    //     }
+    //   },
+    // },
   ]);
 
   const [selectedApp, setSelectedApp] = useState(null);
@@ -87,7 +51,38 @@ const Applications = () => {
   const [statusFilter, setStatusFilter] = useState('All');
   const [isEditing, setIsEditing] = useState(false);
   const [editedStatus, setEditedStatus] = useState('');
+  const [loading, setLoading] = useState(false)
 
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+  
+          // Get user stats (active/inactive/admin)
+          const statsRes = await axios.get("http://localhost:8000/api/v1/admin/get-applications", {
+            withCredentials: true,
+          });
+  
+          // Set state
+          setApplications(statsRes.data.data);
+  
+          setLoading(false);
+  
+        } catch (err) {
+          setLoading(false);
+          if (err.response?.status === 401) {
+            console.log("❌ Unauthorized:", err.response.status);
+            setUsers(null);
+          } else {
+            console.error("Unexpected error:", err);
+          }
+        }
+      };
+  
+      fetchData();
+    }, []);
+console.log("this is aplications ::", applications)
   const handleDeleteClick = (app) => {
     setAppToDelete(app);
   };
@@ -130,16 +125,6 @@ const Applications = () => {
       </span>
     );
   };
-
-  const filteredApplications = applications.filter(app => {
-    const matchesSearch =
-      app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.cnic.includes(searchTerm) ||
-      app.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.program.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'All' || app.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
 
   const isImageUrl = url => url && /^https?:\/\//.test(url);
 
@@ -190,7 +175,7 @@ const Applications = () => {
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-sm font-medium text-gray-500">Total Applications</p>
-                <p className="text-3xl font-bold mt-1">{applications.length}</p>
+                <p className="text-3xl font-bold mt-1">{applications.total}</p>
               </div>
               <div className="bg-blue-100 p-3 rounded-full">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +190,7 @@ const Applications = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Approved</p>
                 <p className="text-3xl font-bold mt-1">
-                  {applications.filter(a => a.status === 'Approved').length}
+                  {applications.approved}
                 </p>
               </div>
               <div className="bg-green-100 p-3 rounded-full">
@@ -219,7 +204,7 @@ const Applications = () => {
               <div>
                 <p className="text-sm font-medium text-gray-500">Pending</p>
                 <p className="text-3xl font-bold mt-1">
-                  {applications.filter(a => a.status === 'Pending').length}
+                  {applications.pending}
                 </p>
               </div>
               <div className="bg-yellow-100 p-3 rounded-full">
@@ -245,16 +230,15 @@ const Applications = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredApplications.map(app => (
-                  <tr key={app.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{app.id}</td>
+                {applications.applications?.map(application => (
+                  <tr key={application.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{application._id}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">
-                          {isImageUrl(app.fullForm.documents.photo) ? (
+                          {isImageUrl(application.photo) ? (
                             <img
-                              src={app.fullForm.documents.photo}
-                              alt={app.name}
+                              src={application.photo}
                               className="h-10 w-10 rounded-full object-cover"
                               onError={e => (e.target.style.display = 'none')}
                             />
@@ -265,23 +249,23 @@ const Applications = () => {
                           )}
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{app.name}</div>
-                          <div className="text-sm text-gray-500">{app.cnic}</div>
+                          <div className="text-sm font-medium text-gray-900">{application.firstName} {application.lastName} </div>
+                          <div className="text-sm text-gray-500">{application.cnic}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.university}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.program}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.university}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.program}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {statusBadge(app.status)}
+                      {statusBadge(application.applicationStatus)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.date}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.dob}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">
                         <button
                           onClick={() => {
-                            setSelectedApp(app);
-                            setEditedStatus(app.status);
+                            setSelectedApp(application);
+                            setEditedStatus(application.applicationStatus);
                             setIsEditing(false);
                           }}
                           className="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
@@ -290,7 +274,7 @@ const Applications = () => {
                           <FaEye className="h-5 w-5" />
                         </button>
                         <button
-                          onClick={() => handleDeleteClick(app)}
+                          onClick={() => handleDeleteClick(application)}
                           className="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
                           title="Delete"
                         >

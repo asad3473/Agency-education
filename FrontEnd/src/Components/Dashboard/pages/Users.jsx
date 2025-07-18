@@ -26,9 +26,9 @@ const Users = () => {
 
 
 
-  // const handleUpdateUser = (updatedUser) => {
-  //   setSelectedUser(updatedUser);
-  // };
+  const handleUpdateUser = (updatedUser) => {
+    setUpdatedUsers(updatedUser);
+  };
 
   const handleDeleteClick = (userId) => {
     setShowDeleteModal(true);
@@ -265,7 +265,7 @@ useEffect(() => {
           <UserProfile
             user={selectedUser}
             onClose={() => setShowProfile(false)}
-           // onEdit={handleUpdateUser}
+            onEdit={handleUpdateUser}
           />
         )}
     

@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UserProfile = ({ user, onClose /*, setUpdatedUsers */ }) => {
-  const [editData, setEditData] = useState(user);
-  const [roleChanged, setRoleChanged] = useState(user.role);
+const UserProfile = ({ user, onClose, onEdit }) => {
+  const [userId, setUserId] = useState(user);
+  const [role, setRole] = useState(user.role);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setEditData(user?._id);
-    setRoleChanged(user.role);
+    setUserId(user?._id);
+    setRole(user.role);
   }, [user]);
-
+console.log("🔄 Changing role for user ID:", userId);
   const changedRole = async () => {
     setLoading(true);
-    console.log("🔄 Changing role for user ID:", editData);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/admin/update-role",
-        { editData, roleChanged },
+        { userId, role },
         {
           withCredentials: true,
           headers: {
@@ -26,7 +25,7 @@ const UserProfile = ({ user, onClose /*, setUpdatedUsers */ }) => {
           },
         }
       );
-
+          onEdit(res.data)
       console.log("✅ Role update response:", res.data);
 
       // Optional: update state in parent
@@ -96,8 +95,8 @@ const UserProfile = ({ user, onClose /*, setUpdatedUsers */ }) => {
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700">Role</label>
               <select
-                value={roleChanged}
-                onChange={(e) => setRoleChanged(e.target.value)}
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
               >
                 <option value="admin">Admin</option>
