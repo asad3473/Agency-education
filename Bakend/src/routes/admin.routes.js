@@ -7,7 +7,9 @@ import {
   deleteUser,
   activeUsers,
   deleteApplication,
-  updateRole
+  updateRole,
+  totalApplications,
+  updateApplication
 } from "../controllers/admin.controller.js";
 
 const router = Router();
@@ -18,6 +20,8 @@ const router = Router();
 router.route("/users").get( activeUsers);
 router.route("/delete-user").delete( deleteUser);
 router.route("/application/:id").delete( deleteApplication);
-router.route("/update-role").post(updateRole)
+router.route("/update-role").post(updateRole);
+router.route("/get-applications").get(totalApplications);
+router.route("/update-application").post(updateApplication)
 
 export default router;

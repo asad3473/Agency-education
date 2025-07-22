@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaTimes, FaTrashAlt, FaEye, FaCheck, FaClock, FaTimesCircle, FaSearch, FaFilter } from 'react-icons/fa';
-import { useAuth } from '../../../contextApi/contextApi';
-import { FiUser } from 'react-icons/fi';
+import axios from 'axios';
 
 const Applications = () => {
   const { language } = useAuth();
@@ -95,82 +94,45 @@ const Applications = () => {
 
   // Sample data - replace with your actual data
   const [applications, setApplications] = useState([
-    {
-      id: 1,
-      cnic: '12345-1234567-1',
-      name: isArabic ? 'علي خان' : 'Ali Khan',
-      university: isArabic ? 'جامعة البنجاب' : 'Punjab University',
-      program: isArabic ? 'بكالوريوس علوم الحاسوب' : 'BSCS',
-      date: '2025-07-10',
-      status: 'Pending',
-      fullForm: {
-        firstName: isArabic ? 'علي' : 'Ali',
-        lastName: isArabic ? 'خان' : 'Khan',
-        fatherName: isArabic ? 'أسلم خان' : 'Aslam Khan',
-        motherName: isArabic ? 'فاطمة خان' : 'Fatima Khan',
-        email: 'ali@example.com',
-        cnic: '12345-1234567-1',
-        gender: isArabic ? 'ذكر' : 'Male',
-        maritalStatus: isArabic ? 'أعزب' : 'Single',
-        dob: '2000-01-01',
-        nationality: isArabic ? 'باكستاني' : 'Pakistani',
-        phoneNumber: '03001234567',
-        birthPlace: isArabic ? 'لاهور' : 'Lahore',
-        program: isArabic ? 'بكالوريوس علوم الحاسوب' : 'BS Computer Science',
-        university: isArabic ? 'جامعة البنجاب' : 'Punjab University',
-        course: isArabic ? 'علوم الحاسوب' : 'Computer Science',
-        documents: {
-          photo: 'https://example.com/photo.jpg',
-          passportCopy: 'https://example.com/passport.jpg',
-          secondaryCertificate: 'https://example.com/certificate.jpg',
-          englishCompetence: 'https://example.com/english.jpg',
-          bsDegreeCertificate: 'https://example.com/bs-degree.jpg',
-          bsTranscript: 'https://example.com/bs-transcript.jpg',
-          msCertificate: 'https://example.com/ms-certificate.jpg',
-          msTranscript: 'https://example.com/ms-transcript.jpg',
-          phdResearchProposal: 'https://example.com/phd-proposal.jpg',
-          cv: 'https://example.com/cv.pdf'
-        }
-      },
-    },
-    {
-      id: 2,
-      cnic: '67890-1234567-2',
-      name: isArabic ? 'سارة أحمد' : 'Sara Ahmed',
-      university: isArabic ? 'جامعة فاست' : 'FAST NUCES',
-      program: isArabic ? 'بكالوريوس إدارة الأعمال' : 'BBA',
-      date: '2025-07-12',
-      status: 'Approved',
-      fullForm: {
-        firstName: isArabic ? 'سارة' : 'Sara',
-        lastName: isArabic ? 'أحمد' : 'Ahmed',
-        fatherName: isArabic ? 'أحمد رضا' : 'Ahmed Raza',
-        motherName: isArabic ? 'عائشة رضا' : 'Ayesha Raza',
-        email: 'sara@example.com',
-        cnic: '67890-1234567-2',
-        gender: isArabic ? 'أنثى' : 'Female',
-        maritalStatus: isArabic ? 'أعزب' : 'Single',
-        dob: '1999-05-10',
-        nationality: isArabic ? 'باكستاني' : 'Pakistani',
-        phoneNumber: '03111234567',
-        birthPlace: isArabic ? 'كراتشي' : 'Karachi',
-        program: isArabic ? 'بكالوريوس إدارة الأعمال' : 'BBA',
-        university: isArabic ? 'جامعة فاست' : 'FAST NUCES',
-        course: isArabic ? 'إدارة الأعمال' : 'Business Administration',
-        documents: {
-          photo: 'https://example.com/photo.jpg',
-          passportCopy: 'https://example.com/passport.jpg',
-          secondaryCertificate: 'https://example.com/certificate.jpg',
-          englishCompetence: 'https://example.com/english.jpg',
-          bsDegreeCertificate: 'https://example.com/bs-degree.jpg',
-          bsTranscript: 'https://example.com/bs-transcript.jpg',
-          msCertificate: 'https://example.com/ms-certificate.jpg',
-          msTranscript: 'https://example.com/ms-transcript.jpg',
-          phdResearchProposal: 'https://example.com/phd-proposal.jpg',
-          cv: 'https://example.com/cv.pdf'
-        }
-      },
-    },
+  
+    // {
+    //   id: 2,
+    //   cnic: '67890-1234567-2',
+    //   name: 'Sara Ahmed',
+    //   university: 'FAST NUCES',
+    //   program: 'BBA',
+    //   date: '2025-07-12',
+    //   status: 'Approved',
+    //   fullForm: {
+    //     firstName: 'Sara',
+    //     lastName: 'Ahmed',
+    //     fatherName: 'Ahmed Raza',
+    //     motherName: 'Ayesha Raza',
+    //     email: 'sara@example.com',
+    //     cnic: '67890-1234567-2',
+    //     gender: 'Female',
+    //     maritalStatus: 'Single',
+    //     dob: '1999-05-10',
+    //     nationality: 'Pakistani',
+    //     phoneNumber: '03111234567',
+    //     birthPlace: 'Karachi',
+    //     program: 'BBA',
+    //     university: 'FAST NUCES',
+    //     course: 'Business Administration',
+    //     documents: {
+    //       photo: 'https://images.unsplash.com/photo-1742198832597-e43588e8ad28?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
+    //       passportCopy: 'https://images.unsplash.com/photo-1612365922929-eb3b5b4bddb0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFzc3BvcnRDb3B5fGVufDB8fDB8fHww',
+    //       secondaryCertificate: 'https://media.istockphoto.com/id/93177402/photo/happy-graduates.webp?a=1&b=1&s=612x612&w=0&k=20&c=ErVUPCbAXZwJ9ZKtxFNBaPn9RIorjf652wRHg5y8zFI=',
+    //       englishCompetence: 'https://media.istockphoto.com/id/2158398318/photo/confident-student-smiling-at-friend.webp?a=1&b=1&s=612x612&w=0&k=20&c=_9LKy1I4qjbqlxGwTTv3-lGFd59wJvGKMnkigjIXwRY=',
+    //       bsDegreeCertificate: 'https://media.istockphoto.com/id/1067505660/photo/certificate.webp?a=1&b=1&s=612x612&w=0&k=20&c=FkvEmUb0C24pDP-TGC4UmXzm1KfZuqDyKF2mMyuQ9iI=',
+    //       bsTranscript: 'https://media.istockphoto.com/id/1021460044/photo/orf.webp?a=1&b=1&s=612x612&w=0&k=20&c=MVUsktzlisQpS2Sp_S8FsWGaN2RbMIIkmf1sQSZwmkc=',
+    //       msCertificate: 'https://media.istockphoto.com/id/1055048530/photo/label-seal-of-made-in-mississippi.webp?a=1&b=1&s=612x612&w=0&k=20&c=C7qUql6X0Btc_LWlJZQA-p701Fc5rGShHPMLh0-QZbo=',
+    //       msTranscript: 'https://media.istockphoto.com/id/1763174626/photo/screenwriter-holds-folder-of-documents-labeled-script.webp?a=1&b=1&s=612x612&w=0&k=20&c=Tz2deOOHVKd-TjIGd-q4u1g3qVMV0Ip3mEhUEavu_hc=',
+    //       phdResearchProposal: 'https://media.istockphoto.com/id/184902657/photo/optical-glass-with-words-pr.webp?a=1&b=1&s=612x612&w=0&k=20&c=kp8mJImTyZwKUqHWNNgTkIZu7gYt9R-JH6F7ycQrRp4=',
+    //       cv: 'https://images.unsplash.com/photo-1698047681432-006d2449c631?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3Z8ZW58MHx8MHx8fDA%3D'
+    //     }
+    //   },
+    // },
   ]);
 
   const [selectedApp, setSelectedApp] = useState(null);
@@ -179,7 +141,38 @@ const Applications = () => {
   const [statusFilter, setStatusFilter] = useState('All');
   const [isEditing, setIsEditing] = useState(false);
   const [editedStatus, setEditedStatus] = useState('');
+  const [loading, setLoading] = useState(false)
 
+
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+  
+          // Get user stats (active/inactive/admin)
+          const statsRes = await axios.get("http://localhost:8000/api/v1/admin/get-applications", {
+            withCredentials: true,
+          });
+  
+          // Set state
+          setApplications(statsRes.data.data);
+  
+          setLoading(false);
+  
+        } catch (err) {
+          setLoading(false);
+          if (err.response?.status === 401) {
+            console.log("❌ Unauthorized:", err.response.status);
+            setUsers(null);
+          } else {
+            console.error("Unexpected error:", err);
+          }
+        }
+      };
+  
+      fetchData();
+    }, []);
+console.log("this is aplications ::", applications)
   const handleDeleteClick = (app) => {
     setAppToDelete(app);
   };
@@ -223,17 +216,7 @@ const Applications = () => {
     );
   };
 
-  const filteredApplications = applications.filter(app => {
-    const matchesSearch =
-      app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.cnic.includes(searchTerm) ||
-      app.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.program.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'All' || app.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
-
-  const isImageUrl = url => url && /^https?:\/\//.test(url) && /\.(jpg|jpeg|png|gif)$/i.test(url);
+  const isImageUrl = url => url && /^https?:\/\//.test(url);
 
   return (
     <div 
@@ -282,48 +265,47 @@ const Applications = () => {
 
         {/* Stats Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {[
-            { 
-              title: t.stats.total, 
-              value: applications.length, 
-              border: "border-blue-500", 
-              bg: "bg-blue-100", 
-              icon: (
+          <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500 hover:shadow-lg transition-shadow">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm font-medium text-gray-500">Total Applications</p>
+                <p className="text-3xl font-bold mt-1">{applications.total}</p>
+              </div>
+              <div className="bg-blue-100 p-3 rounded-full">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-              ) 
-            },
-            { 
-              title: t.stats.approved, 
-              value: applications.filter(a => a.status === 'Approved').length, 
-              border: "border-green-500", 
-              bg: "bg-green-100", 
-              icon: <FaCheck className="w-6 h-6 text-green-600" />
-            },
-            { 
-              title: t.stats.pending, 
-              value: applications.filter(a => a.status === 'Pending').length, 
-              border: "border-yellow-500", 
-              bg: "bg-yellow-100", 
-              icon: <FaClock className="w-6 h-6 text-yellow-600" />
-            }
-          ].map((stat, index) => (
-            <div 
-              key={index} 
-              className={`bg-white p-6 rounded-xl shadow-md border-t-4 ${stat.border} hover:shadow-lg transition-shadow`}
-            >
-              <div className={`flex justify-between items-start ${isArabic ? "flex-row-reverse" : ""}`}>
-                <div className={isArabic ? "text-right" : "text-left"}>
-                  <p className="text-sm font-medium text-gray-500">{stat.title}</p>
-                  <p className="text-3xl font-bold mt-1">{stat.value}</p>
-                </div>
-                <div className={`${stat.bg} p-3 rounded-full`}>
-                  {stat.icon}
-                </div>
               </div>
             </div>
-          ))}
+          </div>
+          
+          <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500 hover:shadow-lg transition-shadow">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm font-medium text-gray-500">Approved</p>
+                <p className="text-3xl font-bold mt-1">
+                  {applications.approved}
+                </p>
+              </div>
+              <div className="bg-green-100 p-3 rounded-full">
+                <FaCheck className="w-6 h-6 text-green-600" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500 hover:shadow-lg transition-shadow">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="text-sm font-medium text-gray-500">Pending</p>
+                <p className="text-3xl font-bold mt-1">
+                  {applications.pending}
+                </p>
+              </div>
+              <div className="bg-yellow-100 p-3 rounded-full">
+                <FaClock className="w-6 h-6 text-yellow-600" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Table */}
@@ -359,16 +341,15 @@ const Applications = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredApplications.map(app => (
-                  <tr key={app.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{app.id}</td>
+                {applications.applications?.map(application => (
+                  <tr key={application.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{application._id}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className={`flex items-center ${isArabic ? "flex-row-reverse" : ""}`}>
                         <div className="flex-shrink-0 h-10 w-10">
-                          {isImageUrl(app.fullForm.documents.photo) ? (
+                          {isImageUrl(application.photo) ? (
                             <img
-                              src={app.fullForm.documents.photo}
-                              alt={app.name}
+                              src={application.photo}
                               className="h-10 w-10 rounded-full object-cover"
                               onError={e => (e.target.style.display = 'none')}
                             />
@@ -378,24 +359,24 @@ const Applications = () => {
                             </div>
                           )}
                         </div>
-                        <div className={isArabic ? "mr-4" : "ml-4"}>
-                          <div className="text-sm font-medium text-gray-900">{app.name}</div>
-                          <div className="text-sm text-gray-500">{app.cnic}</div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">{application.firstName} {application.lastName} </div>
+                          <div className="text-sm text-gray-500">{application.cnic}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.university}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.program}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.university}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.program}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      {statusBadge(app.status)}
+                      {statusBadge(application.applicationStatus)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.date}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{application.dob}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className={`flex ${isArabic ? "justify-start" : "justify-end"} space-x-2`}>
                         <button
                           onClick={() => {
-                            setSelectedApp(app);
-                            setEditedStatus(app.status);
+                            setSelectedApp(application);
+                            setEditedStatus(application.applicationStatus);
                             setIsEditing(false);
                           }}
                           className="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
@@ -404,7 +385,7 @@ const Applications = () => {
                           <FaEye className="h-5 w-5" />
                         </button>
                         <button
-                          onClick={() => handleDeleteClick(app)}
+                          onClick={() => handleDeleteClick(application)}
                           className="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
                           title={isArabic ? "حذف" : "Delete"}
                         >

@@ -115,6 +115,12 @@ const Users = () => {
     setShowProfile(true);
   };
 
+
+
+  const handleUpdateUser = (updatedUser) => {
+    setUpdatedUsers(updatedUser);
+  };
+
   const handleDeleteClick = (userId) => {
     setShowDeleteModal(true);
     setUserDeleteId(userId);
@@ -410,8 +416,7 @@ const Users = () => {
           <UserProfile
             user={selectedUser}
             onClose={() => setShowProfile(false)}
-            isArabic={isArabic}
-            translations={t}
+            onEdit={handleUpdateUser}
           />
         )}
 

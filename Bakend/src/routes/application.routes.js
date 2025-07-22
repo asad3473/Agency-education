@@ -1,4 +1,4 @@
-import {createApplication, getApplication, getAllApplications, updateApplication, totalApplications} from "../controllers/application.controller.js";
+import {createApplication, getApplication} from "../controllers/application.controller.js";
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middlewares.js";
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
@@ -25,10 +25,5 @@ router.route("/create-application").post(
 );
 
 router.route("/get-apllication").get(verifyJWT, getApplication);
-
-router.route("/get-all-applications").get(getAllApplications);
-
-router.route("/update-application").post(updateApplication);
-router.route("/total-applications").get(totalApplications)
 
 export default router
