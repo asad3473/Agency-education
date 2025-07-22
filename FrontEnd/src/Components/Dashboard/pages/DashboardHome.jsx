@@ -1,55 +1,99 @@
 import { FaUsers, FaClipboardList, FaUserClock, FaUserCheck } from "react-icons/fa";
+import { useAuth } from '../../../contextApi/contextApi';
 
 const DashboardHome = () => {
-  const metrics = [
-    { label: "Total Users", value: "1,234", icon: <FaUsers />, color: "bg-blue-100", iconColor: "text-blue-600" },
-    { label: "Active Applications", value: "567", icon: <FaClipboardList />, color: "bg-green-100", iconColor: "text-green-600" },
-    { label: "Pending Profiles", value: "89", icon: <FaUserClock />, color: "bg-yellow-100", iconColor: "text-yellow-600" },
-    { label: "Completed Profiles", value: "1,023", icon: <FaUserCheck />, color: "bg-purple-100", iconColor: "text-purple-600" },
-  ];
+  const { language } = useAuth();
+  const isArabic = language === "ar";
 
-  const activities = [
-    {
-      iconBg: "bg-indigo-100",
-      iconColor: "text-indigo-600",
-      title: "New user registered",
-      description: "John Doe just created an account",
-      time: "2 min ago",
-      iconPath: (
-        <path
-          fillRule="evenodd"
-          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-          clipRule="evenodd"
-        />
-      ),
+  // Translations
+  const translations = {
+    en: {
+      dashboardTitle: "Dashboard Overview",
+      welcomeText: "Welcome back! Here's what's happening today.",
+      metrics: [
+        { label: "Total Users", value: "1,234" },
+        { label: "Active Applications", value: "567" },
+        { label: "Pending Profiles", value: "89" },
+        { label: "Completed Profiles", value: "1,023" }
+      ],
+      recentActivity: "Recent Activity",
+      viewAll: "View All",
+      activities: [
+        {
+          title: "New user registered",
+          description: "John Doe just created an account",
+          time: "2 min ago"
+        },
+        {
+          title: "Application submitted",
+          description: "Jane Smith submitted an application",
+          time: "15 min ago"
+        }
+      ]
     },
-    {
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600",
-      title: "Application submitted",
-      description: "Jane Smith submitted an application",
-      time: "15 min ago",
-      iconPath: (
-        <path
-          fillRule="evenodd"
-          d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H5a1 1 0 010-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z"
-          clipRule="evenodd"
-        />
-      ),
-    },
-  ];
+    ar: {
+      dashboardTitle: "نظرة عامة على لوحة التحكم",
+      welcomeText: "مرحبًا بعودتك! إليك ما يحدث اليوم.",
+      metrics: [
+        { label: "إجمالي المستخدمين", value: "١,٢٣٤" },
+        { label: "الطلبات النشطة", value: "٥٦٧" },
+        { label: "الملفات المعلقة", value: "٨٩" },
+        { label: "الملفات المكتملة", value: "١,٠٢٣" }
+      ],
+      recentActivity: "النشاط الأخير",
+      viewAll: "عرض الكل",
+      activities: [
+        {
+          title: "مستخدم جديد مسجل",
+          description: "قام جون دو بإنشاء حساب جديد",
+          time: "منذ دقيقتين"
+        },
+        {
+          title: "تم تقديم طلب",
+          description: "قدمت جين سميث طلبًا جديدًا",
+          time: "منذ ١٥ دقيقة"
+        }
+      ]
+    }
+  };
+
+  const t = translations[language] || translations.en;
+
+  const metrics = [
+    { icon: <FaUsers />, color: "bg-blue-100", iconColor: "text-blue-600" },
+    { icon: <FaClipboardList />, color: "bg-green-100", iconColor: "text-green-600" },
+    { icon: <FaUserClock />, color: "bg-yellow-100", iconColor: "text-yellow-600" },
+    { icon: <FaUserCheck />, color: "bg-purple-100", iconColor: "text-purple-600" },
+  ].map((item, idx) => ({
+    ...item,
+    label: t.metrics[idx].label,
+    value: t.metrics[idx].value
+  }));
+
+  const activities = t.activities.map((activity, idx) => ({
+    ...activity,
+    iconBg: idx === 0 ? "bg-indigo-100" : "bg-green-100",
+    iconColor: idx === 0 ? "text-indigo-600" : "text-green-600",
+    iconPath: (
+      <path
+        fillRule="evenodd"
+        d={idx === 0 ? "M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" : "M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2H5a1 1 0 010-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z"}
+        clipRule="evenodd"
+      />
+    )
+  }));
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+    <div className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen" dir={isArabic ? 'rtl' : 'ltr'}>
       {/* Header with subtle gradient */}
       <div className="mb-6 sm:mb-8 pb-4 border-b border-gray-200">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight flex items-center">
           <span className="text-gray-800">
-            Dashboard Overview
+            {t.dashboardTitle}
           </span>
-          <span className="ml-2 sm:ml-3 text-blue-500">📊</span>
+          <span className={`${isArabic ? 'mr-2 sm:mr-3' : 'ml-2 sm:ml-3'} text-blue-500`}>📊</span>
         </h1>
-        <p className="text-gray-500 mt-1 sm:mt-2 text-sm sm:text-base">Welcome back! Here's what's happening today.</p>
+        <p className="text-gray-500 mt-1 sm:mt-2 text-sm sm:text-base">{t.welcomeText}</p>
       </div>
 
       {/* Metrics grid with responsive columns and spacing */}
@@ -82,9 +126,9 @@ const DashboardHome = () => {
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
               </svg>
             </span>
-            Recent Activity
+            {t.recentActivity}
           </h2>
-          <button className="text-xs sm:text-sm text-blue-600 hover:text-blue-800 font-medium self-start xs:self-auto">View All</button>
+          <button className="text-xs sm:text-sm text-blue-600 hover:text-blue-800 font-medium self-start xs:self-auto">{t.viewAll}</button>
         </div>
         
         <div className="space-y-3 sm:space-y-4">
